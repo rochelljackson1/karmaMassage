@@ -8,10 +8,11 @@ import static com.uh.rachel.util.LoginCred.*;
 
 public class ConnectionProvider {
     private static Connection connection = null;
+
     static {
         try {
-            Class.forName(DRIVER);
-            connection = DriverManager.getConnection(CONNECTION, USER, PASSWORD);
+            Class.forName(DatabaseConnector.DRIVER);
+            connection = DriverManager.getConnection(DatabaseConnector.CONNECTION_URL, USER, PASSWORD);
         } catch (Exception e){
             e.printStackTrace();
         }
