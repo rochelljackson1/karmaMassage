@@ -2,6 +2,7 @@ package com.uh.rachel.util;
 
 import com.uh.rachel.util.tableClasses.customerTable;
 import com.uh.rachel.util.tableClasses.doctorTable;
+import com.uh.rachel.util.tableClasses.Address;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,4 +49,35 @@ public class DataHandler {
         }
         return v;
     }
+
+
+
+
+    public static Vector<Address> getAddress() {
+        Vector<Address> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Address");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Address(result.getInt("customerNumber"),
+                        result.getString("street"),
+                        result.getString("cityName"),
+                        result.getString("stateName"),
+                        result.getString("zipCode"),
+                        result.getString("countryName")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+
+
+
 }
