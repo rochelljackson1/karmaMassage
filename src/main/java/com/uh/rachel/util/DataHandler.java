@@ -59,7 +59,10 @@ public class DataHandler {
             ResultSet result = statement.executeQuery();
 
             while (result.next()){
-                v.add(new FAQTable(result.getString("question"), result.getString("answer")));
+                v.add(new FAQTable(result.getInt("faqNumber"), result.getString("question"),
+                        result.getString("answer"), result.getInt("serviceNumber"),
+                        result.getInt("addOnNumber"), result.getInt("packageNumber"),
+                        result.getInt("locationNumber")));
             }
         } catch (Exception e){
             e.printStackTrace();
