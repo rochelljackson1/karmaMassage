@@ -1,5 +1,6 @@
 package com.uh.rachel.util;
 
+import com.uh.rachel.util.tableClasses.FAQTable;
 import com.uh.rachel.util.tableClasses.customerTable;
 import com.uh.rachel.util.tableClasses.doctorTable;
 
@@ -48,4 +49,22 @@ public class DataHandler {
         }
         return v;
     }
+
+    public static Vector<FAQTable> getFAQ(){
+        Vector<FAQTable> v = new Vector<>();
+        try{
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM FAQTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new FAQTable(result.getString("question"), result.getString("answer")));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
 }
