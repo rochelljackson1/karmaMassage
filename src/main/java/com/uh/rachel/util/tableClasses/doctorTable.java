@@ -11,9 +11,9 @@ public class doctorTable {
 
     }
 
-    public doctorTable(int customerNumber, int doctorNuber, String physicianFirstname, String physicianLastname, String physicianPhone) {
+    public doctorTable(int customerNumber, int doctorNumber, String physicianFirstname, String physicianLastname, String physicianPhone) {
         this.customerNumber = customerNumber;
-        this.doctorNuber = doctorNuber;
+        this.doctorNuber = doctorNumber;
         this.physicianFirstname = physicianFirstname;
         PhysicianLastname = physicianLastname;
         this.physicianPhone = physicianPhone;

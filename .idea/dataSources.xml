@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="karma-massage-db@cot-cis3365-13" uuid="a03699c5-cd82-477b-99ff-6981da4d63cd">
+    <data-source source="LOCAL" name="Microsoft SQL Server - karma-massage-db@cot-cis3365-13" uuid="9c52a4b6-e21f-47e6-aa79-f92a8b8b9076">
       <driver-ref>sqlserver.ms</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
