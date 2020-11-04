@@ -1,6 +1,7 @@
 package com.uh.rachel.util;
 
 import com.uh.rachel.util.tableClasses.FAQTable;
+import com.uh.rachel.util.tableClasses.appointmentsTable;
 import com.uh.rachel.util.tableClasses.customerTable;
 import com.uh.rachel.util.tableClasses.doctorTable;
 
@@ -66,8 +67,28 @@ public class DataHandler {
         return v;
     }
 
-    public static Vector<>
+    public static Vector<appointmentsTable> getAppointments(){
+        Vector<appointmentsTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM appointmentsTable");
+            ResultSet result = statement.executeQuery();
 
+            while(result.next()){
+                v.add(new appointmentsTable(result.getInt("appointmentNumber"),
+                        result.getInt("customerNumber"), result.getInt("serviceNumber"),
+                        result.getInt("packageNumber"), result.getInt("addOnNumber"),
+                        result.getString("scheduledDate"), result.getString("scheduledTime"),
+                        result.getDouble("originalFullPrice"), result.getString("dateCancelled"),
+                        result.getString("timeCancelled"), result.getDouble("actualPricePaid"),
+                        result.getString("defaultPayment"), result.getString("cardNumberType"),
+                        result.getString("cardNumber"), result.getInt("staff_NUmber")));
+            }
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
 
 }

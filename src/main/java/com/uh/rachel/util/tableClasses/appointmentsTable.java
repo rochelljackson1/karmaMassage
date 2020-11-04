@@ -38,129 +38,52 @@ public class appointmentsTable {
             this.cardNumberType = cardNumberType;
             this.cardNumber = cardNumber;
             this.staff_number = staff_number;
-
-
         }
 
-    public int getAppointmentNumber() {
-        return appointmentNumber;
-    }
+    public int getAppointmentNumber() { return appointmentNumber; }
+    public void setAppointmentNumber(int appointmentNumber) { this.appointmentNumber = appointmentNumber; }
 
-    public void setAppointmentNumber(int appointmentNumber) {
-        this.appointmentNumber = appointmentNumber;
-    }
+    public int getCustomerNumber() { return customerNumber; }
+    public void setCustomerNumber(int customerNumber) { this.customerNumber = customerNumber; }
 
-    public int getCustomerNumber() {
-        return customerNumber;
-    }
+    public int getServiceNumber() { return serviceNumber; }
+    public void setServiceNumber(int serviceNumber) { this.serviceNumber = serviceNumber; }
 
-    public void setCustomerNumber(int customerNumber) {
-        this.customerNumber = customerNumber;
-    }
+    public int getPackageNumber() { return packageNumber; }
+    public void setPackageNumber(int packageNumber) { this.packageNumber = packageNumber; }
 
-    public int getServiceNumber() {
-        return serviceNumber;
-    }
+    public int getAddOnNumber() { return addOnNumber; }
+    public void setAddOnNumber(int addOnNumber) { this.addOnNumber = addOnNumber; }
 
-    public void setServiceNumber(int serviceNumber) {
-        this.serviceNumber = serviceNumber;
-    }
+    public String getScheduledDate() { return scheduledDate; }
+    public void setScheduledDate(String scheduledDate) { this.scheduledDate = scheduledDate; }
 
-    public int getPackageNumber() {
-        return packageNumber;
-    }
+    public String getScheduledTime() { return scheduledTime; }
+    public void setScheduledTime(String scheduledTime) { this.scheduledTime = scheduledTime; }
 
-    public void setPackageNumber(int packageNumber) {
-        this.packageNumber = packageNumber;
-    }
+    public double getOriginalFullPrice() { return originalFullPrice; }
+    public void setOriginalFullPrice(double originalFullPrice) { this.originalFullPrice = originalFullPrice; }
 
-    public int getAddOnNumber() {
-        return addOnNumber;
-    }
+    public String getDateCancelled() { return dateCancelled; }
+    public void setDateCancelled(String dateCancelled) { this.dateCancelled = dateCancelled; }
 
-    public void setAddOnNumber(int addOnNumber) {
-        this.addOnNumber = addOnNumber;
-    }
+    public String getTimeCancelled() { return timeCancelled; }
+    public void setTimeCancelled(String timeCancelled) { this.timeCancelled = timeCancelled; }
 
-    public String getScheduledDate() {
-        return scheduledDate;
-    }
+    public double getActualPricePaid() { return actualPricePaid; }
+    public void setActualPricePaid(double actualPricePaid) { this.actualPricePaid = actualPricePaid; }
 
-    public void setScheduledDate(String scheduledDate) {
-        this.scheduledDate = scheduledDate;
-    }
+    public String getDefaultPayment() { return defaultPayment; }
+    public void setDefaultPayment(String defaultPayment) { this.defaultPayment = defaultPayment; }
 
-    public String getScheduledTime() {
-        return scheduledTime;
-    }
+    public String getCardNumberType() { return cardNumberType; }
+    public void setCardNumberType(String cardNumberType) { this.cardNumberType = cardNumberType; }
 
-    public void setScheduledTime(String scheduledTime) {
-        this.scheduledTime = scheduledTime;
-    }
+    public String getCardNumber() { return cardNumber; }
+    public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
 
-    public double getOriginalFullPrice() {
-        return originalFullPrice;
-    }
-
-    public void setOriginalFullPrice(double originalFullPrice) {
-        this.originalFullPrice = originalFullPrice;
-    }
-
-    public String getDateCancelled() {
-        return dateCancelled;
-    }
-
-    public void setDateCancelled(String dateCancelled) {
-        this.dateCancelled = dateCancelled;
-    }
-
-    public String getTimeCancelled() {
-        return timeCancelled;
-    }
-
-    public void setTimeCancelled(String timeCancelled) {
-        this.timeCancelled = timeCancelled;
-    }
-
-    public double getActualPricePaid() {
-        return actualPricePaid;
-    }
-
-    public void setActualPricePaid(double actualPricePaid) {
-        this.actualPricePaid = actualPricePaid;
-    }
-
-    public String getDefaultPayment() {
-        return defaultPayment;
-    }
-
-    public void setDefaultPayment(String defaultPayment) {
-        this.defaultPayment = defaultPayment;
-    }
-
-    public String getCardNumberType() {
-        return cardNumberType;
-    }
-
-    public void setCardNumberType(String cardNumberType) {
-        this.cardNumberType = cardNumberType;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public int getStaff_number() {
-        return staff_number;
-    }
-
-    public void setStaff_number(int staff_number) {
-        this.staff_number = staff_number;
-    }
+    public int getStaff_number() { return staff_number; }
+    public void setStaff_number(int staff_number) { this.staff_number = staff_number; }
 }
 
 
