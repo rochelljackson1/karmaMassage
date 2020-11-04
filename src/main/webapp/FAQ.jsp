@@ -1,6 +1,6 @@
 <%@ page import="com.uh.rachel.util.DataHandler" %>
 <%@ page import="java.util.Vector" %>
-<%@ page import="com.uh.rachel.util.tableClasses.customerTable" %>
+<%@ page import="com.uh.rachel.util.tableClasses.FAQTable" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -21,8 +21,8 @@
         <th>Question</th>
         <th>Answer</th>
     </tr>
-    <% Vector<customerTable> v = DataHandler.getCustomers();
-        for (customerTable c : v) {
+    <% Vector<FAQTable> v = DataHandler.getFAQ();
+        for (FAQTable c : v) {
     %>
     <tr>
         <td><%= String.valueOf(c.getQuestion())%></td>

@@ -14,18 +14,11 @@ public class FAQTable {
             this.answer = answer;
         }
 
-        public String getPhysicianLastname() {
-            return question;
-        }
-        public void setPhysicianLastname(String question) {
-            question = question;
-        }
+    public String getQuestion() { return question; }
+    public void setQuestion(String question) { this.question = question; }
 
-        public String getPhysicianPhone() {
-            return answer;
-        }
-        public void setPhysicianPhone(String answer) {
-            this.answer = answer;
-        }
+    public String getAnswer() { return answer; }
+    public void setAnswer(String answer) { this.answer = answer; }
+
 }
 
