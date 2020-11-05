@@ -214,4 +214,74 @@ public class DataHandler {
         return v;
     }
 
+//Makki
+    public static Vector<Address> getAddress() {
+        Vector<Address> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Address");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Address(result.getInt("customerNumber"),
+                        result.getString("street"),
+                        result.getString("cityName"),
+                        result.getString("stateName"),
+                        result.getString("zipCode"),
+                        result.getString("countryName")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+//Makki
+    public static Vector<Revenue> getRevenue() {
+        Vector<Revenue> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Revenue");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Revenue(
+                        result.getString("date"),
+                        result.getString("revenueMonthlyActual"),
+                        result.getString("revenueWeeklyActual"),
+                        result.getString("revenueMonthlyFromCancellations"),
+                        result.getString("potentialRevenueMonthlyFromScheduled"),
+                        result.getString("revenueByStaff")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    //Makki
+    public static Vector<City> getCiy() {
+        Vector<City> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM City");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new City(
+                        result.getString("cityName"),
+                        result.getString("internationalCity")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+
 }
