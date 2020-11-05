@@ -1,5 +1,5 @@
 <%@ page import="com.uh.rachel.util.DataHandler" %>
-<%@ page import="com.uh.rachel.util.tableClasses.Address" %>
+<%@ page import="com.uh.rachel.util.tableClasses.Revenue" %>
 <%@ page import="java.util.Vector" %><%--
   Created by IntelliJ IDEA.
   User: Makki
@@ -10,29 +10,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Address</title>
+    <title>Revenue</title>
 </head>
 <body>
 <table>
     <tr>
-        <th>Customer ID</th>
-        <th>Street</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Zip Code</th>
-        <th>Country</th>
+        <th>Date</th>
+        <th>Revenue Monthly Actual</th>
+        <th>Revenue Weekly Actual</th>
+        <th>Revenue Monthly From Cancellations</th>
+        <th>Potential Revenue Monthly From Scheduled</th>
+        <th>Revenue By Staff</th>
 
     </tr>
-    <% Vector<Address> v = DataHandler.getAddress();
-        for (Address c : v) {
+    <% Vector<Revenue> v = DataHandler.getRevenue();
+        for (Revenue c : v) {
     %>
     <tr>
-        <td><%= String.valueOf(c.getCustomerNumber())%></td>
-        <td><%= String.valueOf(c.getStreet())%></td>
-        <td><%= String.valueOf(c.getCityName())%></td>
-        <td><%= String.valueOf(c.getStateName())%></td>
-        <td><%= String.valueOf(c.getZipCode())%></td>
-        <td><%= String.valueOf(c.getCountryName())%></td>
+        <td><%= String.valueOf(c.getDate())%></td>
+        <td><%= String.valueOf(c.getRevenueMonthlyActual())%></td>
+        <td><%= String.valueOf(c.getRevenueWeeklyActual())%></td>
+        <td><%= String.valueOf(c.getRevenueMonthlyFromCancellations())%></td>
+        <td><%= String.valueOf(c.getPotentialRevenueMonthlyFromScheduled())%></td>
+        <td><%= String.valueOf(c.getRevenueByStaff())%></td>
     </tr>
     <%
         }
