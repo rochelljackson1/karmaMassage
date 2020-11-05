@@ -84,7 +84,7 @@ public class DataHandler {
                         result.getDouble("originalFullPrice"), result.getString("dateCancelled"),
                         result.getString("timeCancelled"), result.getDouble("actualPricePaid"),
                         result.getString("defaultPayment"), result.getString("cardNumberType"),
-                        result.getString("cardNumber"), result.getInt("staff_NUmber")));
+                        result.getString("cardNumber"), result.getInt("staff_Number")));
             }
 
         }catch (Exception e){
@@ -132,7 +132,7 @@ public class DataHandler {
     }
 
     // yCasasola
-    public static Vector<contactUsTable> getContastUS(){
+    public static Vector<contactUsTable> getContactUS(){
         Vector<contactUsTable> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
@@ -141,7 +141,7 @@ public class DataHandler {
 
             while(result.next()){
                 v.add(new contactUsTable(result.getString("firstName"),
-                        result.getString("lastNmae"),
+                        result.getString("lastName"),
                         result.getString("email"),
                         result.getInt("phone"),
                         result.getString("subjectLine"),
@@ -281,6 +281,78 @@ public class DataHandler {
         return v;
     }
 
+
+
+    //Makki
+    public static Vector<state> getState() {
+        Vector<state> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM state");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new state(
+                        result.getInt("stateID"),
+                        result.getString("stateCode"),
+                        result.getString("stateName")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+    //Makki
+    public static Vector<Country> getCountry() {
+        Vector<Country> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Country");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Country(
+                        result.getInt("id"),
+                        result.getString("countryName")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+
+    //Makki
+    public static Vector<Staff> getStaff() {
+        Vector<Staff> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Staff");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Staff(
+                        result.getInt("staff_Number"),
+                        result.getString("tips"),
+                        result.getString("date"),
+                        result.getString("totalPTO"),
+                        result.getString("revenueByStaff")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
 
 
 
