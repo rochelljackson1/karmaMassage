@@ -11,8 +11,38 @@
 <html>
 <head>
     <title>Customer Profile</title>
+
+    <script type="text/javascript">
+        function makeVisible(){
+            var valuey = document.getElementById('selection').value;
+            if (valuey ==="deleteRow") {
+                document.getElementById('deleteForm').style.display = "flex";
+            }
+            if (valuey == "insertRow") {
+                document.getElementById('insertForm').style.display = "flex";
+            }
+        }
+    </script>
+
 </head>
 <body>
+<select id="selection">
+    <option value="deleteRow">Delete Customer</option>
+    <option value="insertRow">Insert Customer</option>
+</select>
+
+<button onclick="makeVisible();">Make Form Visible</button>
+
+<form action="deleteOptions" id="deleteForm" style="display:none;" method="post">
+    <input name="rowToDelete" type="text">
+    <button type="submit">Delete This Row</button>
+</form>
+
+<form action="insertOptions" id="insertForm" style="display:none;" method="post">
+    <input name="rowToInsert" type="text">
+    <button type="submit">Insert This Row</button>
+</form>
+
 <table>
     <tr>
         <th>Customer ID</th>
@@ -25,6 +55,7 @@
         <th>Birthday</th>
         <th>Address</th>
     </tr>
+
     <% Vector<customerTable> v = DataHandler.getCustomers();
         for (customerTable c : v) {
     %>
