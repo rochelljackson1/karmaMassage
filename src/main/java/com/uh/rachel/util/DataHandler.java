@@ -1,6 +1,9 @@
 package com.uh.rachel.util;
 
-import com.uh.rachel.util.tableClasses.*;
+import com.uh.rachel.util.tableClasses.FAQTable;
+import com.uh.rachel.util.tableClasses.appointmentsTable;
+import com.uh.rachel.util.tableClasses.customerTable;
+import com.uh.rachel.util.tableClasses.doctorTable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,7 +51,6 @@ public class DataHandler {
         return v;
     }
 
-    // yCasasola
     public static Vector<FAQTable> getFAQ(){
         Vector<FAQTable> v = new Vector<>();
         try{
@@ -68,7 +70,6 @@ public class DataHandler {
         return v;
     }
 
-    // yCasasola
     public static Vector<appointmentsTable> getAppointments(){
         Vector<appointmentsTable> v = new Vector<>();
         try {
@@ -84,7 +85,7 @@ public class DataHandler {
                         result.getDouble("originalFullPrice"), result.getString("dateCancelled"),
                         result.getString("timeCancelled"), result.getDouble("actualPricePaid"),
                         result.getString("defaultPayment"), result.getString("cardNumberType"),
-                        result.getString("cardNumber"), result.getInt("staff_Number")));
+                        result.getString("cardNumber"), result.getInt("staff_NUmber")));
             }
 
         }catch (Exception e){
@@ -93,267 +94,92 @@ public class DataHandler {
         return v;
     }
 
-    // yCasasola
-    public static Vector<addOnsTable> getAddOns(){
-        Vector<addOnsTable> v = new Vector<>();
+    public static Vector<customerTable> getReport9() {
+        Vector<customerTable> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM addOnsTable");
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@cardioTrue bit = 0,\n" +
+                    "@resTrue bit = 0,\n" +
+                    "@hnTrue bit = 0,\n" +
+                    "@iTrue bit = 0\n" +
+                    "\n" +
+                    "SELECT @status = 1\n" +
+                    "SELECT @cardioTrue = 0\n" +
+                    "SELECT @resTrue = 0\n" +
+                    "SELECT @hnTrue = 0\n" +
+                    "SELECT @iTrue = 0\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name'\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN existingConditionsCardiovascularTable ON customerTable.customerNumber = existingConditionsCardiovascularTable.customerNumber\n" +
+                    "JOIN existingConditionsHeadNeckTable ON customerTable.customerNumber = existingConditionsHeadNeckTable.customerNumber\n" +
+                    "JOIN existingConditionsInfectiousTable ON customerTable.customerNumber = existingConditionsInfectiousTable.customerNumber\n" +
+                    "JOIN existingConditionsNeurologicalTable ON customerTable.customerNumber = existingConditionsNeurologicalTable.customerNumber\n" +
+                    "JOIN existingConditionsRespiratoryTable ON customerTable.customerNumber = existingConditionsRespiratoryTable.customerNumber\n" +
+                    "JOIN existingConditionsSkinTable ON customerTable.customerNumber = existingConditionsSkinTable.customerNumber\n" +
+                    "JOIN existingConditionsSTJDTable ON customerTable.customerNumber = existingConditionsSTJDTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE companyClientHistoryTable.currentClient = @status\n" +
+                    "AND (existingConditionsCardiovascularTable.bloodClots = @cardioTrue OR existingConditionsCardiovascularTable.cardiovascularAccident = @cardioTrue or existingConditionsCardiovascularTable.cerebralVascularAccident = @cardioTrue\n" +
+                    "\tOR existingConditionsCardiovascularTable.coldFeet = @cardioTrue OR existingConditionsCardiovascularTable.coldHands = @cardioTrue OR existingConditionsCardiovascularTable.congestiveHeartFailure = @cardioTrue\n" +
+                    "\tOR existingConditionsCardiovascularTable.heartAttack = @cardioTrue OR existingConditionsCardiovascularTable.heartDisease = @cardioTrue OR existingConditionsCardiovascularTable.highBloodPressure = @cardioTrue\n" +
+                    "\tOR existingConditionsCardiovascularTable.lowBloodPressure = @cardioTrue OR existingConditionsCardiovascularTable.lymphedema = @cardioTrue OR existingConditionsCardiovascularTable.myocardialInfarction = @cardioTrue\n" +
+                    "\tOR existingConditionsCardiovascularTable.paceMaker = @cardioTrue OR existingConditionsCardiovascularTable.phlebitis = @cardioTrue OR existingConditionsCardiovascularTable.stroke = @cardioTrue\n" +
+                    "\tOR existingConditionsCardiovascularTable.thrombosisEmbolism = @cardioTrue OR existingConditionsCardiovascularTable.varicoseVeins = @cardioTrue)\n" +
+                    "AND (existingConditionsRespiratoryTable.asthma = @resTrue OR existingConditionsRespiratoryTable.bronchitis = @resTrue OR existingConditionsRespiratoryTable.chronicCough = @resTrue\n" +
+                    "\tOR existingConditionsRespiratoryTable.emphysema = @resTrue OR existingConditionsRespiratoryTable.shortnessOfBreath = @resTrue)\n" +
+                    "AND (existingConditionsHeadNeckTable.earProblems = @hnTrue OR existingConditionsHeadNeckTable.headaches = @hnTrue OR existingConditionsHeadNeckTable.hearingLoss = @hnTrue\n" +
+                    "\tOR existingConditionsHeadNeckTable.jawPain = @hnTrue OR existingConditionsHeadNeckTable.migraines = @hnTrue OR existingConditionsHeadNeckTable.sinusProblems = @hnTrue\n" +
+                    "\tOR existingConditionsHeadNeckTable.visionLoss = @hnTrue OR existingConditionsHeadNeckTable.visionProblems = @hnTrue)\n" +
+                    "AND (existingConditionsInfectiousTable.altheletsFoot = @iTrue OR existingConditionsInfectiousTable.hepatitis = @iTrue OR existingConditionsInfectiousTable.herpes = @iTrue\n" +
+                    "\tOR existingConditionsInfectiousTable.hiv = @iTrue OR existingConditionsInfectiousTable.respiratoryConditions = @iTrue OR existingConditionsInfectiousTable.skinConditions = @iTrue)\n" +
+                    "AND (existingConditionsNeurologicalTable.burning = @iTrue OR existingConditionsNeurologicalTable.cerebralPaisy = @iTrue OR existingConditionsNeurologicalTable.herniatedDisc = @iTrue\n" +
+                    "\tOR existingConditionsNeurologicalTable.multipleSclerosis = @iTrue OR existingConditionsNeurologicalTable.numbness = @iTrue OR existingConditionsNeurologicalTable.parkinsons = @iTrue\n" +
+                    "\tOR existingConditionsNeurologicalTable.stabbingPain = @iTrue OR existingConditionsNeurologicalTable.tingling = @iTrue)\n" +
+                    "AND (existingConditionsRespiratoryTable.asthma = @iTrue OR existingConditionsRespiratoryTable.bronchitis = @iTrue OR existingConditionsRespiratoryTable.chronicCough = @iTrue\n" +
+                    "\tOR existingConditionsRespiratoryTable.emphysema = @iTrue OR existingConditionsRespiratoryTable.shortnessOfBreath = @iTrue)\n" +
+                    "AND (existingConditionsSkinTable.bruiseEasily = @iTrue OR existingConditionsSkinTable.hypersensitiveReaction = @iTrue OR existingConditionsSkinTable.melanoma = @iTrue\n" +
+                    "\tOR existingConditionsSkinTable.skinConditions = @iTrue OR existingConditionsSkinTable.skinIrritations = @iTrue)\n" +
+                    "AND (existingConditionsSTJDTable.anklesLeft = @iTrue OR existingConditionsSTJDTable.anklesRight = @iTrue OR existingConditionsSTJDTable.armsLeft = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.armsRight = @iTrue OR existingConditionsSTJDTable.feetLeft = @iTrue OR existingConditionsSTJDTable.feetRight = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.handsLeft = @iTrue OR existingConditionsSTJDTable.handsRight = @iTrue OR existingConditionsSTJDTable.hipsLeft = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.hipsRight = @iTrue OR existingConditionsSTJDTable.kneesLeft = @iTrue OR existingConditionsSTJDTable.kneesRight = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.legsLeft = @iTrue OR existingConditionsSTJDTable.legsRight = @iTrue OR existingConditionsSTJDTable.lowerBackLeft = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.lowerBackRight = @iTrue OR existingConditionsSTJDTable.midBackLeft = @iTrue OR existingConditionsSTJDTable.midBackRight = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.neckLeft = @iTrue OR existingConditionsSTJDTable.neckRight = @iTrue OR existingConditionsSTJDTable.shouldersLeft = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.shouldersRight = @iTrue OR existingConditionsSTJDTable.upperBackLeft = @iTrue OR existingConditionsSTJDTable.upperBackRight = @iTrue)");
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
-                v.add(new addOnsTable(result.getInt("addOnNumber"),
-                        result.getDouble("price"),
-                        result.getString("addOnDescription"),
-                        result.getInt("customerNumber")));
+                v.add(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name")));
             }
+
         }catch (Exception e){
             e.printStackTrace();
         }
         return v;
     }
 
-    // yCasasola
-    public static Vector<addOnsAppointmentAssociativeTable> getAddOnsAppointmentAssociative(){
-        Vector<addOnsAppointmentAssociativeTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM addOnsAppointmentAssociativeTable");
-            ResultSet result = statement.executeQuery();
+    public static void insertRowByID(int rowToInsert) {
 
-            while(result.next()){
-                v.add(new addOnsAppointmentAssociativeTable(result.getInt("addOnNumber"),
-                        result.getInt("appointmentNumber")));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return v;
     }
 
-    // yCasasola
-    public static Vector<contactUsTable> getContactUS(){
-        Vector<contactUsTable> v = new Vector<>();
+    public static void deleteRowByID(int rowToDelete) {
         try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM contactUsTable");
-            ResultSet result = statement.executeQuery();
-
-            while(result.next()){
-                v.add(new contactUsTable(result.getString("firstName"),
-                        result.getString("lastName"),
-                        result.getString("email"),
-                        result.getInt("phone"),
-                        result.getString("subjectLine"),
-                        result.getString("message"),
-                        result.getInt("serviceNumber")));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return v;
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM customerTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {e.printStackTrace();}
     }
-
-    // yCasasola
-    public static Vector<packagesTable> getPackages(){
-        Vector<packagesTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM packagesTable");
-            ResultSet result = statement.executeQuery();
-
-            while(result.next()){
-                v.add(new packagesTable(result.getInt("packageNumber"),
-                        result.getInt("serviceNumber"),
-                        result.getString("packageDescription"),
-                        result.getDouble("price"),
-                        result.getBoolean("status")));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    // yCasasola
-    public static Vector<serviceAppointmentAssociativeTable> getServiceAppointmentAssociative(){
-        Vector<serviceAppointmentAssociativeTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM serviceAppointmentAssociativeTable");
-            ResultSet result = statement.executeQuery();
-
-            while(result.next()){
-                v.add(new serviceAppointmentAssociativeTable(result.getInt("serviceNumber"),
-                        result.getInt("appointmentNumber")));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    // yCasasola
-    public static Vector<servicesTable> getServices(){
-        Vector<servicesTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM servicesTable");
-            ResultSet result = statement.executeQuery();
-
-            while(result.next()){
-                v.add(new servicesTable(result.getInt("serviceNumber"),
-                        result.getString("serviceDescription"),
-                        result.getDouble("price"),
-                        result.getBoolean("status"),
-                        result.getBoolean("discount")));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-//Makki
-    public static Vector<Address> getAddress() {
-        Vector<Address> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Address");
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                v.add(new Address(result.getInt("customerNumber"),
-                        result.getString("street"),
-                        result.getString("cityName"),
-                        result.getString("stateName"),
-                        result.getString("zipCode"),
-                        result.getString("countryName")));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-//Makki
-    public static Vector<Revenue> getRevenue() {
-        Vector<Revenue> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Revenue");
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                v.add(new Revenue(
-                        result.getString("date"),
-                        result.getString("revenueMonthlyActual"),
-                        result.getString("revenueWeeklyActual"),
-                        result.getString("revenueMonthlyFromCancellations"),
-                        result.getString("potentialRevenueMonthlyFromScheduled"),
-                        result.getString("revenueByStaff")));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    //Makki
-    public static Vector<City> getCiy() {
-        Vector<City> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM City");
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                v.add(new City(
-                        result.getString("cityName"),
-                        result.getString("internationalCity")));
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-
-
-    //Makki
-    public static Vector<state> getState() {
-        Vector<state> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM state");
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                v.add(new state(
-                        result.getInt("stateID"),
-                        result.getString("stateCode"),
-                        result.getString("stateName")));
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-
-    //Makki
-    public static Vector<Country> getCountry() {
-        Vector<Country> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Country");
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                v.add(new Country(
-                        result.getInt("id"),
-                        result.getString("countryName")));
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-
-
-
-    //Makki
-    public static Vector<Staff> getStaff() {
-        Vector<Staff> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Staff");
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                v.add(new Staff(
-                        result.getInt("staff_Number"),
-                        result.getString("tips"),
-                        result.getString("date"),
-                        result.getString("totalPTO"),
-                        result.getString("revenueByStaff")));
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-
-
 }
