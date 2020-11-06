@@ -20,7 +20,7 @@ public class companyClientHistoryTable {
         this.customerNumber = customerNumber;
     }
 
-    public boolean isCurrentClient() {
+    public boolean getCurrentClient() {
         return currentClient;
     }
 
