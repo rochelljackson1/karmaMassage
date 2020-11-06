@@ -27,6 +27,12 @@ public class customerTable {
         this.address = address;
     }
 
+    public customerTable(int customerNumber, String firstName, String lastName) {
+        this.customerNumber = customerNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }
@@ -98,4 +104,7 @@ public class customerTable {
     public void setAddress(String address) {
         this.address = address;
     }
+
+
 }
+
