@@ -40,6 +40,14 @@
 
 <form action="insertOptions" id="insertForm" style="display:none;" method="post">
     <input name="rowToInsert" type="text">
+    <input name="rowToInsert2" type="text">
+    <input name="rowToInsert3" type="text">
+    <input name="rowToInsert4" type="text">
+    <input name="rowToInsert5" type="text">
+    <input name="rowToInsert6" type="text">
+    <input name="rowToInsert7" type="text">
+    <input name="rowToInsert8" type="text">
+    <input name="rowToInsert9" type="text">
     <button type="submit">Insert This Row</button>
 </form>
 
