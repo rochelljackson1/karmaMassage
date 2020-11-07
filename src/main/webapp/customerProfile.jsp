@@ -21,7 +21,9 @@
             if (valuey == "insertRow") {
                 document.getElementById('insertForm').style.display = "flex";
             }
-        }
+            if (valuey == "updateRow") {}
+                document.getElementById('updateForm').style.display = "flex";
+            }
     </script>
 
 </head>
@@ -29,6 +31,7 @@
 <select id="selection">
     <option value="deleteRow">Delete Customer</option>
     <option value="insertRow">Insert Customer</option>
+    <option value="updateRow">Update Customer</option>
 </select>
 
 <button onclick="makeVisible();">Make Form Visible</button>
@@ -49,6 +52,19 @@
     <input name="rowToInsert8" type="text">
     <input name="rowToInsert9" type="text">
     <button type="submit">Insert This Row</button>
+</form>
+
+<form action="updateOptions" id="updateForm" style="display:none;" method="post">
+    <input name="customerNumberInput" type="text">
+    <input name="storeCreditInput" type="text">
+    <input name="firstNameInput" type="text">
+    <input name="lastNameInput" type="text">
+    <input name="genderInput" type="text">
+    <input name="phoneInput" type="text">
+    <input name="emailInput" type="text">
+    <input name="birthdayInput" type="text">
+    <input name="addressInput" type="text">
+    <button type="submit">Update This Row</button>
 </form>
 
 <table>

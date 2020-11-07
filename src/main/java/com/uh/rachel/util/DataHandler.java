@@ -536,6 +536,24 @@ public class DataHandler {
         return v;
     }
 
+    public static void updateRowByID(int customerNumberInput,int storeCreditInput, String firstNameInput, String lastNameInput, String genderInput, String phoneInput, String emailInput, String birthdayInput, String addressInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE customerTable SET storeCredit=?, firstName=?, lastName=?, gender=?, phone=?, email=?, birthday=?, address=? WHERE customerNumber=?");
+            ps.setInt(1, storeCreditInput);
+            ps.setString(2, firstNameInput);
+            ps.setString(3, lastNameInput);
+            ps.setString(4, genderInput);
+            ps.setString(5, phoneInput);
+            ps.setString(6, emailInput);
+            ps.setString(7, birthdayInput);
+            ps.setString(8, addressInput);
+            ps.setInt(9, customerNumberInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
     public static void insertRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5, String rowToInsert6, String rowToInsert7, String rowToInsert8, String rowToInsert9) {
         try {
             Connection conn = ConnectionProvider.getConnection();

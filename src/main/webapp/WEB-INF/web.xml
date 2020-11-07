@@ -24,6 +24,16 @@
         <url-pattern>/insertOptions</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>updateOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateOptions</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>updateOptions</servlet-name>
+        <url-pattern>/updateOptions</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>
