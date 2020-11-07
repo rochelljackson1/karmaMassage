@@ -5,6 +5,7 @@ public class existingConditionsRespiratoryTable {
     boolean shortnessOfBreath;
     boolean chronicCough;
     boolean bronchitis;
+    boolean emphysema;
     boolean asthma;
 
     public existingConditionsRespiratoryTable() {
@@ -56,5 +57,13 @@ public class existingConditionsRespiratoryTable {
 
     public void setAsthma(boolean asthma) {
         this.asthma = asthma;
+    }
+
+    public boolean isEmphysema() {
+        return emphysema;
+    }
+
+    public void setEmphysema(boolean emphysema) {
+        this.emphysema = emphysema;
     }
 }

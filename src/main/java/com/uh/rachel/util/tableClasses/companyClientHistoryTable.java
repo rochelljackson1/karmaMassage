@@ -12,6 +12,10 @@ public class companyClientHistoryTable {
         this.currentClient = currentClient;
     }
 
+    public companyClientHistoryTable(boolean currentClient) {
+        this.currentClient = currentClient;
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }
