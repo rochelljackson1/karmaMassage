@@ -11,7 +11,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Customer Table</title>
+    <title>Report 10</title>
 </head>
 <body>
 <table>
@@ -20,7 +20,7 @@
         <th>First Name</th>
         <th>Last Name</th>
     </tr>
-    <% Vector<customerTable> v = DataHandler.getCustomers();
+    <% Vector<customerTable> v = DataHandler.getReport10();
         for (customerTable c : v) {
     %>
     <tr>
