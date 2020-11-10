@@ -395,11 +395,11 @@ public class DataHandler {
             while (result.next()) {
                 v.add(new Revenue(
                         result.getString("date"),
-                        result.getString("revenueMonthlyActual"),
-                        result.getString("revenueWeeklyActual"),
-                        result.getString("revenueMonthlyFromCancellations"),
-                        result.getString("potentialRevenueMonthlyFromScheduled"),
-                        result.getString("revenueByStaff")));
+                        result.getDouble("revenueMonthlyActual"),
+                        result.getDouble("revenueWeeklyActual"),
+                        result.getDouble("revenueMonthlyFromCancellations"),
+                        result.getDouble("potentialRevenueMonthlyFromScheduled"),
+                        result.getDouble("revenueByStaff")));
             }
 
         } catch (Exception e) {
@@ -501,6 +501,102 @@ public class DataHandler {
         }
         return v;
     }
+
+
+    //Makki
+    public static Vector<PTO_Staff> getPTO_Staff() {
+        Vector<PTO_Staff> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM PTO_Staff");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new PTO_Staff(
+                        result.getInt("staffNumber"),
+                        result.getString("maxPTO"),
+                        result.getString("maxSickPTO"),
+                        result.getString("maxMaternatyPTO"),
+                        result.getString("maxEmergencyPTO"),
+                        result.getString("totalPTO")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<Staff_PTO_Staff_Associative> getStaff_PTO_Staff_Associative() {
+        Vector<Staff_PTO_Staff_Associative> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Staff_PTO_Staff_Associative");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Staff_PTO_Staff_Associative(
+                        result.getInt("staff_Number"),
+                        result.getInt("staffNumber")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<OwnerSide_of_Automatic_Payment_Cancellation_System> getOwnerSide_of_Automatic_Payment_Cancellation_System() {
+        Vector<OwnerSide_of_Automatic_Payment_Cancellation_System> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM OwnerSide_of_Automatic_Payment_Cancellation_System");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new OwnerSide_of_Automatic_Payment_Cancellation_System(
+                        result.getString("timeCondition"),
+                        result.getString("deductionPrecentage")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<Location> getLocation() {
+        Vector<Location> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Location");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Location(
+                        result.getInt("locationNumber"),
+                        result.getInt("customerNumber"),
+                        result.getBoolean("inBound"),
+                        result.getBoolean("outBound")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
 
 
 

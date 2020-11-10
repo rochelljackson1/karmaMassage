@@ -2,18 +2,18 @@ package com.uh.rachel.util.tableClasses;
 
 public class Revenue {
     String date;
-    String revenueMonthlyActual;
-    String revenueWeeklyActual;
-    String revenueMonthlyFromCancellations;
-    String potentialRevenueMonthlyFromScheduled;
-    String revenueByStaff;
+    Double revenueMonthlyActual;
+    Double revenueWeeklyActual;
+    Double revenueMonthlyFromCancellations;
+    Double potentialRevenueMonthlyFromScheduled;
+    Double revenueByStaff;
 
 
     public Revenue() {
 
     }
 
-    public Revenue(String date, String revenueMonthlyActual, String revenueWeeklyActual, String revenueMonthlyFromCancellations, String potentialRevenueMonthlyFromScheduled, String revenueByStaff) {
+    public Revenue(String date, Double revenueMonthlyActual, Double revenueWeeklyActual, Double revenueMonthlyFromCancellations, Double potentialRevenueMonthlyFromScheduled, Double revenueByStaff) {
         this.revenueByStaff = revenueByStaff;
         this.date = date;
         this.revenueMonthlyActual = revenueMonthlyActual;
@@ -31,43 +31,43 @@ public class Revenue {
         this.date = date;
     }
 
-    public String getRevenueMonthlyActual() {
+    public Double getRevenueMonthlyActual() {
         return revenueMonthlyActual;
     }
 
-    public void setRevenueMonthlyActual(String revenueMonthlyActual) {
+    public void setRevenueMonthlyActual(Double revenueMonthlyActual) {
         this.revenueMonthlyActual = revenueMonthlyActual;
     }
 
-    public String getRevenueWeeklyActual() {
+    public Double getRevenueWeeklyActual() {
         return revenueWeeklyActual;
     }
 
-    public void setRevenueWeeklyActual(String revenueWeeklyActual) {
+    public void setRevenueWeeklyActual(Double revenueWeeklyActual) {
         this.revenueWeeklyActual = revenueWeeklyActual;
     }
 
-    public String getRevenueMonthlyFromCancellations() {
+    public Double getRevenueMonthlyFromCancellations() {
         return revenueMonthlyFromCancellations;
     }
 
-    public void setRevenueMonthlyFromCancellations(String revenueMonthlyFromCancellations) {
+    public void setRevenueMonthlyFromCancellations(Double revenueMonthlyFromCancellations) {
         this.revenueMonthlyFromCancellations = revenueMonthlyFromCancellations;
     }
 
-    public String getPotentialRevenueMonthlyFromScheduled() {
+    public Double getPotentialRevenueMonthlyFromScheduled() {
         return potentialRevenueMonthlyFromScheduled;
     }
 
-    public void setPotentialRevenueMonthlyFromScheduled(String potentialRevenueMonthlyFromScheduled) {
+    public void setPotentialRevenueMonthlyFromScheduled(Double potentialRevenueMonthlyFromScheduled) {
         this.potentialRevenueMonthlyFromScheduled = potentialRevenueMonthlyFromScheduled;
     }
 
-    public String getRevenueByStaff() {
+    public Double getRevenueByStaff() {
         return revenueByStaff;
     }
 
-    public void setRevenueByStaff(String revenueByStaff) {
+    public void setRevenueByStaff(Double revenueByStaff) {
         this.revenueByStaff = revenueByStaff;
     }
 
