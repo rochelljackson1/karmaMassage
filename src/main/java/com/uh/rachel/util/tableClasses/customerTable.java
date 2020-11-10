@@ -15,6 +15,7 @@ public class customerTable {
 
     }
 
+
     public customerTable(int customerNumber, int storeCredit, String firstName, String lastName, String gender, String phone, String email, String birthday, String address) {
         this.customerNumber = customerNumber;
         this.storeCredit = storeCredit;
