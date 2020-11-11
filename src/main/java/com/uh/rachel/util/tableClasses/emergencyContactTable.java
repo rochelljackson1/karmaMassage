@@ -19,6 +19,13 @@ public class emergencyContactTable {
         this.relationship = relationship;
     }
 
+    public emergencyContactTable(String emergencyFirstName, String emergencyLastName, String emergencyPhone, String relationship) {
+        this.emergencyFirstName = emergencyFirstName;
+        this.emergencyLastName = emergencyLastName;
+        this.emergencyPhone = emergencyPhone;
+        this.relationship = relationship;
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }
