@@ -596,7 +596,7 @@ public class DataHandler {
         return v;
     }
 
-
+    //Makki
     public static Vector<validEmail> getValidEmail() {
         Vector<validEmail> v = new Vector<>();
         try {
@@ -658,6 +658,194 @@ public class DataHandler {
     }
 
 
+
+    //Makki
+    public static Vector<reportGender> getReportGender() {
+        Vector<reportGender> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int = 0,\n" +
+                    "@firstName nvarchar = 0,\n" +
+                    "@lastName nvarchar = 0\n" +
+                    "@gender nvarchar = 0\n" +
+                    "@cityName nvarchar = 0\n" +
+                    "@stateName nvarchar = 0\n" +
+                    "@countryName nvarchar = 0\n" +
+                    "\n" +
+                    "SELECT @gender = 1\n" +
+
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.email AS 'Gender',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country',\n" +
+
+                    "\n" +
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.gender like birthday\n");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new reportGender(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("Gender")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<reportAddress> getReportAddress() {
+        Vector<reportAddress> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int = 0,\n" +
+                    "@firstName nvarchar = 0,\n" +
+                    "@lastName nvarchar = 0\n" +
+                    "@address nvarchar = 0\n" +
+                    "@cityName nvarchar = 0\n" +
+                    "@stateName nvarchar = 0\n" +
+                    "@countryName nvarchar = 0\n" +
+                    "\n" +
+                    "SELECT @address = 'address'\n" +
+
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.address AS 'Address',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country',\n" +
+
+                    "\n" +
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.address like @address\n");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new reportAddress(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("Address")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+
+    //Makki
+    public static Vector<reportBirthday> getReportBirthday() {
+        Vector<reportBirthday> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int = 0,\n" +
+                    "@firstName nvarchar = 0,\n" +
+                    "@lastName nvarchar = 0\n" +
+                    "@birthday nvarchar = 0\n" +
+                    "@cityName nvarchar = 0\n" +
+                    "@stateName nvarchar = 0\n" +
+                    "@countryName nvarchar = 0\n" +
+                    "\n" +
+                    "SELECT @birthday = 'birthday'\n" +
+
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.birthday AS 'Birthday',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country',\n" +
+
+                    "\n" +
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.birthday like @birthday\n");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new reportBirthday(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("Birthday")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
 
 
 
