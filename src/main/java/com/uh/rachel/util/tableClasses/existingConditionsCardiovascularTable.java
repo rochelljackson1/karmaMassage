@@ -44,6 +44,26 @@ public class existingConditionsCardiovascularTable {
         this.bloodClots = bloodClots;
     }
 
+    public existingConditionsCardiovascularTable(boolean bloodClots, boolean cardiovascularAccident, boolean cerebralVascularAccident, boolean coldFeet, boolean coldHands, boolean congestiveHeartFailure, boolean heartAttack, boolean heartDisease, boolean highBloodPressure, boolean lowBloodPressure, boolean lymphedema, boolean myocardialInfarction, boolean paceMaker, boolean phlebitis, boolean stroke, boolean thrombosisEmbolism, boolean varicoseVeins) {
+        this.varicoseVeins = varicoseVeins;
+        this.thrombosisEmbolism = thrombosisEmbolism;
+        this.stroke = stroke;
+        this.phlebitis = phlebitis;
+        this.paceMaker = paceMaker;
+        this.myocardialInfarction = myocardialInfarction;
+        this.lymphedema = lymphedema;
+        this.lowBloodPressure = lowBloodPressure;
+        this.highBloodPressure = highBloodPressure;
+        this.heartDisease = heartDisease;
+        this.heartAttack = heartAttack;
+        this.congestiveHeartFailure = congestiveHeartFailure;
+        this.coldHands = coldHands;
+        this.coldFeet = coldFeet;
+        this.cerebralVascularAccident = cerebralVascularAccident;
+        this.cardiovascularAccident = cardiovascularAccident;
+        this.bloodClots = bloodClots;
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }
