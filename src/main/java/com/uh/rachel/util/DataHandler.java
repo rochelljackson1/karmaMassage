@@ -1,5 +1,6 @@
 package com.uh.rachel.util;
 
+import com.uh.rachel.util.reportClasses.*;
 import com.uh.rachel.util.tableClasses.*;
 
 import java.sql.Connection;
@@ -493,8 +494,8 @@ public class DataHandler {
         return v;
     }
 
-    /*public static Vector<customerTable> getReport14() {
-        Vector<customerTable> v = new Vector<>();
+    public static Vector<report14> getReport14() {
+        Vector<report14> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
             PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
@@ -531,23 +532,23 @@ public class DataHandler {
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
-                v.add(new customerTable(result.getInt("Client Profile Number"),
-                        result.getString("Client First Name"), result.getString("Client Last Name"))),
-                        (new existingConditionsInfectiousTable(result.getBoolean("Infectious Respiratory Condition"))),
-                        (new existingConditionsSkinTable(result.getInt("Bruise Easily"),
+                v.add(new report14(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name")),
+                        new existingConditionsInfectiousTable(result.getBoolean("Infectious Skin Condition")),
+                        new existingConditionsSkinTable(result.getBoolean("Bruise Easily"),
                                 result.getBoolean("HypersensitiveReaction"), result.getBoolean("Melanoma"),
-                                result.getBoolean("Skin Conditions"), result.getBoolean("Skin Irritations"))),
-                        (new companyClientHistoryTable(result.getBoolean("Status")));
+                                result.getBoolean("Skin Conditions"), result.getBoolean("Skin Irritations")),
+                        new companyClientHistoryTable(result.getBoolean("Status"))));
             }
 
         }catch (Exception e){
             e.printStackTrace();
         }
         return v;
-    }*/
+    }
 
-    /*public static Vector<customerTable> getReport5() {
-        Vector<customerTable> v = new Vector<>();
+    public static Vector<report5> getReport5() {
+        Vector<report5> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
             PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
@@ -609,38 +610,20 @@ public class DataHandler {
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
-                v.add(new customerTable(result.getInt("Client Profile Number"),
-                        result.getString("Client First Name"), result.getString("Client Last Name"))),
-                        (new existingConditionsFamilyHistoryTable(result.getBoolean("Family History of Cardiovasular Condition"))),
-                        (new reasonForMassageTable(result.getBoolean("Reason for Massage"))),
-                        (new companyClientHistoryTable(result.getBoolean("Status"))),
-                        (new existingConditionsCardiovascularTable(result.getInt("Blood Clots"),
+                v.add(new report5(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name")),
+                        new existingConditionsFamilyHistoryTable(result.getBoolean("Family History of Cardiovasular Condition")),
+                        new reasonForMassageTable(result.getString("Reason for Massage")),
+                        new companyClientHistoryTable(result.getBoolean("Status")),
+                        new existingConditionsCardiovascularTable(result.getBoolean("Blood Clots"),
                                 result.getBoolean("Cardiovascular Accident"), result.getBoolean("Cerebral Vascular Accident"),
-                                result.getBoolean("Cold Feet"), result.getBoolean(""), result.getInt("Cold Hands"),
+                                result.getBoolean("Cold Feet"), result.getBoolean("Cold Hands"),
                                 result.getBoolean("Congestive Heart Failure"), result.getBoolean("Heart Attack"),
                                 result.getBoolean("Heart Disease"), result.getBoolean("High Blood Pressure"),
                                 result.getBoolean("Low Blood Pressure"), result.getBoolean("Lymphedema"),
                                 result.getBoolean("Myocardial Infarctin"), result.getBoolean("Pace Maker"),
                                 result.getBoolean("Phlebitis"), result.getBoolean("Stroke"),
-                                result.getBoolean("Thrombosis Embolism"), result.getBoolean("Varicose Veins")));
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return v;
-    }*/
-
-    public static Vector<customerTable> getReport6() {
-        Vector<customerTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("");
-            ResultSet result = statement.executeQuery();
-
-            while(result.next()){
-                v.add(new customerTable(result.getInt("Client Profile Number"),
-                        result.getString("Client First Name"), result.getString("Client Last Name")));
+                                result.getBoolean("Thrombosis Embolism"), result.getBoolean("Varicose Veins"))));
             }
 
         }catch (Exception e){
@@ -649,16 +632,52 @@ public class DataHandler {
         return v;
     }
 
-    public static Vector<customerTable> getReport7() {
-        Vector<customerTable> v = new Vector<>();
+    public static Vector<report6> getReport6() {
+        Vector<report6> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("");
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@fhres bit = 0,\n" +
+                    "@resTrue bit = 0\n" +
+                    "\n" +
+                    "SELECT @status = 1\n" +
+                    "SELECT @fhres = 1\n" +
+                    "SELECT @resTrue = 1\n" +
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name',\n" +
+                    "existingConditionsFamilyHistoryTable.respiratoryConditions AS 'Family History of Respiratory Condition',\n" +
+                    "existingConditionsRespiratoryTable.asthma AS 'Asthma',\n" +
+                    "existingConditionsRespiratoryTable.bronchitis AS 'Bronchitis',\n" +
+                    "existingConditionsRespiratoryTable.chronicCough AS 'Chronic Cough',\n" +
+                    "existingConditionsRespiratoryTable.emphysema AS 'Emphysema',\n" +
+                    "existingConditionsRespiratoryTable.shortnessOfBreath AS 'Shortness of Breathe',\n" +
+                    "companyClientHistoryTable.currentClient AS 'Status'\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN existingConditionsFamilyHistoryTable ON customerTable.customerNumber = existingConditionsFamilyHistoryTable.customerNumber\n" +
+                    "JOIN existingConditionsRespiratoryTable ON customerTable.customerNumber = existingConditionsRespiratoryTable.customerNumber\n" +
+                    "JOIN reasonForMassageTable ON customerTable.customerNumber = reasonForMassageTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE companyClientHistoryTable.currentClient = @status\n" +
+                    "AND (existingConditionsFamilyHistoryTable.respiratoryConditions = @fhres)\n" +
+                    "AND (existingConditionsRespiratoryTable.asthma = @resTrue OR existingConditionsRespiratoryTable.bronchitis = @resTrue OR existingConditionsRespiratoryTable.chronicCough = @resTrue\n" +
+                    "\tOR existingConditionsRespiratoryTable.emphysema = @resTrue OR existingConditionsRespiratoryTable.shortnessOfBreath = @resTrue)");
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
-                v.add(new customerTable(result.getInt("Client Profile Number"),
-                        result.getString("Client First Name"), result.getString("Client Last Name")));
+                v.add(new report6(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name")),
+                        new existingConditionsFamilyHistoryTable(result.getBoolean("Family History of Respiratory Condition")),
+                        new existingConditionsRespiratoryTable(result.getBoolean("Asthma"),
+                                result.getBoolean("Bronchitis"), result.getBoolean("Chronic Cough"),
+                                result.getBoolean("Emphysema"), result.getBoolean("Shortness of Breathe")),
+                        new companyClientHistoryTable(result.getBoolean("Status"))));
             }
 
         }catch (Exception e){
@@ -667,16 +686,235 @@ public class DataHandler {
         return v;
     }
 
-    public static Vector<customerTable> getReport8() {
-        Vector<customerTable> v = new Vector<>();
+    public static Vector<report7> getReport7() {
+        Vector<report7> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("");
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@misTrue bit = 0,\n" +
+                    "@reason nvarchar(50),\n" +
+                    "@medTrue nvarchar(50)\n" +
+                    "\n" +
+                    "SELECT @status = 1\n" +
+                    "SELECT @misTrue = 1\n" +
+                    "SELECT @reason = 'NULL'\n" +
+                    "SELECT @medTrue = 'NULL'\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name',\n" +
+                    "companyClientHistoryTable.currentClient AS 'Status',\n" +
+                    "existingConditionsMedicationsTable.other AS 'Taking Medication',\n" +
+                    "reasonForMassageTable.cause AS 'Reason',\n" +
+                    "existingConditionsMisTable.arthritis AS 'Arthritis',\n" +
+                    "existingConditionsMisTable.anaphylaxis AS 'Anaphylaxis',\n" +
+                    "existingConditionsMisTable.artificialJointsSpecialEquipment AS 'Artificial Joint',\n" +
+                    "existingConditionsMisTable.allergies AS 'Allergies',\n" +
+                    "existingConditionsMisTable.cancer AS 'Cancer',\n" +
+                    "existingConditionsMisTable.chrohnsDisease AS 'Chrohns Disease',\n" +
+                    "existingConditionsMisTable.diabetes AS 'Diabetes',\n" +
+                    "existingConditionsMisTable.digestiveConditions AS 'Digestive Conditions',\n" +
+                    "existingConditionsMisTable.dizziness AS 'Dizziness',\n" +
+                    "existingConditionsMisTable.epilepsy AS 'Epilepsy',\n" +
+                    "existingConditionsMisTable.fibromyalgia AS 'Fibromyalgia',\n" +
+                    "existingConditionsMisTable.hemophilia AS 'Hemophilia',\n" +
+                    "existingConditionsMisTable.insomnia AS 'Insomnia',\n" +
+                    "existingConditionsMisTable.lossOfSensation AS 'Loss of Sensation',\n" +
+                    "existingConditionsMisTable.lupus AS 'Lupus',\n" +
+                    "existingConditionsMisTable.mentalIllness AS 'Mental Illness',\n" +
+                    "existingConditionsMisTable.osteoArthritis AS 'OsteoArthritis',\n" +
+                    "existingConditionsMisTable.osteoporosis AS 'Osteoporosis',\n" +
+                    "existingConditionsMisTable.otherDiagnosedDiseases AS 'Other Diagnosed Disease',\n" +
+                    "existingConditionsMisTable.otherMedicalConditions AS 'Other Medical Conditions',\n" +
+                    "existingConditionsMisTable.rheumatoidArthritis AS 'RheumadtoidArthritis',\n" +
+                    "existingConditionsMisTable.shingles AS 'Shingles',\n" +
+                    "existingConditionsMisTable.stress AS 'Stress',\n" +
+                    "existingConditionsMisTable.surgicalPinsOrWire AS 'Surgical Pins or Wire'\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN existingConditionsMisTable ON customerTable.customerNumber = existingConditionsMisTable.customerNumber\n" +
+                    "JOIN existingConditionsMedicationsTable ON customerTable.customerNumber = existingConditionsMedicationsTable.customerNumber\n" +
+                    "JOIN reasonForMassageTable ON customerTable.customerNumber = reasonForMassageTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE companyClientHistoryTable.currentClient = @status\n" +
+                    "AND reasonForMassageTable.cause != 'NULL'\n" +
+                    "AND (existingConditionsMisTable.allergies = @misTrue OR existingConditionsMisTable.anaphylaxis = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.arthritis = @misTrue OR existingConditionsMisTable.artificialJointsSpecialEquipment = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.cancer = @misTrue OR existingConditionsMisTable.chrohnsDisease = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.diabetes = @misTrue OR existingConditionsMisTable.digestiveConditions = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.digestiveConditions = @misTrue OR existingConditionsMisTable.dizziness = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.epilepsy = @misTrue OR existingConditionsMisTable.fibromyalgia = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.hemophilia = @misTrue OR existingConditionsMisTable.insomnia = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.lossOfSensation = @misTrue OR existingConditionsMisTable.lupus = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.mentalIllness = @misTrue OR existingConditionsMisTable.osteoArthritis = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.osteoporosis = @misTrue OR existingConditionsMisTable.otherDiagnosedDiseases = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.otherMedicalConditions = @misTrue OR existingConditionsMisTable.rheumatoidArthritis = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.shingles = @misTrue OR existingConditionsMisTable.stress = @misTrue\n" +
+                    "\tOR existingConditionsMisTable.surgicalPinsOrWire = @misTrue)\n" +
+                    "AND existingConditionsMedicationsTable.other != @medTrue");
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
-                v.add(new customerTable(result.getInt("Client Profile Number"),
-                        result.getString("Client First Name"), result.getString("Client Last Name")));
+                v.add(new report7(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name")),
+                        new companyClientHistoryTable(result.getBoolean("Status")),
+                        new existingConditionsMedicationsTable(result.getString("Taking Medication")),
+                        new reasonForMassageTable(result.getString("Reason")),
+                        new existingConditionsMisTable(result.getBoolean("Arthritis"), result.getBoolean("Anaphylaxis"),
+                                result.getBoolean("Artificial Joint"), result.getBoolean("Allergies"), result.getBoolean("Cancer"),
+                                result.getBoolean("Chrohns Disease"), result.getBoolean("Diabetes"), result.getBoolean("Digestive Conditions"),
+                                result.getBoolean("Dizziness"), result.getBoolean("Epilepsy"), result.getBoolean("Fibromyalgia"),
+                                result.getBoolean("Hemophilia"), result.getBoolean("Insomnia"), result.getBoolean("Loss of Sensation"),
+                                result.getBoolean("Lupus"), result.getBoolean("Mental Illness"), result.getBoolean("OsteoArthritis"),
+                                result.getBoolean("Osteoporosis"), result.getBoolean("Other Diagnosed Disease"),
+                                result.getBoolean("Other Medical Conditions"), result.getBoolean("RheumadtoidArthritis"),
+                                result.getBoolean("Shingles"), result.getBoolean("Stress"), result.getBoolean("Surgical Pins or Wire"))));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<report8> getReport8() {
+        Vector<report8> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@cardioTrue bit = 0,\n" +
+                    "@cardioFalse bit = 0,\n" +
+                    "@resTrue bit = 0,\n" +
+                    "@resFalse bit = 0,\n" +
+                    "@hnTrue bit = 0,\n" +
+                    "@hnFalse bit = 0,\n" +
+                    "@iTrue bit = 0,\n" +
+                    "@iFalse bit = 0,\n" +
+                    "@preg bit = 0,\n" +
+                    "@ack bit = 0,\n" +
+                    "@doctorNoPhone nvarchar(50),\n" +
+                    "@emergencyNoPhone nvarchar(50)\n" +
+                    "\n" +
+                    "SELECT @status = 1\n" +
+                    "SELECT @cardioTrue = 1\n" +
+                    "SELECT @cardioFalse = 0\n" +
+                    "SELECT @resTrue = 1\n" +
+                    "SELECT @resFalse = 0\n" +
+                    "SELECT @hnTrue = 1\n" +
+                    "SELECT @hnFalse = 0\n" +
+                    "SELECT @iTrue = 1\n" +
+                    "SELECT @preg = 1\n" +
+                    "SELECT @ack = 1\n" +
+                    "SELECT @doctorNoPhone = 'NULL'\n" +
+                    "SELECT @emergencyNoPhone = 'NULL'\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name',\n" +
+                    "companyClientHistoryTable.currentClient AS 'Status',\n" +
+                    "existingConditionsMedicationsTable.other AS 'Medications',\n" +
+                    "doctorTable.physicianLastname AS 'Physician Last Name',\n" +
+                    "doctorTable.physicianPhone AS 'Physician Phone Number',\n" +
+                    "emergencyContactTable.emergencyFirstName AS 'Emergency First Name',\n" +
+                    "emergencyContactTable.emergencyLastName AS 'Emergency Last Name',\n" +
+                    "emergencyContactTable.emergencyPhone AS 'Emergency Phone Number',\n" +
+                    "emergencyContactTable.relationship AS 'Emergency Relationship'\n" +
+                    "\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN existingConditionsCardiovascularTable ON customerTable.customerNumber = existingConditionsCardiovascularTable.customerNumber\n" +
+                    "JOIN existingConditionsHeadNeckTable ON customerTable.customerNumber = existingConditionsHeadNeckTable.customerNumber\n" +
+                    "JOIN existingConditionsInfectiousTable ON customerTable.customerNumber = existingConditionsInfectiousTable.customerNumber\n" +
+                    "JOIN existingConditionsMedicationsTable ON customerTable.customerNumber = existingConditionsMedicationsTable.customerNumber\n" +
+                    "JOIN existingConditionsNeurologicalTable ON customerTable.customerNumber = existingConditionsNeurologicalTable.customerNumber\n" +
+                    "JOIN existingConditionsRespiratoryTable ON customerTable.customerNumber = existingConditionsRespiratoryTable.customerNumber\n" +
+                    "JOIN existingConditionsSkinTable ON customerTable.customerNumber = existingConditionsSkinTable.customerNumber\n" +
+                    "JOIN existingConditionsSTJDTable ON customerTable.customerNumber = existingConditionsSTJDTable.customerNumber\n" +
+                    "JOIN existingConditionsWomenTable ON customerTable.customerNumber = existingConditionsWomenTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "--\n" +
+                    "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
+                    "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
+                    "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE companyClientHistoryTable.currentClient = @status\n" +
+                    "AND existingConditionsWomenTable.pregnant = @preg\n" +
+                    "AND ((existingConditionsCardiovascularTable.bloodClots = @cardioTrue OR existingConditionsCardiovascularTable.cardiovascularAccident = @cardioTrue or existingConditionsCardiovascularTable.cerebralVascularAccident = @cardioTrue\n" +
+                    "\tOR existingConditionsCardiovascularTable.coldFeet = @cardioTrue OR existingConditionsCardiovascularTable.coldHands = @cardioTrue OR existingConditionsCardiovascularTable.congestiveHeartFailure = @cardioTrue\n" +
+                    "\tOR existingConditionsCardiovascularTable.heartAttack = @cardioTrue OR existingConditionsCardiovascularTable.heartDisease = @cardioTrue OR existingConditionsCardiovascularTable.highBloodPressure = @cardioTrue\n" +
+                    "\tOR existingConditionsCardiovascularTable.lowBloodPressure = @cardioTrue OR existingConditionsCardiovascularTable.lymphedema = @cardioTrue OR existingConditionsCardiovascularTable.myocardialInfarction = @cardioTrue\n" +
+                    "\tOR existingConditionsCardiovascularTable.paceMaker = @cardioTrue OR existingConditionsCardiovascularTable.phlebitis = @cardioTrue OR existingConditionsCardiovascularTable.stroke = @cardioTrue\n" +
+                    "\tOR existingConditionsCardiovascularTable.thrombosisEmbolism = @cardioTrue OR existingConditionsCardiovascularTable.varicoseVeins = @cardioTrue)\n" +
+                    "OR (existingConditionsRespiratoryTable.asthma = @resTrue OR existingConditionsRespiratoryTable.bronchitis = @resTrue OR existingConditionsRespiratoryTable.chronicCough = @resTrue\n" +
+                    "\tOR existingConditionsRespiratoryTable.emphysema = @resTrue OR existingConditionsRespiratoryTable.shortnessOfBreath = @resTrue)\n" +
+                    "OR (existingConditionsHeadNeckTable.earProblems = @hnTrue OR existingConditionsHeadNeckTable.headaches = @hnTrue OR existingConditionsHeadNeckTable.hearingLoss = @hnTrue\n" +
+                    "\tOR existingConditionsHeadNeckTable.jawPain = @hnTrue OR existingConditionsHeadNeckTable.migraines = @hnTrue OR existingConditionsHeadNeckTable.sinusProblems = @hnTrue\n" +
+                    "\tOR existingConditionsHeadNeckTable.visionLoss = @hnTrue OR existingConditionsHeadNeckTable.visionProblems = @hnTrue)\n" +
+                    "OR (existingConditionsInfectiousTable.altheletsFoot = @iTrue OR existingConditionsInfectiousTable.hepatitis = @iTrue OR existingConditionsInfectiousTable.herpes = @iTrue\n" +
+                    "\tOR existingConditionsInfectiousTable.hiv = @iTrue OR existingConditionsInfectiousTable.respiratoryConditions = @iTrue OR existingConditionsInfectiousTable.skinConditions = @iTrue)\n" +
+                    "OR (existingConditionsNeurologicalTable.burning = @iTrue OR existingConditionsNeurologicalTable.cerebralPaisy = @iTrue OR existingConditionsNeurologicalTable.herniatedDisc = @iTrue\n" +
+                    "\tOR existingConditionsNeurologicalTable.multipleSclerosis = @iTrue OR existingConditionsNeurologicalTable.numbness = @iTrue OR existingConditionsNeurologicalTable.parkinsons = @iTrue\n" +
+                    "\tOR existingConditionsNeurologicalTable.stabbingPain = @iTrue OR existingConditionsNeurologicalTable.tingling = @iTrue)\n" +
+                    "OR (existingConditionsRespiratoryTable.asthma = @iTrue OR existingConditionsRespiratoryTable.bronchitis = @iTrue OR existingConditionsRespiratoryTable.chronicCough = @iTrue\n" +
+                    "\tOR existingConditionsRespiratoryTable.emphysema = @iTrue OR existingConditionsRespiratoryTable.shortnessOfBreath = @iTrue)\n" +
+                    "OR (existingConditionsSkinTable.bruiseEasily = @iTrue OR existingConditionsSkinTable.hypersensitiveReaction = @iTrue OR existingConditionsSkinTable.melanoma = @iTrue\n" +
+                    "\tOR existingConditionsSkinTable.skinConditions = @iTrue OR existingConditionsSkinTable.skinIrritations = @iTrue)\n" +
+                    "OR (existingConditionsSTJDTable.anklesLeft = @iTrue OR existingConditionsSTJDTable.anklesRight = @iTrue OR existingConditionsSTJDTable.armsLeft = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.armsRight = @iTrue OR existingConditionsSTJDTable.feetLeft = @iTrue OR existingConditionsSTJDTable.feetRight = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.handsLeft = @iTrue OR existingConditionsSTJDTable.handsRight = @iTrue OR existingConditionsSTJDTable.hipsLeft = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.hipsRight = @iTrue OR existingConditionsSTJDTable.kneesLeft = @iTrue OR existingConditionsSTJDTable.kneesRight = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.legsLeft = @iTrue OR existingConditionsSTJDTable.legsRight = @iTrue OR existingConditionsSTJDTable.lowerBackLeft = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.lowerBackRight = @iTrue OR existingConditionsSTJDTable.midBackLeft = @iTrue OR existingConditionsSTJDTable.midBackRight = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.neckLeft = @iTrue OR existingConditionsSTJDTable.neckRight = @iTrue OR existingConditionsSTJDTable.shouldersLeft = @iTrue\n" +
+                    "\tOR existingConditionsSTJDTable.shouldersRight = @iTrue OR existingConditionsSTJDTable.upperBackLeft = @iTrue OR existingConditionsSTJDTable.upperBackRight = @iTrue)\n" +
+                    "--\n" +
+                    "OR (existingConditionsCardiovascularTable.bloodClots = @cardioFalse OR existingConditionsCardiovascularTable.cardiovascularAccident = @cardioFalse or existingConditionsCardiovascularTable.cerebralVascularAccident = @cardioFalse\n" +
+                    "\tOR existingConditionsCardiovascularTable.coldFeet = @cardioFalse OR existingConditionsCardiovascularTable.coldHands = @cardioFalse OR existingConditionsCardiovascularTable.congestiveHeartFailure = @cardioFalse\n" +
+                    "\tOR existingConditionsCardiovascularTable.heartAttack = @cardioFalse OR existingConditionsCardiovascularTable.heartDisease = @cardioFalse OR existingConditionsCardiovascularTable.highBloodPressure = @cardioFalse\n" +
+                    "\tOR existingConditionsCardiovascularTable.lowBloodPressure = @cardioFalse OR existingConditionsCardiovascularTable.lymphedema = @cardioFalse OR existingConditionsCardiovascularTable.myocardialInfarction = @cardioFalse\n" +
+                    "\tOR existingConditionsCardiovascularTable.paceMaker = @cardioFalse OR existingConditionsCardiovascularTable.phlebitis = @cardioFalse OR existingConditionsCardiovascularTable.stroke = @cardioFalse\n" +
+                    "\tOR existingConditionsCardiovascularTable.thrombosisEmbolism = @cardioFalse OR existingConditionsCardiovascularTable.varicoseVeins = @cardioFalse)\n" +
+                    "OR (existingConditionsRespiratoryTable.asthma = @resFalse OR existingConditionsRespiratoryTable.bronchitis = @resFalse OR existingConditionsRespiratoryTable.chronicCough = @resFalse\n" +
+                    "\tOR existingConditionsRespiratoryTable.emphysema = @resFalse OR existingConditionsRespiratoryTable.shortnessOfBreath = @resFalse)\n" +
+                    "OR (existingConditionsHeadNeckTable.earProblems = @hnFalse OR existingConditionsHeadNeckTable.headaches = @hnFalse OR existingConditionsHeadNeckTable.hearingLoss = @hnFalse\n" +
+                    "\tOR existingConditionsHeadNeckTable.jawPain = @hnFalse OR existingConditionsHeadNeckTable.migraines = @hnFalse OR existingConditionsHeadNeckTable.sinusProblems = @hnFalse\n" +
+                    "\tOR existingConditionsHeadNeckTable.visionLoss = @hnFalse OR existingConditionsHeadNeckTable.visionProblems = @hnFalse)\n" +
+                    "OR (existingConditionsInfectiousTable.altheletsFoot = @iFalse OR existingConditionsInfectiousTable.hepatitis = @iFalse OR existingConditionsInfectiousTable.herpes = @iFalse\n" +
+                    "\tOR existingConditionsInfectiousTable.hiv = @iFalse OR existingConditionsInfectiousTable.respiratoryConditions = @iFalse OR existingConditionsInfectiousTable.skinConditions = @iFalse)\n" +
+                    "OR (existingConditionsNeurologicalTable.burning = @iFalse OR existingConditionsNeurologicalTable.cerebralPaisy = @iFalse OR existingConditionsNeurologicalTable.herniatedDisc = @iFalse\n" +
+                    "\tOR existingConditionsNeurologicalTable.multipleSclerosis = @iFalse OR existingConditionsNeurologicalTable.numbness = @iFalse OR existingConditionsNeurologicalTable.parkinsons = @iFalse\n" +
+                    "\tOR existingConditionsNeurologicalTable.stabbingPain = @iFalse OR existingConditionsNeurologicalTable.tingling = @iFalse)\n" +
+                    "OR (existingConditionsRespiratoryTable.asthma = @iFalse OR existingConditionsRespiratoryTable.bronchitis = @iFalse OR existingConditionsRespiratoryTable.chronicCough = @iFalse\n" +
+                    "\tOR existingConditionsRespiratoryTable.emphysema = @iFalse OR existingConditionsRespiratoryTable.shortnessOfBreath = @iFalse)\n" +
+                    "OR (existingConditionsSkinTable.bruiseEasily = @iFalse OR existingConditionsSkinTable.hypersensitiveReaction = @iFalse OR existingConditionsSkinTable.melanoma = @iFalse\n" +
+                    "\tOR existingConditionsSkinTable.skinConditions = @iFalse OR existingConditionsSkinTable.skinIrritations = @iFalse)\n" +
+                    "OR (existingConditionsSTJDTable.anklesLeft = @iFalse OR existingConditionsSTJDTable.anklesRight = @iFalse OR existingConditionsSTJDTable.armsLeft = @iFalse\n" +
+                    "\tOR existingConditionsSTJDTable.armsRight = @iFalse OR existingConditionsSTJDTable.feetLeft = @iFalse OR existingConditionsSTJDTable.feetRight = @iFalse\n" +
+                    "\tOR existingConditionsSTJDTable.handsLeft = @iFalse OR existingConditionsSTJDTable.handsRight = @iFalse OR existingConditionsSTJDTable.hipsLeft = @iFalse\n" +
+                    "\tOR existingConditionsSTJDTable.hipsRight = @iFalse OR existingConditionsSTJDTable.kneesLeft = @iFalse OR existingConditionsSTJDTable.kneesRight = @iFalse\n" +
+                    "\tOR existingConditionsSTJDTable.legsLeft = @iFalse OR existingConditionsSTJDTable.legsRight = @iFalse OR existingConditionsSTJDTable.lowerBackLeft = @iFalse\n" +
+                    "\tOR existingConditionsSTJDTable.lowerBackRight = @iFalse OR existingConditionsSTJDTable.midBackLeft = @iFalse OR existingConditionsSTJDTable.midBackRight = @iFalse\n" +
+                    "\tOR existingConditionsSTJDTable.neckLeft = @iFalse OR existingConditionsSTJDTable.neckRight = @iFalse OR existingConditionsSTJDTable.shouldersLeft = @iFalse\n" +
+                    "\tOR existingConditionsSTJDTable.shouldersRight = @iFalse OR existingConditionsSTJDTable.upperBackLeft = @iFalse OR existingConditionsSTJDTable.upperBackRight = @iFalse)\n" +
+                    "--\n" +
+                    "AND waiverTable.acknowledgment = @ack\n" +
+                    "AND doctorTable.physicianPhone != @doctorNoPhone\n" +
+                    "AND emergencyContactTable.emergencyPhone != @emergencyNoPhone)");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new report8(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name")),
+                        new companyClientHistoryTable(result.getBoolean("Status")),
+                        new existingConditionsMedicationsTable(result.getString("Medications")),
+                        new doctorTable(result.getString("Physician Last Name"), result.getString("Physician Phone Number")),
+                        new emergencyContactTable(result.getString("Emergency First Name"), result.getString("Emergency Last Name"),
+                            result.getString("Emergency Phone Number"), result.getString("Emergency Relationship"))));
             }
 
         }catch (Exception e){
