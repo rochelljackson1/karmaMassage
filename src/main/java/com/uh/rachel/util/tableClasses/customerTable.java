@@ -34,6 +34,14 @@ public class customerTable {
         this.lastName = lastName;
     }
 
+    public customerTable(int customerNumber, String firstName, String lastName, String email) {
+        this.customerNumber = customerNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+
     public int getCustomerNumber() {
         return customerNumber;
     }

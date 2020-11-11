@@ -23,6 +23,14 @@ public class Address {
 
     }
 
+
+    public Address(String cityName, String stateName, String countryName) {
+        this.cityName = cityName;
+        this.stateName = stateName;
+        this.countryName = countryName;
+
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }

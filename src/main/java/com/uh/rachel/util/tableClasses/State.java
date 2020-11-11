@@ -1,17 +1,17 @@
 package com.uh.rachel.util.tableClasses;
 
-public class state {
+public class State {
     int stateID;
     String stateCode;
     String stateName;
 
 
 
-    public state() {
+    public State() {
 
     }
 
-    public state(int stateID, String stateCode, String stateName) {
+    public State(int stateID, String stateCode, String stateName) {
         this.stateID = stateID;
         this.stateCode = stateCode;
         this.stateName = stateName;
