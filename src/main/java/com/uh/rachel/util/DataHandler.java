@@ -433,15 +433,15 @@ public class DataHandler {
 
 
     //Makki
-    public static Vector<state> getState() {
-        Vector<state> v = new Vector<>();
+    public static Vector<State> getState() {
+        Vector<State> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM state");
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
-                v.add(new state(
+                v.add(new State(
                         result.getInt("stateID"),
                         result.getString("stateCode"),
                         result.getString("stateName")));
@@ -595,6 +595,71 @@ public class DataHandler {
         }
         return v;
     }
+
+
+    public static Vector<validEmail> getValidEmail() {
+        Vector<validEmail> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int = 0,\n" +
+                    "@firstName nvarchar = 0,\n" +
+                    "@lastName nvarchar = 0\n" +
+                    "@email nvarchar = 1\n" +
+                    "@cityName nvarchar = 0\n" +
+                    "@stateName nvarchar = 0\n" +
+                    "@countryName nvarchar = 0\n" +
+                    "\n" +
+                    "SELECT @email = 1\n" +
+
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.email AS 'E-mail',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country',\n" +
+
+                    "\n" +
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.email like %@%\n");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new validEmail(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("E-mail")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+
 
 
 
