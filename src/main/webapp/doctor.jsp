@@ -18,10 +18,10 @@
             if (valuey ==="deleteRow") {
                 document.getElementById('deleteForm').style.display = "flex";
             }
-            if (valuey === "insertRow") {
+            if (valuey == "insertRow") {
                 document.getElementById('insertForm').style.display = "flex";
             }
-            if (valuey === "updateRow") {}
+            if (valuey == "updateRow") {}
             document.getElementById('updateForm').style.display = "flex";
         }
     </script>
