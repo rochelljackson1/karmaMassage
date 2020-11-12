@@ -602,15 +602,15 @@ public class DataHandler {
         try {
             Connection connection = ConnectionProvider.getConnection();
             PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@customerNumber int = 0,\n" +
-                    "@firstName nvarchar = 0,\n" +
-                    "@lastName nvarchar = 0\n" +
-                    "@email nvarchar = 1\n" +
-                    "@cityName nvarchar = 0\n" +
-                    "@stateName nvarchar = 0\n" +
-                    "@countryName nvarchar = 0\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@email nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
                     "\n" +
-                    "SELECT @email = 1\n" +
+                    "SELECT @email = '%@%'\n" +
 
 
                     "\n" +
@@ -622,9 +622,9 @@ public class DataHandler {
                     "customerTable.email AS 'E-mail',\n" +
                     "Address.cityName AS 'City',\n" +
                     "Address.stateName AS 'State',\n" +
-                    "Address.countryName AS 'Country',\n" +
+                    "Address.countryName AS 'Country'\n" +
 
-                    "\n" +
+
                     "FROM Address\n" +
                     "JOIN State ON Address.stateName = State.stateName\n" +
                     "JOIN Country ON Address.countryName = Country.countryName\n" +
@@ -632,7 +632,7 @@ public class DataHandler {
                     "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
 
                     "\n" +
-                    "WHERE customerTable.email like %@%\n");
+                    "WHERE customerTable.email >= @email");
 
             ResultSet result = statement.executeQuery();
 
@@ -665,16 +665,15 @@ public class DataHandler {
         try {
             Connection connection = ConnectionProvider.getConnection();
             PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@customerNumber int = 0,\n" +
-                    "@firstName nvarchar = 0,\n" +
-                    "@lastName nvarchar = 0\n" +
-                    "@gender nvarchar = 0\n" +
-                    "@cityName nvarchar = 0\n" +
-                    "@stateName nvarchar = 0\n" +
-                    "@countryName nvarchar = 0\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@gender nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
                     "\n" +
-                    "SELECT @gender = 1\n" +
-
+                    "SELECT @gender = 'male'\n" +
 
                     "\n" +
                     "\n" +
@@ -682,10 +681,10 @@ public class DataHandler {
                     "customerTable.customerNumber AS 'Customer ID',\n" +
                     "customerTable.firstName AS 'First Name',\n" +
                     "customerTable.lastName AS 'Last Name',\n" +
-                    "customerTable.email AS 'Gender',\n" +
+                    "customerTable.gender AS 'Gender',\n" +
                     "Address.cityName AS 'City',\n" +
                     "Address.stateName AS 'State',\n" +
-                    "Address.countryName AS 'Country',\n" +
+                    "Address.countryName AS 'Country'\n" +
 
                     "\n" +
                     "FROM Address\n" +
@@ -695,7 +694,7 @@ public class DataHandler {
                     "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
 
                     "\n" +
-                    "WHERE customerTable.gender like birthday\n");
+                    "WHERE customerTable.gender >= @gender\n");
 
             ResultSet result = statement.executeQuery();
 
@@ -709,8 +708,6 @@ public class DataHandler {
                                 result.getString("City"),
                                 result.getString("State"),
                                 result.getString("Country"))));
-
-
 
             }
 
@@ -728,13 +725,13 @@ public class DataHandler {
         try {
             Connection connection = ConnectionProvider.getConnection();
             PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@customerNumber int = 0,\n" +
-                    "@firstName nvarchar = 0,\n" +
-                    "@lastName nvarchar = 0\n" +
-                    "@address nvarchar = 0\n" +
-                    "@cityName nvarchar = 0\n" +
-                    "@stateName nvarchar = 0\n" +
-                    "@countryName nvarchar = 0\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@address nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
                     "\n" +
                     "SELECT @address = 'address'\n" +
 
@@ -748,7 +745,7 @@ public class DataHandler {
                     "customerTable.address AS 'Address',\n" +
                     "Address.cityName AS 'City',\n" +
                     "Address.stateName AS 'State',\n" +
-                    "Address.countryName AS 'Country',\n" +
+                    "Address.countryName AS 'Country'\n" +
 
                     "\n" +
                     "FROM Address\n" +
@@ -758,7 +755,7 @@ public class DataHandler {
                     "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
 
                     "\n" +
-                    "WHERE customerTable.address like @address\n");
+                    "WHERE customerTable.address LIKE address\n");
 
             ResultSet result = statement.executeQuery();
 
@@ -792,15 +789,15 @@ public class DataHandler {
         try {
             Connection connection = ConnectionProvider.getConnection();
             PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@customerNumber int = 0,\n" +
-                    "@firstName nvarchar = 0,\n" +
-                    "@lastName nvarchar = 0\n" +
-                    "@birthday nvarchar = 0\n" +
-                    "@cityName nvarchar = 0\n" +
-                    "@stateName nvarchar = 0\n" +
-                    "@countryName nvarchar = 0\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@birthday nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
                     "\n" +
-                    "SELECT @birthday = 'birthday'\n" +
+                    "SELECT @birthday= 'Birthday'\n" +
 
 
                     "\n" +
@@ -812,7 +809,7 @@ public class DataHandler {
                     "customerTable.birthday AS 'Birthday',\n" +
                     "Address.cityName AS 'City',\n" +
                     "Address.stateName AS 'State',\n" +
-                    "Address.countryName AS 'Country',\n" +
+                    "Address.countryName AS 'Country'\n" +
 
                     "\n" +
                     "FROM Address\n" +
@@ -822,7 +819,7 @@ public class DataHandler {
                     "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
 
                     "\n" +
-                    "WHERE customerTable.birthday like @birthday\n");
+                    "WHERE customerTable.birthday = birthday\n");
 
             ResultSet result = statement.executeQuery();
 
