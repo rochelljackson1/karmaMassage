@@ -1,5 +1,5 @@
 <%@ page import="com.uh.rachel.util.DataHandler" %>
-<%@ page import="com.uh.rachel.util.tableClasses.state" %>
+<%@ page import="com.uh.rachel.util.tableClasses.State" %>
 <%@ page import="java.util.Vector" %><%--
   Created by IntelliJ IDEA.
   User: Makki
@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>state</title>
+    <title>State</title>
 </head>
 <body>
 <table>
@@ -22,8 +22,8 @@
 
 
     </tr>
-    <% Vector<state> v = DataHandler.getState();
-        for (state c : v) {
+    <% Vector<State> v = DataHandler.getState();
+        for (State c : v) {
     %>
     <tr>
         <td><%= String.valueOf(c.getStateID())%></td>
