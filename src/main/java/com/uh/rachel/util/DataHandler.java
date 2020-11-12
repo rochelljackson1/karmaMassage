@@ -48,6 +48,24 @@ public class DataHandler {
         }
         return v;
     }
+
+    public static Vector<companyClientHistoryTable> getcompanyClientHistory() {
+        Vector<companyClientHistoryTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM companyClientHistoryTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new companyClientHistoryTable(result.getInt("customerNumber"),
+                        result.getBoolean("currentClient")));
+            }
+        }catch (Exception e) {
+            e.printStackTrace();;
+        }
+        return v;
+    }
+
 //Ramiro Santibanez
     public static Vector<customerTable> getReport10() {
         Vector<customerTable> v = new Vector<>();
@@ -955,6 +973,17 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    public static void updateCompanyRowByID(int customerNumberInput, boolean currentClient) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE companyClientHistoryTable SET currentClient=? WHERE customerNumber=?");
+            ps.setBoolean(1, currentClient);
+            ps.setInt(2, customerNumberInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
     public static void insertRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5, String rowToInsert6, String rowToInsert7, String rowToInsert8, String rowToInsert9) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -987,6 +1016,17 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    public static void insertCompanyRowByID(int rowToInsert, boolean rowToInsert2) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO companyClientHistoryTable (customerNumber, currentClient) VALUES (?, ?)");
+            ps.setInt(1, rowToInsert);
+            ps.setBoolean(2, rowToInsert2);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
     public static void deleteRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1003,6 +1043,18 @@ public class DataHandler {
         try {
             Connection conn = ConnectionProvider.getConnection();
             PreparedStatement ps = conn.prepareStatement("DELETE FROM doctorTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteCompanyRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM companyClientHistoryTable WHERE customerNumber=?");
             ps.setInt(1, rowToDelete);
             ps.executeUpdate();
             ps.close();
