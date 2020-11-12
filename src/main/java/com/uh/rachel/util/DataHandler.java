@@ -941,6 +941,20 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    public static void updateDoctorRowByID(int customerNumberInput,int doctoNuberInput, String physicianFirstnameInput, String physicianLastnameInput, String physicianPhoneInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE doctorTable SET doctorNuber=?, physicianFirstname=?, physicianLastname=?, physicianPhone=? WHERE customerNumber=?");
+            ps.setInt(1, doctoNuberInput);
+            ps.setString(2, physicianFirstnameInput);
+            ps.setString(3, physicianLastnameInput);
+            ps.setString(4, physicianPhoneInput);
+            ps.setInt(5, customerNumberInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
     public static void insertRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5, String rowToInsert6, String rowToInsert7, String rowToInsert8, String rowToInsert9) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -959,6 +973,20 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    public static void insertDoctorRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO doctorTable (customerNumber, doctorNuber, physicianFirstname, physicianLastname, physicianPhone) VALUES (?, ?, ?, ?, ?)");
+            ps.setInt(1, rowToInsert);
+            ps.setInt(2, rowToInsert2);
+            ps.setString(3, rowToInsert3);
+            ps.setString(4, rowToInsert4);
+            ps.setString(5, rowToInsert5);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
     public static void deleteRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -966,6 +994,20 @@ public class DataHandler {
             ps.setInt(1, rowToDelete);
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteDoctorRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM doctorTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

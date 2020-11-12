@@ -11,8 +11,55 @@
 <html>
 <head>
     <title>Doctor</title>
+
+    <script type="text/javascript">
+        function makeVisible(){
+            var valuey = document.getElementById('selection').value;
+            if (valuey ==="deleteRow") {
+                document.getElementById('deleteForm').style.display = "flex";
+            }
+            if (valuey === "insertRow") {
+                document.getElementById('insertForm').style.display = "flex";
+            }
+            if (valuey === "updateRow") {}
+            document.getElementById('updateForm').style.display = "flex";
+        }
+    </script>
 </head>
+
 <body>
+
+<select id="selection">
+    <option value="deleteRow">Delete Customer</option>
+    <option value="insertRow">Insert Customer</option>
+    <option value="updateRow">Update Customer</option>
+</select>
+
+<button onclick="makeVisible();">Make Form Visible</button>
+
+<form action="deleteDoctorOptions" id="deleteForm" style="display:none;" method="post">
+    <input name="rowToDelete" type="text">
+    <button type="submit">Delete This Row</button>
+</form>
+
+<form action="insertDoctorOptions" id="insertForm" style="display:none;" method="post">
+    <input name="rowToInsert" type="text">
+    <input name="rowToInsert2" type="text">
+    <input name="rowToInsert3" type="text">
+    <input name="rowToInsert4" type="text">
+    <input name="rowToInsert5" type="text">
+    <button type="submit">Insert This Row</button>
+</form>
+
+<form action="updateDoctorOptions" id="updateForm" style="display:none;" method="post">
+    <input name="customerNumberInput" type="text">
+    <input name="doctorNuberInput" type="text">
+    <input name="physicianFirstnameInput" type="text">
+    <input name="physicianLastnameInput" type="text">
+    <input name="physicianPhoneInput" type="text">
+    <button type="submit">Update This Row</button>
+</form>
+
 <table>
     <tr>
         <th>Customer ID</th>
