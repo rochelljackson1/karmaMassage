@@ -232,7 +232,7 @@ public class DataHandler {
                         result.getDouble("originalFullPrice"), result.getString("dateCancelled"),
                         result.getString("timeCancelled"), result.getDouble("actualPricePaid"),
                         result.getString("defaultPayment"), result.getString("cardNumberType"),
-                        result.getString("cardNumber"), result.getInt("staff_NUmber")));
+                        result.getString("cardNumber"), result.getInt("staff_Number")));
             }
 
         }catch (Exception e){
@@ -941,20 +941,6 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
-    public static void updateDoctorRowByID(int customerNumberInput,int doctoNuberInput, String physicianFirstnameInput, String physicianLastnameInput, String physicianPhoneInput) {
-        try {
-            Connection conn = ConnectionProvider.getConnection();
-            PreparedStatement ps = conn.prepareStatement("UPDATE doctorTable SET doctorNuber=?, physicianFirstname=?, physicianLastname=?, physicianPhone=? WHERE customerNumber=?");
-            ps.setInt(1, doctoNuberInput);
-            ps.setString(2, physicianFirstnameInput);
-            ps.setString(3, physicianLastnameInput);
-            ps.setString(4, physicianPhoneInput);
-            ps.setInt(5, customerNumberInput);
-            ps.executeUpdate();
-            ps.close();
-        } catch (Exception e) {e.printStackTrace();}
-    }
-
     public static void insertRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5, String rowToInsert6, String rowToInsert7, String rowToInsert8, String rowToInsert9) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -973,20 +959,6 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
-    public static void insertDoctorRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5) {
-        try {
-            Connection conn = ConnectionProvider.getConnection();
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO doctorTable (customerNumber, doctorNuber, physicianFirstname, physicianLastname, physicianPhone) VALUES (?, ?, ?, ?, ?)");
-            ps.setInt(1, rowToInsert);
-            ps.setInt(2, rowToInsert2);
-            ps.setString(3, rowToInsert3);
-            ps.setString(4, rowToInsert4);
-            ps.setString(5, rowToInsert5);
-            ps.executeUpdate();
-            ps.close();
-        } catch (Exception e) {e.printStackTrace();}
-    }
-
     public static void deleteRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -994,20 +966,57 @@ public class DataHandler {
             ps.setInt(1, rowToDelete);
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) {e.printStackTrace();}
     }
 
-    public static void deleteDoctorRowByID(int rowToDelete) {
+    public static Vector<appointmentsTable> getReport15() {
+        Vector<appointmentsTable> v = new Vector<>();
         try {
-            Connection conn = ConnectionProvider.getConnection();
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM doctorTable WHERE customerNumber=?");
-            ps.setInt(1, rowToDelete);
-            ps.executeUpdate();
-            ps.close();
-        } catch (Exception e) {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@hotStone int = 0,\n" +
+                    "@startDate nvarchar(10),\n" +
+                    "@date2 nvarchar(10), \n" +
+                    "@date3 nvarchar(10), \n" +
+                    "@date4 nvarchar(10), \n" +
+                    "@endDate nvarchar(10), \n" +
+                    "\n" +
+                    "SELECT @hotStone = 4\n" +
+                    "SELECT @startDate = '7/13/2020', \n" +
+                    "SELECT @date2 = '7/14/2020', \n" +
+                    "SELECT @date3 = '7/15/2020', \n" +
+                    "SELECT @date4 = '7/16/2020', \n" +
+                    "SELECT @endDate = '7/17/2020', \n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.customerNumber AS 'Client ID',\n" +
+                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.scheduledTime AS 'Appointment Time',\n" +
+                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE appointmentsTable.addOnNumber = @hotStone\n" +
+                    "AND (appointmentsTable.scheduledDate = @startDate OR appointmentsTable.scheduledDate = @date2)\n" +
+                    "\tOR (appointmentsTable.scheduledDate = @date3 OR appointmentsTable.scheduledDate = @date4)" +
+                    "\tOR appointmentsTable.scheduledDate = @endDate)");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new appointmentsTable(result.getInt("Client ID Number"),
+                       (result.getString("Appointment Date")),
+                        (result.getString("Appointment Time")),
+                        (result.getInt("Add-On"))));
+            }
+
+        }catch (Exception e){
             e.printStackTrace();
         }
+        return v;
     }
+
 }

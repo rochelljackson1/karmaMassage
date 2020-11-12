@@ -3,38 +3,4 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-
-    <servlet>
-        <servlet-name>deleteOptions</servlet-name>
-        <servlet-class>com.uh.rachel.util.servlets.deleteOptions</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>deleteOptions</servlet-name>
-        <url-pattern>/deleteOptions</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>insertOptions</servlet-name>
-        <servlet-class>com.uh.rachel.util.servlets.insertOptions</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>insertOptions</servlet-name>
-        <url-pattern>/insertOptions</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>updateOptions</servlet-name>
-        <servlet-class>com.uh.rachel.util.servlets.updateOptions</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>updateOptions</servlet-name>
-        <url-pattern>/updateOptions</url-pattern>
-    </servlet-mapping>
-
-
-
 </web-app>
-

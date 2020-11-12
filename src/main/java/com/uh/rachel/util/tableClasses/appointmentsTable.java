@@ -40,6 +40,18 @@ public class appointmentsTable {
             this.staff_number = staff_number;
         }
 
+    public appointmentsTable(int customerNumber, String scheduledDate, String scheduledTime, int addOnNumber) {
+        this.customerNumber = customerNumber;
+        this.addOnNumber = addOnNumber;
+        this.scheduledDate = scheduledDate;
+        this.scheduledTime = scheduledTime;
+    }
+
+    public appointmentsTable(int customerNumber, int appointmentNumber) {
+        this.appointmentNumber = appointmentNumber;
+        this.customerNumber = customerNumber;
+    }
+
     public int getAppointmentNumber() { return appointmentNumber; }
     public void setAppointmentNumber(int appointmentNumber) { this.appointmentNumber = appointmentNumber; }
 
