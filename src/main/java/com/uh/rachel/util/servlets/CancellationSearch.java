@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Vector;
 
 @WebServlet(name = "CancellationSearch")
 public class CancellationSearch extends HttpServlet {
@@ -20,9 +21,9 @@ public class CancellationSearch extends HttpServlet {
         }else {
            String firstname = request.getParameter("firstname");
            String lastname = request.getParameter("lastname");
-           customerTable customer = DataHandler.getUserByName(firstname, lastname);
+           Vector<customerTable> customer = DataHandler.getUserByName(firstname, lastname);
            if(customer != null) {
-               id = customer.getCustomerNumber();
+               id = customer.get(customerNumber);
 
            }
         }
