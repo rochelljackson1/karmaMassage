@@ -144,7 +144,7 @@ public class DataHandler {
                     "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
                     "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
                     "\n" +
-                    "WHERE emergencyContactTable.emergencyPhone = @emergencyNoPhone\n" +
+                    "WHERE emergencyContactTable.emergencyPhone != @emergencyNoPhone\n" +
                     "AND waiverTable.acknowledgment = @ack\n" +
                     "AND doctorTable.physicianPhone != @doctorNoPhone\n" +
                     "AND companyClientHistoryTable.currentClient = @status");
