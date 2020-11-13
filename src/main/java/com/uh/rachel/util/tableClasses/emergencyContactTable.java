@@ -11,19 +11,19 @@ public class emergencyContactTable {
 
     }
 
-    public emergencyContactTable(int customerNumber, String emergencyFirstName, String emergencyLastName, String emergencyPhone, String relationship) {
+    public emergencyContactTable(int customerNumber, String emergencyFirstName, String emergencyLastName, String relationship, String emergencyPhone) {
         this.customerNumber = customerNumber;
         this.emergencyFirstName = emergencyFirstName;
         this.emergencyLastName = emergencyLastName;
-        this.emergencyPhone = emergencyPhone;
         this.relationship = relationship;
+        this.emergencyPhone = emergencyPhone;
     }
 
-    public emergencyContactTable(String emergencyFirstName, String emergencyLastName, String emergencyPhone, String relationship) {
+    public emergencyContactTable(String emergencyFirstName, String emergencyLastName, String relationship, String emergencyPhone) {
         this.emergencyFirstName = emergencyFirstName;
         this.emergencyLastName = emergencyLastName;
-        this.emergencyPhone = emergencyPhone;
         this.relationship = relationship;
+        this.emergencyPhone = emergencyPhone;
     }
 
     public int getCustomerNumber() {
