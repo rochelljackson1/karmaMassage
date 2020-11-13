@@ -23,6 +23,9 @@ public class FAQTable {
             this.locationNumber = locationNumber;
         }
 
+    public FAQTable(String question) {
+        this.question = question;
+    }
 
     public int getFaqNumber() { return faqNumber; }
     public void setFaqNumber(int faqNumber) { this.faqNumber = faqNumber; }

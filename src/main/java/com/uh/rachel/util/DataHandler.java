@@ -1300,4 +1300,172 @@ public class DataHandler {
         }
         return v;
     }
+
+    public static Vector<appointmentsTable> getReport16() {
+        Vector<appointmentsTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@smallNum int = 0,\n" +
+                    "\n" +
+                    "SELECT @smallNum = 995\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.customerNumber AS 'Client ID',\n" +
+                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.packageNumber AS 'Appointment Time',\n" +
+                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
+                    "appointmentsTable.actualPricePaid AS 'Price Paid',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN customerTable ON appointmentsTable.customerNumber = customerTable.customerNumber\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE appointmentsTable.actualPricePaid = @smallNum\n");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new appointmentsTable(result.getInt("Client ID Number"),
+                        (result.getString("Purchase Date")),
+                        (result.getInt("Package Number")),
+                        (result.getInt("Add-On")),
+                        (result.getDouble("Price Paid"))));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+    public static Vector<report17> getReport17() {
+        Vector<report17> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@hotStone int = 0,\n" +
+                    "@startDate nvarchar(10),\n" +
+                    "@date2 nvarchar(10), \n" +
+                    "@date3 nvarchar(10), \n" +
+                    "@date4 nvarchar(10), \n" +
+                    "@endDate nvarchar(10), \n" +
+                    "\n" +
+                    "SELECT @hotStone = 4\n" +
+                    "SELECT @startDate = '7/13/2020', \n" +
+                    "SELECT @date2 = '7/14/2020', \n" +
+                    "SELECT @date3 = '7/15/2020', \n" +
+                    "SELECT @date4 = '7/16/2020', \n" +
+                    "SELECT @endDate = '7/17/2020', \n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.customerNumber AS 'Customer ID',\n" +
+                    "appointmentsTable.packageNumber AS 'Package Purchased',\n" +
+                    "appointmentsTable.serviceNumber AS 'Service Number',\n" +
+                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
+                    "FAQTable.question AS 'Question Asked',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE appointmentsTable.scheduledDate = @startDate OR appointmentsTable.scheduledDate = @date2 OR " +
+                    "appointmentsTable.scheduledDate = @date3 \n" +
+                    "\tOR appointmentsTable.scheduledDate = @endDate OR appointmentsTable.scheduledDate = @date4");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new report17(result.getString("Appointment Date"),
+                        (result.getInt("Client ID")),
+                        (result.getInt("Package Bought")),
+                        (result.getInt("Service Number")),
+                        (result.getInt("Add-On")),
+                        (result.getString("Question Asked"))));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<report18> getReport18() {
+        Vector<report18> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@importantQuestion,\n" +
+                    "@startDate nvarchar(10),\n" +
+                    "@date2 nvarchar(10), \n" +
+                    "@date3 nvarchar(10), \n" +
+                    "@date4 nvarchar(10), \n" +
+                    "@endDate nvarchar(10), \n" +
+                    "\n" +
+                    "SELECT @importantQuestion = 11\n" +
+                    "SELECT @startDate = '5/13/2020', \n" +
+                    "SELECT @date2 = '5/14/2020', \n" +
+                    "SELECT @date3 = '5/15/2020', \n" +
+                    "SELECT @date4 = '5/16/2020', \n" +
+                    "SELECT @endDate = '5/17/2020', \n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.customerNumber AS 'Customer ID',\n" +
+                    "appointmentsTable.packageNumber AS 'Appointment Date',\n" +
+                    "appointmentsTable.serviceNumber AS 'Service Number',\n" +
+                    "FAQTable.question AS 'Question Asked',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE FAQTable.faqNumber = @importantQuesiton " +
+                    "AND appointmentsTable.scheduledDate = @startDate OR " +
+                    "appointmentsTable.scheduledDate = @date2 OR appointmentsTable.scheduledDate = @date3\n" +
+                    "\tOR appointmentsTable.scheduledDate = @endDate OR appointmentsTable.scheduledDate = @date4");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new report18(
+                        (result.getInt("Client ID")),
+                        (result.getString("Appointment Date")),
+                        (result.getString("Question Asked")),
+                        (result.getInt("Service Number"))
+                        ));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+    public static void cancelAppointment(int aptNum, boolean isLate) {
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT actualPricePaid FROM appointmentsTable WHERE appointmentNumber=?");
+            preparedStatement.setInt(1, aptNum);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                double price = resultSet.getInt(1);
+                preparedStatement = connection.prepareStatement("UPDATE appointmentsTable SET actualPricePaid=? WHERE appointmentNumber=?");
+                if (isLate){
+                    preparedStatement.setDouble(1, price*.5);
+                } else {
+                    preparedStatement.setDouble(1, 0);
+                }
+                preparedStatement.setInt(2, aptNum);
+                preparedStatement.executeUpdate();
+            }
+            resultSet.close();
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
