@@ -14,6 +14,10 @@ public class existingConditionsFamilyHistoryTable {
         this.cardiovascularConditions = cardiovascularConditions;
     }
 
+    public existingConditionsFamilyHistoryTable(boolean cardiovascularConditions) {
+        this.cardiovascularConditions = cardiovascularConditions;
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }

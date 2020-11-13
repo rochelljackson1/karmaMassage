@@ -12,6 +12,10 @@ public class existingConditionsMedicationsTable {
         this.other = other;
     }
 
+    public existingConditionsMedicationsTable(String other) {
+        this.other = other;
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }

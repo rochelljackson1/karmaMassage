@@ -18,6 +18,10 @@ public class reasonForMassageTable {
         this.cause = cause;
     }
 
+    public reasonForMassageTable(String cause) {
+        this.cause = cause;
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }

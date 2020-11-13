@@ -1,14 +1,20 @@
-package com.uh.rachel.util.tableClasses;
+package com.uh.rachel.util.reportClasses;
 
-public class report13 {
+import com.uh.rachel.util.tableClasses.customerTable;
+import com.uh.rachel.util.tableClasses.companyClientHistoryTable;
+import com.uh.rachel.util.tableClasses.existingConditionsFamilyHistoryTable;
+import com.uh.rachel.util.tableClasses.existingConditionsRespiratoryTable;
+
+
+public class report6 {
     customerTable customerPackage;
-    existingConditionsInfectiousTable infectiousPackage;
+    existingConditionsFamilyHistoryTable familyPackage;
     existingConditionsRespiratoryTable respiratoryPackage;
     companyClientHistoryTable companyClientHistoryPackage;
 
-    public report13(customerTable customerPackage, existingConditionsInfectiousTable infectiousPackage, existingConditionsRespiratoryTable respiratoryPackage, companyClientHistoryTable companyClientHistoryPackage) {
+    public report6(customerTable customerPackage, existingConditionsFamilyHistoryTable familyPackage, existingConditionsRespiratoryTable respiratoryPackage, companyClientHistoryTable companyClientHistoryPackage) {
         this.customerPackage = customerPackage;
-        this.infectiousPackage = infectiousPackage;
+        this.familyPackage = familyPackage;
         this.respiratoryPackage = respiratoryPackage;
         this.companyClientHistoryPackage = companyClientHistoryPackage;
     }
@@ -21,12 +27,12 @@ public class report13 {
         this.customerPackage = customerPackage;
     }
 
-    public existingConditionsInfectiousTable getInfectiousPackage() {
-        return infectiousPackage;
+    public existingConditionsFamilyHistoryTable getFamilyPackage() {
+        return familyPackage;
     }
 
-    public void setInfectiousPackage(existingConditionsInfectiousTable infectiousPackage) {
-        this.infectiousPackage = infectiousPackage;
+    public void setFamilyPackage(existingConditionsFamilyHistoryTable familyPackage) {
+        this.familyPackage = familyPackage;
     }
 
     public existingConditionsRespiratoryTable getRespiratoryPackage() {

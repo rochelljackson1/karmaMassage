@@ -15,8 +15,13 @@ public class doctorTable {
         this.customerNumber = customerNumber;
         this.doctorNuber = doctorNumber;
         this.physicianFirstname = physicianFirstname;
-        PhysicianLastname = physicianLastname;
+        this.PhysicianLastname = physicianLastname;
         this.physicianPhone = physicianPhone;
+    }
+
+    public doctorTable(String physicianLastname, String physicianPhone) {
+        this.physicianPhone = physicianPhone;
+        this.PhysicianLastname = physicianLastname;
     }
 
     public int getCustomerNumber() {

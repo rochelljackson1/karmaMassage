@@ -32,6 +32,7 @@
         <td><%= String.valueOf(c.getServiceNumber())%></td>
         <td><%= String.valueOf(c.getPackageDescription())%></td>
         <td><%= String.valueOf(c.getPrice()) %></td>
+        <td><%= String.valueOf(c.getStatus()) %></td>
 
     </tr>
     <%

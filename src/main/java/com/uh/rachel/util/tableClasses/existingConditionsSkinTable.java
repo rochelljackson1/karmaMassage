@@ -20,6 +20,14 @@ public class existingConditionsSkinTable {
         this.bruiseEasily = bruiseEasily;
     }
 
+    public existingConditionsSkinTable(boolean bruiseEasily, boolean hypersensitiveReaction, boolean melanoma, boolean skinConditions, boolean skinIrritations) {
+        this.skinIrritations = skinIrritations;
+        this.skinConditions = skinConditions;
+        this.melanoma = melanoma;
+        this.hypersensitiveReaction = hypersensitiveReaction;
+        this.bruiseEasily = bruiseEasily;
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }

@@ -58,6 +58,33 @@ public class existingConditionsMisTable {
         this.artificialJointsSpecialEquipment = artificialJointsSpecialEquipment;
     }
 
+    public existingConditionsMisTable(boolean allergies, boolean anaphylaxis, boolean artificialJointsSpecialEquipment, boolean arthritis, boolean cancer, boolean chrohnsDisease, boolean diabetes, boolean digestiveConditions, boolean dizziness, boolean epilepsy, boolean fibromyalgia, boolean hemophilia, boolean insomnia, boolean lossOfSensation, boolean lupus, boolean mentalIllness, boolean otherDiagnosedDiseases, boolean otherMedicalConditions, boolean osteoArthritis, boolean osteoporosis, boolean rheumatoidArthritis, boolean shingles, boolean stress, boolean surgicalPinsOrWire) {
+        this.surgicalPinsOrWire = surgicalPinsOrWire;
+        this.stress = stress;
+        this.shingles = shingles;
+        this.rheumatoidArthritis = rheumatoidArthritis;
+        this.osteoporosis = osteoporosis;
+        this.osteoArthritis = osteoArthritis;
+        this.otherMedicalConditions = otherMedicalConditions;
+        this.otherDiagnosedDiseases = otherDiagnosedDiseases;
+        this.mentalIllness = mentalIllness;
+        this.lupus = lupus;
+        this.lossOfSensation = lossOfSensation;
+        this.insomnia = insomnia;
+        this.hemophilia = hemophilia;
+        this.fibromyalgia = fibromyalgia;
+        this.epilepsy = epilepsy;
+        this.dizziness = dizziness;
+        this.digestiveConditions = digestiveConditions;
+        this.diabetes = diabetes;
+        this.chrohnsDisease = chrohnsDisease;
+        this.cancer = cancer;
+        this.arthritis = arthritis;
+        this.anaphylaxis = anaphylaxis;
+        this.allergies = allergies;
+        this.artificialJointsSpecialEquipment = artificialJointsSpecialEquipment;
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }
