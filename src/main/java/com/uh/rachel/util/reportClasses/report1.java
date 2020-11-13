@@ -33,9 +33,7 @@ public class report1 {
         return waiverPackage;
     }
 
-    public void setWaiverPackage(waiverTable waiverPackage) {
-        this.waiverPackage = waiverPackage;
-    }
+    public void setWaiverPackage(waiverTable waiverPackage) { this.waiverPackage = waiverPackage; }
 
     public doctorTable getDoctorPackage() {
         return doctorPackage;
@@ -49,15 +47,11 @@ public class report1 {
         return emergencyPackage;
     }
 
-    public void setEmergencyPackage(emergencyContactTable emergencyPackage) {
-        this.emergencyPackage = emergencyPackage;
-    }
+    public void setEmergencyPackage(emergencyContactTable emergencyPackage) { this.emergencyPackage = emergencyPackage; }
 
     public companyClientHistoryTable getCompanyClientHistoryPackage() {
         return companyClientHistoryPackage;
     }
 
-    public void setCompanyClientHistoryPackage(companyClientHistoryTable companyClientHistoryPackage) {
-        this.companyClientHistoryPackage = companyClientHistoryPackage;
-    }
+    public void setCompanyClientHistoryPackage(companyClientHistoryTable companyClientHistoryPackage) { this.companyClientHistoryPackage = companyClientHistoryPackage; }
 }
