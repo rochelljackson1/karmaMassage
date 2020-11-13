@@ -39,7 +39,7 @@ public class DataHandler {
 
             while (result.next()) {
                 v.add(new doctorTable(result.getInt("customerNumber"),
-                        result.getInt("doctorNuber"), result.getString("physicianFirstname"),
+                        result.getInt("doctorNumber"), result.getString("physicianFirstname"),
                         result.getString("physicianLastname"), result.getString("physicianPhone")));
             }
 
@@ -49,19 +49,206 @@ public class DataHandler {
         return v;
     }
 
-    public static Vector<companyClientHistoryTable> getcompanyClientHistory() {
-        Vector<companyClientHistoryTable> v = new Vector<>();
+ //Nafisa Chowdhury
+    public static Vector<report1> getReport1() {
+        Vector<report1> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM companyClientHistoryTable");
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@ack bit = 0,\n" +
+                    "@doctorNoPhone nvarchar(50),\n" +
+                    "@emergencyNoPhone nvarchar(50)\n" +
+                    "\n" +
+                    "SELECT @status = 1\n" +
+                    "SELECT @ack = 1\n" +
+                    "SELECT @doctorNoPhone = 'NULL'\n" +
+                    "SELECT @emergencyNoPhone = 'NULL'\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name',\n" +
+                    "waiverTable.signiture AS 'Waiver Signiture',\n" +
+                    "waiverTable.acknowledgment AS 'Acknowledgment',\n" +
+                    "doctorTable.physicianLastname AS 'Doctor Last Name',\n" +
+                    "doctorTable.physicianPhone AS 'Doctor Phone Number',\n" +
+                    "emergencyContactTable.emergencyFirstName AS 'Emergency First Name',\n" +
+                    "emergencyContactTable.emergencyLastName AS 'Emergency Last Name',\n" +
+                    "emergencyContactTable.relationship AS 'Emergency Relationship',\n" +
+                    "emergencyContactTable.emergencyPhone AS 'Emergency Phone Number',\n" +
+                    "companyClientHistoryTable.currentClient AS 'Status'\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
+                    "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
+                    "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE companyClientHistoryTable.currentClient = @status\n" +
+                    "AND waiverTable.acknowledgment = @ack\n" +
+                    "AND doctorTable.physicianPhone != @doctorNoPhone\n" +
+                    "AND emergencyContactTable.emergencyPhone != @emergencyNoPhone\n)");
             ResultSet result = statement.executeQuery();
 
-            while (result.next()) {
-                v.add(new companyClientHistoryTable(result.getInt("customerNumber"),
-                        result.getBoolean("currentClient")));
+            while (result.next()){
+                v.add(new report1(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name")),
+                        new waiverTable(result.getString("Waiver Signiture"), result.getBoolean("Acknowledgment")),
+                        new doctorTable(result.getString("Doctor Last Name"), result.getString("Doctor Phone Number")),
+                        new emergencyContactTable(result.getString("Emergency First Name"), result.getString("Emergency Last Name"),
+                                result.getString("Emergency Phone Number"), result.getString("Emergency Relationship")),
+                        new companyClientHistoryTable(result.getBoolean("Status"))));
             }
-        }catch (Exception e) {
-            e.printStackTrace();;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+//Nafisa Chowdhury
+    public static Vector<report2> getReport2() {
+        Vector<report2> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@ack bit = 0,\n" +
+                    "@doctorNoPhone nvarchar(50),\n" +
+                    "@emergencyNoPhone nvarchar(50)\n" +
+                    "\n" +
+                    "SELECT @status = 1\n" +
+                    "SELECT @ack = 0\n" +
+
+                    "SELECT @doctorNoPhone = 'NULL'\n" +
+                    "SELECT @emergencyNoPhone = 'NULL'\n" +
+                    "\n" +
+                    "SELECT\n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name',\n" +
+                    "waiverTable.signiture AS 'Waiver Signiture',\n" +
+                    "waiverTable.acknowledgment AS 'Acknowledgment',\n" +
+                    "doctorTable.physicianLastname AS 'Doctor Last Name',\n" +
+                    "doctorTable.physicianPhone AS 'Doctor Phone Number',\n" +
+                    "emergencyContactTable.emergencyFirstName AS 'Emergency First Name',\n" +
+                    "emergencyContactTable.emergencyLastName AS 'Emergency Last Name',\n" +
+                    "emergencyContactTable.relationship AS 'Emergency Relationship',\n" +
+                    "emergencyContactTable.emergencyPhone AS 'Emergency Phone Number',\n" +
+                    "companyClientHistoryTable.currentClient AS 'Status'\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
+                    "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
+                    "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE emergencyContactTable.emergencyPhone = @emergencyNoPhone\n" +
+                    "AND waiverTable.acknowledgment = @ack\n" +
+                    "AND doctorTable.physicianPhone != @doctorNoPhone\n" +
+                    "AND companyClientHistoryTable.currentClient = @status");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new report2(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name")),
+                        new waiverTable(result.getString("Waiver Signiture"), result.getBoolean("Acknowledgment")),
+                        new doctorTable(result.getString("Doctor Last Name"), result.getString("Doctor Phone Number")),
+                        new emergencyContactTable(result.getString("Emergency First Name"), result.getString("Emergency Last Name"), result.getString("Emergency Phone Number"), result.getString("Emergency Relationship")),
+                        new companyClientHistoryTable(result.getBoolean("Status"))));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+//Nafisa Chowdhury
+    public static Vector<report3> getReport3() {
+        Vector<report3> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@phone nvarchar(50),\n" +
+                    "@email nvarchar(50)\n" +
+                    "\n" +
+                    "SELECT @status = 0\n" +
+                    "SELECT @phone = 'NULL'\n" +
+                    "SELECT @email = 'NULL'\n" +
+                    "\n" +
+                    "SELECT\n" +
+                    "\n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name',\n" +
+                    "customerTable.phone AS 'Client Phone Number',\n" +
+                    "customerTable.email AS 'Client Email Address',\n" +
+                    "companyClientHistoryTable.currentClient AS 'Status'\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
+                    "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
+                    "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE companyClientHistoryTable.currentClient = @status\n" +
+                    "AND (customerTable.phone != @phone OR customerTable.email != @email)");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new report3(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name"),
+                        result.getString("Client Phone Number"), result.getString("Client Email Address")),
+                        new companyClientHistoryTable(result.getBoolean("Status"))));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+//Nafisa Chowdhury
+    public static Vector<report4> getReport4() {
+        Vector<report4> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@phone nvarchar(50),\n" +
+                    "@email nvarchar(50)\n" +
+                    "\n" +
+                    "SELECT @status = 1\n" +
+                    "SELECT @phone = 'NULL'\n" +
+                    "SELECT @email = 'NULL'\n" +
+                    "\n" +
+                    "SELECT\n" +
+                    "\n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name',\n" +
+                    "customerTable.phone AS 'Client Phone Number',\n" +
+                    "customerTable.email AS 'Client Email Address',\n" +
+                    "companyClientHistoryTable.currentClient AS 'Status'\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
+                    "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
+                    "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE companyClientHistoryTable.currentClient = @status\n" +
+                    "AND (customerTable.phone != @phone OR customerTable.email != @email)");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new report4(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name"),
+                        result.getString("Client Phone Number"), result.getString("Client Email Address")),
+                        new companyClientHistoryTable(result.getBoolean("Status"))));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return v;
     }
@@ -1061,5 +1248,55 @@ public class DataHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static Vector<appointmentsTable> getReport15() {
+        Vector<appointmentsTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@hotStone int = 0,\n" +
+                    "@startDate nvarchar(10),\n" +
+                    "@date2 nvarchar(10), \n" +
+                    "@date3 nvarchar(10), \n" +
+                    "@date4 nvarchar(10), \n" +
+                    "@endDate nvarchar(10), \n" +
+                    "\n" +
+                    "SELECT @hotStone = 4\n" +
+                    "SELECT @startDate = '7/13/2020', \n" +
+                    "SELECT @date2 = '7/14/2020', \n" +
+                    "SELECT @date3 = '7/15/2020', \n" +
+                    "SELECT @date4 = '7/16/2020', \n" +
+                    "SELECT @endDate = '7/17/2020', \n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.customerNumber AS 'Client ID',\n" +
+                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.scheduledTime AS 'Appointment Time',\n" +
+                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE appointmentsTable.addOnNumber = @hotStone\n" +
+                    "AND (appointmentsTable.scheduledDate = @startDate OR appointmentsTable.scheduledDate = @date2)\n" +
+                    "\tOR (appointmentsTable.scheduledDate = @date3 OR appointmentsTable.scheduledDate = @date4)" +
+                    "\tOR appointmentsTable.scheduledDate = @endDate)");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new appointmentsTable(result.getInt("Client ID Number"),
+                        (result.getString("Appointment Date")),
+                        (result.getString("Appointment Time")),
+                        (result.getInt("Add-On"))));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
     }
 }
