@@ -79,6 +79,7 @@ public class DataHandler {
                     "emergencyContactTable.emergencyPhone AS 'Emergency Phone Number',\n" +
                     "companyClientHistoryTable.currentClient AS 'Status'\n" +
                     "\n" +
+                    "\n" +
                     "FROM customerTable\n" +
                     "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
                     "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
@@ -88,7 +89,7 @@ public class DataHandler {
                     "WHERE companyClientHistoryTable.currentClient = @status\n" +
                     "AND waiverTable.acknowledgment = @ack\n" +
                     "AND doctorTable.physicianPhone != @doctorNoPhone\n" +
-                    "AND emergencyContactTable.emergencyPhone != @emergencyNoPhone\n)");
+                    "AND emergencyContactTable.emergencyPhone != @emergencyNoPhone");
             ResultSet result = statement.executeQuery();
 
             while (result.next()){
@@ -119,7 +120,6 @@ public class DataHandler {
                     "\n" +
                     "SELECT @status = 1\n" +
                     "SELECT @ack = 0\n" +
-
                     "SELECT @doctorNoPhone = 'NULL'\n" +
                     "SELECT @emergencyNoPhone = 'NULL'\n" +
                     "\n" +
@@ -136,6 +136,7 @@ public class DataHandler {
                     "emergencyContactTable.relationship AS 'Emergency Relationship',\n" +
                     "emergencyContactTable.emergencyPhone AS 'Emergency Phone Number',\n" +
                     "companyClientHistoryTable.currentClient AS 'Status'\n" +
+                    "\n" +
                     "\n" +
                     "FROM customerTable\n" +
                     "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
@@ -154,7 +155,7 @@ public class DataHandler {
                         result.getString("Client First Name"), result.getString("Client Last Name")),
                         new waiverTable(result.getString("Waiver Signiture"), result.getBoolean("Acknowledgment")),
                         new doctorTable(result.getString("Doctor Last Name"), result.getString("Doctor Phone Number")),
-                        new emergencyContactTable(result.getString("Emergency First Name"), result.getString("Emergency Last Name"), result.getString("Emergency Phone Number"), result.getString("Emergency Relationship")),
+                        new emergencyContactTable(result.getString("Emergency First Name"), result.getString("Emergency Last Name"), result.getString("Emergency Relationship"), result.getString("Emergency Phone Number")),
                         new companyClientHistoryTable(result.getBoolean("Status"))));
             }
         } catch (Exception e) {
