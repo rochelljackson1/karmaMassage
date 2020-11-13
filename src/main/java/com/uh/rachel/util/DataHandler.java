@@ -1445,4 +1445,27 @@ public class DataHandler {
     }
 
 
+    public static void cancelAppointment(int aptNum, boolean isLate) {
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT actualPricePaid FROM appointmentsTable WHERE appointmentNumber=?");
+            preparedStatement.setInt(1, aptNum);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                double price = resultSet.getInt(1);
+                preparedStatement = connection.prepareStatement("UPDATE appointmentsTable SET actualPricePaid=? WHERE appointmentNumber=?");
+                if (isLate){
+                    preparedStatement.setDouble(1, price*.5);
+                } else {
+                    preparedStatement.setDouble(1, 0);
+                }
+                preparedStatement.setInt(2, aptNum);
+                preparedStatement.executeUpdate();
+            }
+            resultSet.close();
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
