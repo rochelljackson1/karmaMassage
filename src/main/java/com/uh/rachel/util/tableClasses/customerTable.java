@@ -11,8 +11,12 @@ public class customerTable {
     String birthday;
     String address;
 
-    public customerTable() {
-
+    public customerTable(int client_profile_number, String client_first_name, String client_last_name, String client_phone_number, String client_email_address) {
+        this.customerNumber = client_profile_number;
+        this.firstName = client_first_name;
+        this.lastName = client_last_name;
+        this.phone = client_phone_number;
+        this.email = client_email_address;
     }
 
 
