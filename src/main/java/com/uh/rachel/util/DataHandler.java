@@ -83,7 +83,7 @@ public class DataHandler {
                     "FROM customerTable\n" +
                     "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
                     "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
-                    "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
+                     "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
                     "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
                     "\n" +
                     "WHERE companyClientHistoryTable.currentClient = @status\n" +
@@ -155,7 +155,8 @@ public class DataHandler {
                         result.getString("Client First Name"), result.getString("Client Last Name")),
                         new waiverTable(result.getString("Waiver Signiture"), result.getBoolean("Acknowledgment")),
                         new doctorTable(result.getString("Doctor Last Name"), result.getString("Doctor Phone Number")),
-                        new emergencyContactTable(result.getString("Emergency First Name"), result.getString("Emergency Last Name"), result.getString("Emergency Relationship"), result.getString("Emergency Phone Number")),
+                        new emergencyContactTable(result.getString("Emergency First Name"), result.getString("Emergency Last Name"),
+                                result.getString("Emergency Phone Number"), result.getString("Emergency Relationship")),
                         new companyClientHistoryTable(result.getBoolean("Status"))));
             }
         } catch (Exception e) {
@@ -1479,6 +1480,93 @@ public class DataHandler {
             while (result.next()) {
                 v.add(new companyClientHistoryTable(result.getInt("customerNumber"),
                         result.getBoolean("currentClient")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsWomenTable> getExistingConditionsWomen() {
+        Vector<existingConditionsWomenTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsWomenTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsWomenTable(result.getInt("customerNumber"),
+                        result.getBoolean("pregnant"), result.getBoolean("gynecologicalConditions")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsSTJDTable> getExistingConditionsSTJD() {
+        Vector<existingConditionsSTJDTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsSTJDTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsSTJDTable(result.getInt("customerNumber"),
+                        result.getBoolean("upperBackRight"), result.getBoolean("upperBackLeft"),
+                        result.getBoolean("shouldersRight"), result.getBoolean("shouldersLeft"),
+                        result.getBoolean("neckRight"), result.getBoolean("neckLeft"),
+                        result.getBoolean("midBackRight"), result.getBoolean("midBackLeft"),
+                        result.getBoolean("lowerBackRight"), result.getBoolean("lowerBackLeft"),
+                        result.getBoolean("legsRight"), result.getBoolean("legsLeft"),
+                        result.getBoolean("kneesRight"), result.getBoolean("kneesLeft"),
+                        result.getBoolean("hipsRight"), result.getBoolean("hipsLeft"),
+                        result.getBoolean("handsRight"), result.getBoolean("handsLeft"),
+                        result.getBoolean("feetRight"), result.getBoolean("feetLeft"),
+                        result.getBoolean("armsRight"), result.getBoolean("armsLeft"),
+                        result.getBoolean("anklesRight"), result.getBoolean("anklesLeft")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsSkinTable> getExistingConditionsSkin() {
+        Vector<existingConditionsSkinTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsSkinTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsSkinTable(result.getInt("customerNumber"),
+                        result.getBoolean("skinIrritations"), result.getBoolean("skinConditions"),
+                        result.getBoolean("melanoma"), result.getBoolean("hypersensitiveReaction"),
+                        result.getBoolean("bruiseEasily")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsRespiratoryTable> getExistingConditionsRespiratory() {
+        Vector<existingConditionsRespiratoryTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsRespiratoryTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsRespiratoryTable(result.getInt("customerNumber"),
+                        result.getBoolean("shortnessOfBreath"), result.getBoolean("emphysema"),
+                        result.getBoolean("chronicCough"), result.getBoolean("bronchitis"),
+                        result.getBoolean("asthma")));
             }
 
         } catch (Exception e) {
