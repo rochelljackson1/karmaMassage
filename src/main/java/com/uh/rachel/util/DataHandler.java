@@ -1468,4 +1468,22 @@ public class DataHandler {
             e.printStackTrace();
         }
     }
+
+    public static Vector<companyClientHistoryTable> getcompanyClientHistory() {
+        Vector<companyClientHistoryTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM companyClientHistoryTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new companyClientHistoryTable(result.getInt("customerNumber"),
+                        result.getBoolean("currentClient")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
 }
