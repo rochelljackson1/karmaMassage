@@ -14,7 +14,7 @@
 <head>
     <title>Company Client History</title>
 
-    <script type="text/javascript">
+    <script type="text/javascript" id="test">
         function makeVisible(){
             var valuey = document.getElementById('selection').value;
             if (valuey ==="deleteRow") {
@@ -51,9 +51,10 @@
 
 <form action="updateCompanyOptions" id="updateForm" style="display:none;" method="post">
     <input name="customerNumberInput" type="text">
-    <input name="currentClientInput" type="text">
+    <input name="currentClient" type="text">
     <button type="submit">Update This Row</button>
 </form>
+
 
 <table>
     <tr>
@@ -65,6 +66,23 @@
     %>
     <tr>
         <td><%= String.valueOf(c.getCustomerNumber())%></td>
+        <script type="text/javascript" id = "test3">
+            function validateForm() {
+                var x = document.forms["updateForm"]["currentClient"].value;
+                if ((x == "true") || (x == "True") || (x == "TRue" || (x == "TRUe") || (x == "TRUE") || (x == "tRue") || (x == "tRUe") || (x == "tRUE") || (x == "trUe") || (x == "trUE") || (x == "truE"))) {
+                    <% //This is not showing true on HTML, but it is being changed in DataGrip
+                        c.setCurrentClient(true);%>
+                }
+                else if ((x == "false") || (x == "False") || (x == "FAlse") || (x == "FALse") || (x == "FALSe") || (x == "FALSE") || (x == "fAlse") || (x == "fALse") || (x == "fALSe") || (x == "fALSE") || (x == "faLse") || (x == "faLSe") || (x == "faLSE") || (x == "falSe") || (x == "falSE") || (x == "falsE")){
+                    <% //This is not showing true on HTML, but it is being changed in DataGrip
+                        c.setCurrentClient(false);%>
+                }
+                else {
+                    //This is not showing true on HTML, but it is being changed in DataGrip
+                    System.out.println("This is not a word. Please check spelling.");
+                }
+            }
+        </script>
         <td><%= String.valueOf(c.getCurrentClient())%></td>
     </tr>
 
