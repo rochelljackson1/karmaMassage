@@ -13,6 +13,7 @@ import java.util.Vector;
 
 @WebServlet(name = "CancellationSearch")
 public class CancellationSearch extends HttpServlet {
+    /*
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idString = request.getParameter("custID");
         int id = 0;
@@ -29,4 +30,8 @@ public class CancellationSearch extends HttpServlet {
         }
         response.sendRedirect("./cancellationSystem.jsp?id=" + id);
     }
+
+     */
+
+
 }

@@ -112,6 +112,7 @@ public class appointmentsTable {
 
     public int getStaff_number() { return staff_number; }
     public void setStaff_number(int staff_number) { this.staff_number = staff_number; }
+
 }
 
 

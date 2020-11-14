@@ -20,33 +20,33 @@ public class cancellationSystem extends HttpServlet {
         int aptNum = Integer.parseInt(request.getParameter("rowToDelete"));
        try {
             Connection conn = ConnectionProvider.getConnection();
-            PreparedStatement ps = conn.prepareStatement("SELECT appointmentDateTime FROM appointmentsTable WHERE appointmentNumber=?");
-            ps.setInt(1, aptNum);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Date cancelledDate = new Date();
-                Date appointmentDate = new Date(rs.getTimestamp("appointmentDateTime").getTime());
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT appointmentDateTime FROM appointmentsTable WHERE appointmentNumber=?");
+            preparedStatement.setInt(1, aptNum);
+            ResultSet ResultSet = preparedStatement.executeQuery();
+            if (ResultSet.next()) {
+                Date now = new Date();
+                Date appointmentDate = new Date(ResultSet.getTimestamp("appointmentDateTime").getTime());
                 Calendar c = Calendar.getInstance();
-                c.setTime(appointmentDate);
+                c.setTime(now);
                 //replace 24 in the following line with the number of hours difference gotten from the database
                 c.add(Calendar.HOUR_OF_DAY, 24);
-                if (appointmentDate.after(cancelledDate)) {
+                if (!appointmentDate.before(now)) {
                     DataHandler.cancelAppointment(aptNum, false);
                     //TODO cancelled within time limit
-                    response.sendRedirect("./customerProfile.jsp?message=1");
+                    response.sendRedirect("./cancellationSystem.jsp?message=1");
                 } else  {
                     DataHandler.cancelAppointment(aptNum, true);
                     //TODO not cancelled within time limit
-                    response.sendRedirect("./customerProfile.jsp?message=2");
+                    response.sendRedirect("./cancellationSystem.jsp?message=2");
                 }
             }
-            rs.close();
-            ps.close();
+            ResultSet.close();
+            preparedStatement.close();
             return;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        response.sendRedirect("./customerProfile.jsp");
+        response.sendRedirect("./cancellationSystem.jsp");
     }
 }
 

@@ -1,7 +1,9 @@
 <%@ page import="com.uh.rachel.util.DataHandler" %>
 <%@ page import="java.util.Vector" %>
-<%@ page import="com.uh.rachel.util.tableClasses.appointmentsTable" %>
+<%@ page import="com.uh.rachel.util.tableClasses.customerTable" %>
 <%@ page import="com.uh.rachel.util.tableClasses.cancellationObjects" %>
+<%@ page import="com.uh.rachel.util.tableClasses.appointmentsTable" %>
+<%@ page import="javafx.scene.chart.XYChart" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -16,32 +18,39 @@
 <head>
     <title>Cancellation System</title>
     <script type="text/javascript">
-
+        window.onload = function (){
+            showToast();
+        }
+        function showToast(){
+            console.log("a")
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function (){x.className = x.className.replace("show", ""); }, 300);
+        }
     </script>
 </head>
 <body>
 
+<form action="cancellationSystem" id="deleteForm" style="display:none;" method="post">
+    <input name="rowToDelete" type="text">
+    <button type="submit">Delete This Appointment</button>
+</form>
 
-<table>
-    <tr>
-        <th>Appointment Number</th>
-        <th>Scheduled Date</th>
-        <th>Original Full Price</th>
-    </tr>
-    <tr>
-            <% Vector<cancellationObjects> v = DataHandler.getCancellationsByUserId(userId);
-        for (cancellationObjects c : v) {
-    %>
-    <tr>
-        <td><%= String.valueOf(c.getTable().getAppointmentNumber())%></td>
-        <td><%= String.valueOf(c.getTable().getScheduledDate())%></td>
-       <td><%= String.valueOf(c.getTable().getOriginalFullPrice())%></td>
-    </tr>
-    <%
+<% if (request.getParameter("t") != null) {
+    switch (Integer.parseInt(request.getParameter("t"))){
+        case 1: {
+%><div id="snackbar" onload="showToast()">Thank you, your cancellation is complete.</div><%
+        break;
         }
-    %>
-    </tr>
-</table>
+    case 2: {
+%><div id="snackbar" onload="showToast()">Your appointment has been cancelled, your account will be charged.</div><%
+    break;
+    }
+        default: {
+            break;
+        }
+    }
+}%>
 
 </body>
 </html>
