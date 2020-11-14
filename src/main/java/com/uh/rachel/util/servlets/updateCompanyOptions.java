@@ -11,7 +11,7 @@ package com.uh.rachel.util.servlets;
 
 public class updateCompanyOptions extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DataHandler.updateCompanyRowByID(Integer.parseInt(request.getParameter("customerNumberInput")), Boolean.parseBoolean(request.getParameter("currentClient")));
+        DataHandler.updateCompanyRowByID((Integer.parseInt(request.getParameter("customerNumberInput")!=""?request.getParameter("customerNumberInput"):"0")), Boolean.parseBoolean(request.getParameter("currentClient")!=""?request.getParameter("currentClient"):"0"));
         response.sendRedirect("./companyClientHistory.jsp");
     }
 }
