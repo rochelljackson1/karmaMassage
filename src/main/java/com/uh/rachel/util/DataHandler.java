@@ -1188,6 +1188,20 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    public static void updateEmergencyRowByID(int customerNumberInput, String emergencyFirstNameInput, String emergencyLastNameInput, String emergencyPhoneInput, String relationshipInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE emergencyContactTable SET emergencyFirstName=?, emergencyLastName=?, emergencyPhone=?, relationship=? WHERE customerNumber=?");
+            ps.setString(1, emergencyFirstNameInput);
+            ps.setString(2, emergencyLastNameInput);
+            ps.setString(3, emergencyPhoneInput);
+            ps.setString(4, relationshipInput);
+            ps.setInt(5, customerNumberInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
     public static void insertRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5, String rowToInsert6, String rowToInsert7, String rowToInsert8, String rowToInsert9) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1244,6 +1258,20 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    public static void insertEmergencyRowByID(int customerNumberInput, String emergencyFirstNameInput, String emergencyLastNameInput, String emergencyPhoneInput, String relationshipInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO emergencyContactTable (customerNumber, emergencyFirstName, emergencyLastName, emergencyPhone, relationship) VALUES(?, ?, ?, ?, ?)");
+            ps.setInt(1, customerNumberInput);
+            ps.setString(2, emergencyFirstNameInput);
+            ps.setString(3, emergencyLastNameInput);
+            ps.setString(4, emergencyPhoneInput);
+            ps.setString(5, relationshipInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
     public static void deleteRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1284,6 +1312,18 @@ public class DataHandler {
         try {
             Connection conn = ConnectionProvider.getConnection();
             PreparedStatement ps = conn.prepareStatement("DELETE FROM waiverTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteEmergencyRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM emergencyContactTable WHERE customerNumber=?");
             ps.setInt(1, rowToDelete);
             ps.executeUpdate();
             ps.close();
@@ -1629,6 +1669,25 @@ public class DataHandler {
                         result.getString("packageDescription"),
                         result.getDouble("price"),
                         result.getBoolean("0")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<emergencyContactTable> getEmergencyContact() {
+        Vector<emergencyContactTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM emergencyContactTable");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                v.add(new emergencyContactTable(result.getInt("customerNumber"),
+                        result.getString("emergencyFirstName"),
+                        result.getString("emergencyLastName"),
+                        result.getString("emergencyPhone"),
+                        result.getString("relationship")));
             }
         } catch (Exception e) {
             e.printStackTrace();

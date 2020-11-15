@@ -25,6 +25,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>deleteEmergencyOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteEmergencyOptions</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>insertOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.insertOptions</servlet-class>
     </servlet>
@@ -45,6 +50,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>insertEmergencyOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertEmergencyOptions</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>updateOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.updateOptions</servlet-class>
     </servlet>
@@ -62,6 +72,11 @@
     <servlet>
         <servlet-name>updateWaiverOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.updateWaiverOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateEmergencyOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateEmergencyOptions</servlet-class>
     </servlet>
 
     <servlet>
@@ -90,6 +105,11 @@
     </servlet-mapping>
 
     <servlet-mapping>
+        <servlet-name>deleteEmergencyOptions</servlet-name>
+        <url-pattern>/deleteEmergencyOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
         <servlet-name>insertOptions</servlet-name>
         <url-pattern>/insertOptions</url-pattern>
     </servlet-mapping>
@@ -110,6 +130,11 @@
     </servlet-mapping>
 
     <servlet-mapping>
+        <servlet-name>insertEmergencyOptions</servlet-name>
+        <url-pattern>/insertEmergencyOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
         <servlet-name>updateOptions</servlet-name>
         <url-pattern>/updateOptions</url-pattern>
     </servlet-mapping>
@@ -127,6 +152,11 @@
     <servlet-mapping>
         <servlet-name>updateWaiverOptions</servlet-name>
         <url-pattern>/updateWaiverOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateEmergencyOptions</servlet-name>
+        <url-pattern>/updateEmergencyOptions</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
