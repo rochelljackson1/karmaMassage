@@ -1593,4 +1593,44 @@ public class DataHandler {
         }
         return v;
     }
+
+    // Yeslyn Packages Delete
+
+    public static void deletePackagesRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM packagesTable WHERE packageNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Yeslyn Packages Update
+    public static void updatePackagesRowByID(int packageNumber, String packageDescription, double price) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE packagesTable SET packageNumber=?, packageDescription=?, price=? WHERE packageNumber=?");
+            preparedStatement.setInt(1, packageNumber);
+            preparedStatement.setString(2, packageDescription);
+            preparedStatement.setDouble(3, price);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    // Yeslyn Pakcages Insert
+    public static void insertPackagesRowByID(int rowToInsert, String rowToInsert2, double  String) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO packagesTable (packageNumber, packageDescription, price) VALUES (?, ?, ?)");
+            preparedStatement.setInt(1, rowToInsert);
+            preparedStatement.setString(3, rowToInsert2);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
 }

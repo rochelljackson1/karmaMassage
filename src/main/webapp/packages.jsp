@@ -15,10 +15,10 @@
 <head>
     <title>Packages</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<h1 align="center" class="w3-purple">Service Packages</h1>
+<h1 align="center" class="w3-grey">Service Packages</h1>
 </head>
 
-<body bgcolor="#f2c0fc">
+<body bgcolor="#aeb6f5">
 <form method="post" action="/save">
     <fieldset>
         <legend><em>Please Update Your Service Package</em></legend>
@@ -27,10 +27,10 @@
         <br>
         <input type="hidden" name="serviceNumber" value="">
         <br>
-        em>Package Description:</em><br>
+        <em>Package Description:</em><br>
         <input type="text" name="packageDescription">
         <br>
-        em>Price:</em><br>
+        <em>Price:</em><br>
         <input type="number" name="price">
         <br>
         <input type="hidden" name="status" value="">
@@ -43,7 +43,7 @@
             width: 80%;
         }
         td, th {
-            border: 1px solid mediumpurple;
+            border: 1px solid lightgrey;
             text-align: left;
             padding: 8px;
             width: 100px;
@@ -55,7 +55,7 @@
     </style>
 </form>
 <table class="center">
-    <h2 align="center" class="w3-purple">Packages List</h2>
+    <h2 align="center" class="w3-grey">Packages List</h2>
     <tr>
         <th style="text-align:center">Package Number</th>
         <th style="text-align:center">Service Number</th>
@@ -63,6 +63,7 @@
         <th style="text-align:center">Price</th>
         <th style="text-align:center">Status</th>
     </tr>
+
     <% Vector<packagesTable> v = DataHandler.getPackages();
         for (packagesTable c : v) {
     %>
@@ -74,6 +75,7 @@
         <td style="text-align:center"><%= String.valueOf(c.getStatus()) %></td>
 
     </tr>
+
     <%
         }
     %>
