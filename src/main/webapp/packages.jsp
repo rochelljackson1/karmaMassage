@@ -13,26 +13,65 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Frequently Asked Questions</title>
+    <title>Packages</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<h1 align="center" class="w3-purple">Service Packages</h1>
 </head>
-<body>
-<table>
+
+<body bgcolor="#f2c0fc">
+<form method="post" action="/save">
+    <fieldset>
+        <legend><em>Please Update Your Service Package</em></legend>
+        <em>Package Number:</em><br>
+        <input type="text" name="packageNumber">
+        <br>
+        <input type="hidden" name="serviceNumber" value="">
+        <br>
+        em>Package Description:</em><br>
+        <input type="text" name="packageDescription">
+        <br>
+        em>Price:</em><br>
+        <input type="number" name="price">
+        <br>
+        <input type="hidden" name="status" value="">
+    </fieldset>
+</form>
+<form>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+        }
+        td, th {
+            border: 1px solid mediumpurple;
+            text-align: left;
+            padding: 8px;
+            width: 100px;
+        }
+        table.center{
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</form>
+<table class="center">
+    <h2 align="center" class="w3-purple">Packages List</h2>
     <tr>
-        <th>Package Number</th>
-        <th>Service Number</th>
-        <th>Package Description</th>
-        <th>Price</th>
-        <th>Status</th>
+        <th style="text-align:center">Package Number</th>
+        <th style="text-align:center">Service Number</th>
+        <th style="text-align:center">Package Description</th>
+        <th style="text-align:center">Price</th>
+        <th style="text-align:center">Status</th>
     </tr>
     <% Vector<packagesTable> v = DataHandler.getPackages();
         for (packagesTable c : v) {
     %>
     <tr>
-        <td><%= String.valueOf(c.getPackageNumber()) %></td>
-        <td><%= String.valueOf(c.getServiceNumber())%></td>
-        <td><%= String.valueOf(c.getPackageDescription())%></td>
-        <td><%= String.valueOf(c.getPrice()) %></td>
-        <td><%= String.valueOf(c.getStatus()) %></td>
+        <td style="text-align:center"><%= String.valueOf(c.getPackageNumber()) %></td>
+        <td style="text-align:center"><%= String.valueOf(c.getServiceNumber())%></td>
+        <td style="text-align:center"><%= String.valueOf(c.getPackageDescription())%></td>
+        <td style="text-align:center"><%= String.valueOf(c.getPrice()) %></td>
+        <td style="text-align:center"><%= String.valueOf(c.getStatus()) %></td>
 
     </tr>
     <%

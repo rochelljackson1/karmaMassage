@@ -1574,4 +1574,23 @@ public class DataHandler {
         }
         return v;
     }
+
+    public static Vector<packagesTable> getPackages() {
+        Vector<packagesTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM packagesTable");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                v.add(new packagesTable(result.getInt("packagesNumber"),
+                        result.getInt("serviceNumber"),
+                        result.getString("packageDescription"),
+                        result.getDouble("price"),
+                        result.getBoolean("0")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
 }
