@@ -6,6 +6,8 @@ import com.uh.rachel.util.tableClasses.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Vector;
 
 public class DataHandler {
@@ -1173,6 +1175,19 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    public static void updateWaiverRowByID(int customerNumberInput, String signiture, String date, boolean acknowledgment) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE waiverTable SET signiture=?, date=?, acknowledgment=? WHERE customerNumber=?");
+            ps.setString(1, signiture);
+            ps.setString(2, date);
+            ps.setBoolean(3, acknowledgment);
+            ps.setInt(4, customerNumberInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
     public static void insertRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5, String rowToInsert6, String rowToInsert7, String rowToInsert8, String rowToInsert9) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1216,6 +1231,19 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    public static void insertWaiverRowByID(int customerNumber, String signiture, String date, boolean acknowledgment) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO waiverTable (customerNumber, signiture, date, acknowledgment) VALUES (?, ?, ?, ?)");
+            ps.setInt(1, customerNumber);
+            ps.setString(2, signiture);
+            ps.setString(3, date);
+            ps.setBoolean(4, acknowledgment);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
     public static void deleteRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1244,6 +1272,18 @@ public class DataHandler {
         try {
             Connection conn = ConnectionProvider.getConnection();
             PreparedStatement ps = conn.prepareStatement("DELETE FROM companyClientHistoryTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteWaiverRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM waiverTable WHERE customerNumber=?");
             ps.setInt(1, rowToDelete);
             ps.executeUpdate();
             ps.close();
@@ -1454,7 +1494,9 @@ public class DataHandler {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()){
                 double price = resultSet.getInt(1);
-                preparedStatement = connection.prepareStatement("UPDATE appointmentsTable SET actualPricePaid=? WHERE appointmentNumber=?");
+                preparedStatement = connection.prepareStatement("UPDATE appointmentsTable SET actualPricePaid=?, cancelledDateTime=? WHERE appointmentNumber=?");
+                preparedStatement.setTimestamp(2, new Timestamp(new Date().getTime()));
+                preparedStatement.setInt(3, aptNum);
                 if (isLate){
                     preparedStatement.setDouble(1, price*.5);
                 } else {
@@ -1594,6 +1636,22 @@ public class DataHandler {
         return v;
     }
 
+    public static Vector<waiverTable> getWaiver() {
+        Vector<waiverTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM waiverTable");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                v.add(new waiverTable(result.getInt("customerNumber"), result.getString("signiture"),
+                        result.getString("date"), result.getBoolean("acknowledgment")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
     // Yeslyn Packages Delete
 
     public static void deletePackagesRowByID(int rowToDelete) {
@@ -1632,5 +1690,4 @@ public class DataHandler {
             preparedStatement.close();
         } catch (Exception e) {e.printStackTrace();}
     }
-
 }

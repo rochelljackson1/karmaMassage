@@ -1,20 +1,18 @@
-<%@ page import="com.uh.rachel.util.tableClasses.companyClientHistoryTable" %>
 <%@ page import="com.uh.rachel.util.DataHandler" %>
-<%@ page import="java.util.Vector" %>
-<%@ page import="com.uh.rachel.util.tableClasses.customerTable" %>
-<%@ page import="javax.xml.crypto.Data" %><%--
+<%@ page import="com.uh.rachel.util.tableClasses.waiverTable" %>
+<%@ page import="java.util.Vector" %><%--
   Created by IntelliJ IDEA.
   User: rjvoigt
-  Date: 11/3/20
-  Time: 4:37 PM
+  Date: 11/1/20
+  Time: 12:21 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Company Client History</title>
+    <title>Waiver</title>
 
-    <script type="text/javascript" id="test">
+    <script type="text/javascript">
         function makeVisible(){
             var valuey = document.getElementById('selection').value;
             if (valuey ==="deleteRow") {
@@ -28,6 +26,7 @@
         }
     </script>
 </head>
+
 <body>
 
 <select id="selection">
@@ -38,50 +37,46 @@
 
 <button onclick="makeVisible();">Make Form Visible</button>
 
-<form action="deleteCompanyOptions" id="deleteForm" style="display:none;" method="post">
+<form action="deleteWaiverOptions" id="deleteForm" style="display:none;" method="post">
     <input name="rowToDelete" type="text">
     <button type="submit">Delete This Row</button>
 </form>
 
-<form action="insertCompanyOptions" id="insertForm" style="display:none;" method="post">
-    <input name="rowToInsert" type="text">
-    <input name="rowToInsert2" type="text">
+<form action="insertWaiverOptions" id="insertForm" style="display:none;" method="post">
+    <input name="customerNumberInput" type="text">
+    <input name="signitureInput" type="text">
+    <input name="dateInput" type="text">
+    <input name="acknowledgmentInput" type="text">
     <button type="submit">Insert This Row</button>
 </form>
 
-<form action="updateCompanyOptions" id="updateForm" style="display:none;" method="post">
+<form action="updateWaiverOptions" id="updateForm" style="display:none;" method="post">
     <input name="customerNumberInput" type="text">
-    <input name="currentClient" type="text">
-<%--    <input name="currentClient" type="checkbox">--%>
+    <input name="signitureInput" type="text">
+    <input name="dateInput" type="text">
+    <input name="acknowledgmentInput" type="text">
     <button type="submit">Update This Row</button>
 </form>
-
 
 <table>
     <tr>
         <th>Customer ID</th>
-        <th>Current Client</th>
+        <th>Signiture</th>
+        <th>Date</th>
+        <th>Acknowledgment</th>
     </tr>
-    <% Vector<companyClientHistoryTable> v = DataHandler.getcompanyClientHistory();
-        for (companyClientHistoryTable c : v) {
-            System.out.println(c.getCurrentClient());
+    <% Vector<waiverTable> v = DataHandler.getWaiver();
+        for (waiverTable c : v) {
     %>
     <tr>
         <td><%= String.valueOf(c.getCustomerNumber())%></td>
-            <%--function check() {
-                document.getElementById("updateForm").checked = true;
-            }
-            function uncheck() {
-                document.getElementById("updateForm").checked = false;
-            }--%>
-        <td><%= c.getCurrentClient()?"true":"false"%></td>
+        <td><%= String.valueOf(c.getSigniture())%></td>
+        <td><%= String.valueOf(c.getDate())%></td>
+        <td><%= String.valueOf(c.isAcknowledgment())%></td>
     </tr>
-
     <%
         }
     %>
-
-
 </table>
 </body>
 </html>

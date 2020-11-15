@@ -33,6 +33,13 @@
 </head>
 
 <body>
+
+<form class="centered-form" action="cancellationSystem" id="deleteForm" style="display:flex;" method="post">
+    <input type="text" name="rowToDelete">
+    <button type="submit" name="DeleteAppt">Cancel</button>
+
+</form>
+
 <% if (request.getParameter("t") != null) {
     switch (Integer.parseInt(request.getParameter("t"))){
         case 1: {
@@ -48,11 +55,5 @@
         }
     }
 }%>
-
-<form class="centered-form" action="cancellationSystem" id="deleteForm" style="display:none;" method="post">
-    <input type="text" name="rowToDelete">
-    <button type="submit" name="DeleteAppt">Cancel</button>
-
-</form>
 </body>
 </html>

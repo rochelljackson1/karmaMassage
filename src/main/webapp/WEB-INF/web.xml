@@ -20,6 +20,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>deleteWaiverOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteWaiverOptions</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>insertOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.insertOptions</servlet-class>
     </servlet>
@@ -35,6 +40,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>insertWaiverOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertWaiverOptions</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>updateOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.updateOptions</servlet-class>
     </servlet>
@@ -47,6 +57,16 @@
     <servlet>
         <servlet-name>updateCompanyOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.updateCompanyOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateWaiverOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateWaiverOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>cancellationSystem</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.cancellationSystem</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -65,6 +85,11 @@
     </servlet-mapping>
 
     <servlet-mapping>
+        <servlet-name>deleteWaiverOptions</servlet-name>
+        <url-pattern>/deleteWaiverOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
         <servlet-name>insertOptions</servlet-name>
         <url-pattern>/insertOptions</url-pattern>
     </servlet-mapping>
@@ -80,6 +105,11 @@
     </servlet-mapping>
 
     <servlet-mapping>
+        <servlet-name>insertWaiverOptions</servlet-name>
+        <url-pattern>/insertWaiverOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
         <servlet-name>updateOptions</servlet-name>
         <url-pattern>/updateOptions</url-pattern>
     </servlet-mapping>
@@ -92,6 +122,16 @@
     <servlet-mapping>
         <servlet-name>updateCompanyOptions</servlet-name>
         <url-pattern>/updateCompanyOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateWaiverOptions</servlet-name>
+        <url-pattern>/updateWaiverOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>cancellationSystem</servlet-name>
+        <url-pattern>/cancellationSystem</url-pattern>
     </servlet-mapping>
 
 
