@@ -51,7 +51,7 @@ public class DataHandler {
         return v;
     }
 
- //Nafisa Chowdhury
+    //Nafisa Chowdhury
     public static Vector<report1> getReport1() {
         Vector<report1> v = new Vector<>();
         try {
@@ -85,7 +85,7 @@ public class DataHandler {
                     "FROM customerTable\n" +
                     "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
                     "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
-                     "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
+                    "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
                     "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
                     "\n" +
                     "WHERE companyClientHistoryTable.currentClient = @status\n" +
@@ -109,7 +109,7 @@ public class DataHandler {
         return v;
     }
 
-//Nafisa Chowdhury
+    //Nafisa Chowdhury
     public static Vector<report2> getReport2() {
         Vector<report2> v = new Vector<>();
         try {
@@ -167,7 +167,7 @@ public class DataHandler {
         return v;
     }
 
-//Nafisa Chowdhury
+    //Nafisa Chowdhury
     public static Vector<report3> getReport3() {
         Vector<report3> v = new Vector<>();
         try {
@@ -212,7 +212,7 @@ public class DataHandler {
         return v;
     }
 
-//Nafisa Chowdhury
+    //Nafisa Chowdhury
     public static Vector<report4> getReport4() {
         Vector<report4> v = new Vector<>();
         try {
@@ -257,7 +257,7 @@ public class DataHandler {
         return v;
     }
 
-//Ramiro Santibanez
+    //Ramiro Santibanez
     public static Vector<customerTable> getReport10() {
         Vector<customerTable> v = new Vector<>();
         try {
@@ -327,11 +327,11 @@ public class DataHandler {
                         result.getString("Client Last Name")));
             }
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return v;
     }
-//Ramiro Santibaez
+    //Ramiro Santibaez
     public static Vector<customerTable> getReport11() {
         Vector<customerTable> v = new Vector<>();
         try{
@@ -692,8 +692,8 @@ public class DataHandler {
                         result.getString("Client First Name"), result.getString("Client Last Name")),
                         new existingConditionsInfectiousTable(result.getBoolean("Infectious Respiratory Condition")),
                         new existingConditionsRespiratoryTable(result.getInt("Asthma"),
-                        result.getBoolean("Bronchitis"), result.getBoolean("Chronic Cough"),
-                        result.getBoolean("Emphysema"), result.getBoolean("Shortness of Breathe")),
+                                result.getBoolean("Bronchitis"), result.getBoolean("Chronic Cough"),
+                                result.getBoolean("Emphysema"), result.getBoolean("Shortness of Breathe")),
                         new companyClientHistoryTable(result.getBoolean("Status"))));
             }
 
@@ -1123,7 +1123,7 @@ public class DataHandler {
                         new existingConditionsMedicationsTable(result.getString("Medications")),
                         new doctorTable(result.getString("Physician Last Name"), result.getString("Physician Phone Number")),
                         new emergencyContactTable(result.getString("Emergency First Name"), result.getString("Emergency Last Name"),
-                            result.getString("Emergency Phone Number"), result.getString("Emergency Relationship"))));
+                                result.getString("Emergency Phone Number"), result.getString("Emergency Relationship"))));
             }
 
         }catch (Exception e){
@@ -1516,7 +1516,7 @@ public class DataHandler {
                         (result.getString("Appointment Date")),
                         (result.getString("Question Asked")),
                         (result.getInt("Service Number"))
-                        ));
+                ));
             }
 
         }catch (Exception e){
@@ -1786,8 +1786,8 @@ public class DataHandler {
         }
         return v;
     }
-    
-    
+
+
     //Makki
     public static Vector<Address> getAddress() {
         Vector<Address> v = new Vector<>();
@@ -2268,14 +2268,90 @@ public class DataHandler {
         }
         return v;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    public static void updateCountryRowByID(int IdInput,String countryNameInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE Country SET countryName=? WHERE Id=?");
+            ps.setString(2, countryNameInput);
+            ps.setInt(1, IdInput);
+
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void insertCountryRowByID(String countryNameInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO Country (countryName) VALUES (?)");
+            ps.setString(1, countryNameInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void deleteCountryRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM Country WHERE Id=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void updateAddressRowByID(int customerNumberInput, String streetInput, String cityNameInput, String stateNameInput, String zipCodeInput, String countryNameInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE Address SET street=?, cityName=?, stateName=?, zipCode=?, countryName=? WHERE customerNumber=?");
+            ps.setInt(6, customerNumberInput);
+            ps.setString(1, streetInput);
+            ps.setString(2, cityNameInput);
+            ps.setString(3, stateNameInput);
+            ps.setString(4, zipCodeInput);
+            ps.setString(5, countryNameInput);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+
+
+    public static void insertAddressRowByID( int customerNumberInput, String streetInput, String cityNameInput, String stateNameInput, String zipCodeInput, String countryNameInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO Address ( customerNumber, street, cityName, stateName, zipCode, countryName) VALUES(?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, customerNumberInput);
+            ps.setString(2, streetInput);
+            ps.setString(3, cityNameInput);
+            ps.setString(4, stateNameInput);
+            ps.setString(5, zipCodeInput);
+            ps.setString(6, countryNameInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+
+
+    public static void deleteAddressRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM Address WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }
