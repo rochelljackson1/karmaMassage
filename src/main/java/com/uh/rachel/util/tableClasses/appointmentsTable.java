@@ -40,6 +40,34 @@ public class appointmentsTable {
             this.staff_number = staff_number;
         }
 
+    public appointmentsTable(int customerNumber, String scheduledDate, String scheduledTime, int addOnNumber) {
+        this.customerNumber = customerNumber;
+        this.addOnNumber = addOnNumber;
+        this.scheduledDate = scheduledDate;
+        this.scheduledTime = scheduledTime;
+    }
+
+    public appointmentsTable(int customerNumber, int appointmentNumber) {
+        this.appointmentNumber = appointmentNumber;
+        this.customerNumber = customerNumber;
+    }
+
+    public appointmentsTable(int customerNumber, String scheduledDate, int packageNumber, int addOnNumber, double actualPricePaid) {
+            this.customerNumber = customerNumber;
+            this.scheduledDate = scheduledDate;
+            this.packageNumber = packageNumber;
+            this.addOnNumber = addOnNumber;
+            this.actualPricePaid = actualPricePaid;
+    }
+
+    public appointmentsTable(String scheduledDate, int customerNumber, int packageNumber, int serviceNumber, int addOnNumber){
+            this.scheduledDate = scheduledDate;
+            this.customerNumber = customerNumber;
+            this.packageNumber = packageNumber;
+            this.serviceNumber = serviceNumber;
+            this.addOnNumber = addOnNumber;
+    }
+
     public int getAppointmentNumber() { return appointmentNumber; }
     public void setAppointmentNumber(int appointmentNumber) { this.appointmentNumber = appointmentNumber; }
 
@@ -84,6 +112,7 @@ public class appointmentsTable {
 
     public int getStaff_number() { return staff_number; }
     public void setStaff_number(int staff_number) { this.staff_number = staff_number; }
+
 }
 
 

@@ -11,8 +11,62 @@
 <html>
 <head>
     <title>Customer Profile</title>
+
+    <script type="text/javascript">
+        function makeVisible(){
+            var valuey = document.getElementById('selection').value;
+            if (valuey ==="deleteRow") {
+                document.getElementById('deleteForm').style.display = "flex";
+            }
+            if (valuey == "insertRow") {
+                document.getElementById('insertForm').style.display = "flex";
+            }
+            if (valuey == "updateRow") {}
+                document.getElementById('updateForm').style.display = "flex";
+            }
+    </script>
+
 </head>
 <body>
+<select id="selection">
+    <option value="deleteRow">Delete Customer</option>
+    <option value="insertRow">Insert Customer</option>
+    <option value="updateRow">Update Customer</option>
+</select>
+
+<button onclick="makeVisible();">Make Form Visible</button>
+
+<form action="deleteOptions" id="deleteForm" style="display:none;" method="post">
+    <input name="rowToDelete" type="text">
+    <button type="submit">Delete This Row</button>
+</form>
+
+<form action="insertOptions" id="insertForm" style="display:none;" method="post">
+    <input name="rowToInsert" type="text">
+    <input name="rowToInsert2" type="text">
+    <input name="rowToInsert3" type="text">
+    <input name="rowToInsert4" type="text">
+    <input name="rowToInsert5" type="text">
+    <input name="rowToInsert6" type="text">
+    <input name="rowToInsert7" type="text">
+    <input name="rowToInsert8" type="text">
+    <input name="rowToInsert9" type="text">
+    <button type="submit">Insert This Row</button>
+</form>
+
+<form action="updateOptions" id="updateForm" style="display:none;" method="post">
+    <input name="customerNumberInput" type="text">
+    <input name="storeCreditInput" type="text">
+    <input name="firstNameInput" type="text">
+    <input name="lastNameInput" type="text">
+    <input name="genderInput" type="text">
+    <input name="phoneInput" type="text">
+    <input name="emailInput" type="text">
+    <input name="birthdayInput" type="text">
+    <input name="addressInput" type="text">
+    <button type="submit">Update This Row</button>
+</form>
+
 <table>
     <tr>
         <th>Customer ID</th>
@@ -25,6 +79,7 @@
         <th>Birthday</th>
         <th>Address</th>
     </tr>
+
     <% Vector<customerTable> v = DataHandler.getCustomers();
         for (customerTable c : v) {
     %>

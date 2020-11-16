@@ -11,9 +11,14 @@ public class customerTable {
     String birthday;
     String address;
 
-    public customerTable() {
-
+    public customerTable(int client_profile_number, String client_first_name, String client_last_name, String client_phone_number, String client_email_address) {
+        this.customerNumber = client_profile_number;
+        this.firstName = client_first_name;
+        this.lastName = client_last_name;
+        this.phone = client_phone_number;
+        this.email = client_email_address;
     }
+
 
     public customerTable(int customerNumber, int storeCredit, String firstName, String lastName, String gender, String phone, String email, String birthday, String address) {
         this.customerNumber = customerNumber;
@@ -25,6 +30,12 @@ public class customerTable {
         this.email = email;
         this.birthday = birthday;
         this.address = address;
+    }
+
+    public customerTable(int customerNumber, String firstName, String lastName) {
+        this.customerNumber = customerNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public int getCustomerNumber() {
@@ -98,4 +109,7 @@ public class customerTable {
     public void setAddress(String address) {
         this.address = address;
     }
+
+
 }
+

@@ -17,6 +17,10 @@ public class packagesTable {
         this.status = status;
     }
 
+    public packagesTable(int packageNumber) {
+        this.packageNumber = packageNumber;
+    }
+
     public int getPackageNumber() { return packageNumber; }
     public void setPackageNumber(int packageNumber) { this.packageNumber = packageNumber; }
 
@@ -29,7 +33,7 @@ public class packagesTable {
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
 
-    public boolean isStatus() { return status; }
+    public boolean getStatus() { return status; }
     public void setStatus(boolean status) { this.status = status; }
 
 }

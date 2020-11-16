@@ -22,6 +22,10 @@ public class existingConditionsInfectiousTable {
         this.altheletsFoot = altheletsFoot;
     }
 
+    public existingConditionsInfectiousTable(boolean respiratoryConditions) {
+        this.respiratoryConditions = respiratoryConditions;
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }

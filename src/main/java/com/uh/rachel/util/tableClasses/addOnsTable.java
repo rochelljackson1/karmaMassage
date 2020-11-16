@@ -16,6 +16,11 @@ public class addOnsTable {
         this.customerNumber = customerNumber;
     }
 
+    public addOnsTable(int addOnNumber, String addOnDescription) {
+        this.addOnNumber = addOnNumber;
+        this.addOnDescription = addOnDescription;
+    }
+
     public int getAddOnNumber() { return addOnNumber; }
     public void setAddOnNumber(int addOnNumber) { this.addOnNumber = addOnNumber; }
 

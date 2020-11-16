@@ -5,6 +5,7 @@ public class existingConditionsRespiratoryTable {
     boolean shortnessOfBreath;
     boolean chronicCough;
     boolean bronchitis;
+    boolean emphysema;
     boolean asthma;
 
     public existingConditionsRespiratoryTable() {
@@ -16,6 +17,17 @@ public class existingConditionsRespiratoryTable {
         this.chronicCough = chronicCough;
         this.bronchitis = bronchitis;
         this.asthma = asthma;
+    }
+
+    public existingConditionsRespiratoryTable(boolean asthma, boolean bronchitis, boolean chronicCough, boolean emphysema, boolean shortnessOfBreath) {
+        this.shortnessOfBreath = shortnessOfBreath;
+        this.chronicCough = chronicCough;
+        this.bronchitis = bronchitis;
+        this.emphysema = emphysema;
+        this.asthma = asthma;
+    }
+
+    public existingConditionsRespiratoryTable(int customerNumber, boolean shortnessOfBreath, boolean emphysema, boolean chronicCough, boolean bronchitis, boolean asthma) {
     }
 
     public int getCustomerNumber() {
@@ -56,5 +68,13 @@ public class existingConditionsRespiratoryTable {
 
     public void setAsthma(boolean asthma) {
         this.asthma = asthma;
+    }
+
+    public boolean isEmphysema() {
+        return emphysema;
+    }
+
+    public void setEmphysema(boolean emphysema) {
+        this.emphysema = emphysema;
     }
 }
