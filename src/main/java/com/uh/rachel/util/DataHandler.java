@@ -1786,5 +1786,496 @@ public class DataHandler {
         }
         return v;
     }
+    
+    
+    //Makki
+    public static Vector<Address> getAddress() {
+        Vector<Address> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Address");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Address(result.getInt("customerNumber"),
+                        result.getString("street"),
+                        result.getString("cityName"),
+                        result.getString("stateName"),
+                        result.getString("zipCode"),
+                        result.getString("countryName")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+    //Makki
+    public static Vector<Revenue> getRevenue() {
+        Vector<Revenue> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Revenue");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Revenue(
+                        result.getString("date"),
+                        result.getDouble("revenueMonthlyActual"),
+                        result.getDouble("revenueWeeklyActual"),
+                        result.getDouble("revenueMonthlyFromCancellations"),
+                        result.getDouble("potentialRevenueMonthlyFromScheduled"),
+                        result.getDouble("revenueByStaff")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    //Makki
+    public static Vector<City> getCiy() {
+        Vector<City> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM City");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new City(
+                        result.getString("cityName"),
+                        result.getString("internationalCity")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<State> getState() {
+        Vector<State> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM state");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new State(
+                        result.getInt("stateID"),
+                        result.getString("stateCode"),
+                        result.getString("stateName")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+    //Makki
+    public static Vector<Country> getCountry() {
+        Vector<Country> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Country");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Country(
+                        result.getInt("id"),
+                        result.getString("countryName")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+
+    //Makki
+    public static Vector<Staff> getStaff() {
+        Vector<Staff> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Staff");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Staff(
+                        result.getInt("staff_Number"),
+                        result.getString("tips"),
+                        result.getString("date"),
+                        result.getString("totalPTO"),
+                        result.getString("revenueByStaff")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+    //Makki
+    public static Vector<PTO_Staff> getPTO_Staff() {
+        Vector<PTO_Staff> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM PTO_Staff");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new PTO_Staff(
+                        result.getInt("staffNumber"),
+                        result.getString("maxPTO"),
+                        result.getString("maxSickPTO"),
+                        result.getString("maxMaternatyPTO"),
+                        result.getString("maxEmergencyPTO"),
+                        result.getString("totalPTO")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<Staff_PTO_Staff_Associative> getStaff_PTO_Staff_Associative() {
+        Vector<Staff_PTO_Staff_Associative> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Staff_PTO_Staff_Associative");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Staff_PTO_Staff_Associative(
+                        result.getInt("staff_Number"),
+                        result.getInt("staffNumber")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<OwnerSide_of_Automatic_Payment_Cancellation_System> getOwnerSide_of_Automatic_Payment_Cancellation_System() {
+        Vector<OwnerSide_of_Automatic_Payment_Cancellation_System> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM OwnerSide_of_Automatic_Payment_Cancellation_System");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new OwnerSide_of_Automatic_Payment_Cancellation_System(
+                        result.getString("timeCondition"),
+                        result.getString("deductionPrecentage")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<Location> getLocation() {
+        Vector<Location> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Location");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Location(
+                        result.getInt("locationNumber"),
+                        result.getInt("customerNumber"),
+                        result.getBoolean("inBound"),
+                        result.getBoolean("outBound")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    //Makki
+    public static Vector<validEmail> getValidEmail() {
+        Vector<validEmail> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@email nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
+                    "\n" +
+                    "SELECT @email = '%@%'\n" +
+
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.email AS 'E-mail',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country'\n" +
+
+
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.email >= @email");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new validEmail(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("E-mail")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<reportGender> getReportGender() {
+        Vector<reportGender> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@gender nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
+                    "\n" +
+                    "SELECT @gender = 'male'\n" +
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.gender AS 'Gender',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country'\n" +
+
+                    "\n" +
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.gender >= @gender\n");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new reportGender(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("Gender")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<reportAddress> getReportAddress() {
+        Vector<reportAddress> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@address nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
+                    "\n" +
+                    "SELECT @address = 'address'\n" +
+
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.address AS 'Address',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country'\n" +
+
+                    "\n" +
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.address LIKE address\n");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new reportAddress(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("Address")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+
+    //Makki
+    public static Vector<reportBirthday> getReportBirthday() {
+        Vector<reportBirthday> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@birthday nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
+                    "\n" +
+                    "SELECT @birthday= 'Birthday'\n" +
+
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.birthday AS 'Birthday',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country'\n" +
+
+                    "\n" +
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.birthday = birthday\n");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new reportBirthday(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("Birthday")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }
