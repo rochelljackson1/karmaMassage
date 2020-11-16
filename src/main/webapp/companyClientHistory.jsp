@@ -64,7 +64,7 @@
     </tr>
     <% Vector<companyClientHistoryTable> v = DataHandler.getcompanyClientHistory();
         for (companyClientHistoryTable c : v) {
-            System.out.println(c.getCurrentClient());
+            //System.out.println(c.getCurrentClient());
     %>
     <tr>
         <td><%= String.valueOf(c.getCustomerNumber())%></td>
