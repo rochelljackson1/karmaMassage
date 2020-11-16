@@ -49,3 +49,5 @@ public class FAQTable {
     public void setLocationNumber(int locationNumber) { this.locationNumber = locationNumber; }
 }
 
+
+
