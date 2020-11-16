@@ -407,7 +407,7 @@ public class DataHandler {
         return v;
     }
 
-    public static Vector<FAQTable> getFAQ(){
+     public static Vector<FAQTable> getFAQ(){
         Vector<FAQTable> v = new Vector<>();
         try{
             Connection connection = ConnectionProvider.getConnection();
@@ -1131,8 +1131,559 @@ public class DataHandler {
         }
         return v;
     }
+    
+    public static Vector<appointmentsTable> getReport15() {
+        Vector<appointmentsTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@hotStone int = 0,\n" +
+                    "@startDate nvarchar(10),\n" +
+                    "@date2 nvarchar(10), \n" +
+                    "@date3 nvarchar(10), \n" +
+                    "@date4 nvarchar(10), \n" +
+                    "@endDate nvarchar(10), \n" +
+                    "\n" +
+                    "SELECT @hotStone = 4\n" +
+                    "SELECT @startDate = '7/13/2020', \n" +
+                    "SELECT @date2 = '7/14/2020', \n" +
+                    "SELECT @date3 = '7/15/2020', \n" +
+                    "SELECT @date4 = '7/16/2020', \n" +
+                    "SELECT @endDate = '7/17/2020', \n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.customerNumber AS 'Client ID',\n" +
+                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.scheduledTime AS 'Appointment Time',\n" +
+                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE appointmentsTable.addOnNumber = @hotStone\n" +
+                    "AND (appointmentsTable.scheduledDate = @startDate OR appointmentsTable.scheduledDate = @date2)\n" +
+                    "\tOR (appointmentsTable.scheduledDate = @date3 OR appointmentsTable.scheduledDate = @date4)" +
+                    "\tOR appointmentsTable.scheduledDate = @endDate)");
+            ResultSet result = statement.executeQuery();
 
-    public static void updateRowByID(int customerNumberInput,int storeCreditInput, String firstNameInput, String lastNameInput, String genderInput, String phoneInput, String emailInput, String birthdayInput, String addressInput) {
+            while(result.next()){
+                v.add(new appointmentsTable(result.getInt("Client ID Number"),
+                        (result.getString("Appointment Date")),
+                        (result.getString("Appointment Time")),
+                        (result.getInt("Add-On"))));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<appointmentsTable> getReport16() {
+        Vector<appointmentsTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@smallNum int = 0,\n" +
+                    "\n" +
+                    "SELECT @smallNum = 995\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.customerNumber AS 'Client ID',\n" +
+                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.packageNumber AS 'Appointment Time',\n" +
+                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
+                    "appointmentsTable.actualPricePaid AS 'Price Paid',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN customerTable ON appointmentsTable.customerNumber = customerTable.customerNumber\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE appointmentsTable.actualPricePaid = @smallNum\n");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new appointmentsTable(result.getInt("Client ID Number"),
+                        (result.getString("Purchase Date")),
+                        (result.getInt("Package Number")),
+                        (result.getInt("Add-On")),
+                        (result.getDouble("Price Paid"))));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+    public static Vector<report17> getReport17() {
+        Vector<report17> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@hotStone int = 0,\n" +
+                    "@startDate nvarchar(10),\n" +
+                    "@date2 nvarchar(10), \n" +
+                    "@date3 nvarchar(10), \n" +
+                    "@date4 nvarchar(10), \n" +
+                    "@endDate nvarchar(10), \n" +
+                    "\n" +
+                    "SELECT @hotStone = 4\n" +
+                    "SELECT @startDate = '7/13/2020', \n" +
+                    "SELECT @date2 = '7/14/2020', \n" +
+                    "SELECT @date3 = '7/15/2020', \n" +
+                    "SELECT @date4 = '7/16/2020', \n" +
+                    "SELECT @endDate = '7/17/2020', \n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.customerNumber AS 'Customer ID',\n" +
+                    "appointmentsTable.packageNumber AS 'Package Purchased',\n" +
+                    "appointmentsTable.serviceNumber AS 'Service Number',\n" +
+                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
+                    "FAQTable.question AS 'Question Asked',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE appointmentsTable.scheduledDate = @startDate OR appointmentsTable.scheduledDate = @date2 OR " +
+                    "appointmentsTable.scheduledDate = @date3 \n" +
+                    "\tOR appointmentsTable.scheduledDate = @endDate OR appointmentsTable.scheduledDate = @date4");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new report17(result.getString("Appointment Date"),
+                        (result.getInt("Client ID")),
+                        (result.getInt("Package Bought")),
+                        (result.getInt("Service Number")),
+                        (result.getInt("Add-On")),
+                        (result.getString("Question Asked"))));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<report18> getReport18() {
+        Vector<report18> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@importantQuestion,\n" +
+                    "@startDate nvarchar(10),\n" +
+                    "@date2 nvarchar(10), \n" +
+                    "@date3 nvarchar(10), \n" +
+                    "@date4 nvarchar(10), \n" +
+                    "@endDate nvarchar(10), \n" +
+                    "\n" +
+                    "SELECT @importantQuestion = 11\n" +
+                    "SELECT @startDate = '5/13/2020', \n" +
+                    "SELECT @date2 = '5/14/2020', \n" +
+                    "SELECT @date3 = '5/15/2020', \n" +
+                    "SELECT @date4 = '5/16/2020', \n" +
+                    "SELECT @endDate = '5/17/2020', \n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.customerNumber AS 'Customer ID',\n" +
+                    "appointmentsTable.packageNumber AS 'Appointment Date',\n" +
+                    "appointmentsTable.serviceNumber AS 'Service Number',\n" +
+                    "FAQTable.question AS 'Question Asked',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE FAQTable.faqNumber = @importantQuesiton " +
+                    "AND appointmentsTable.scheduledDate = @startDate OR " +
+                    "appointmentsTable.scheduledDate = @date2 OR appointmentsTable.scheduledDate = @date3\n" +
+                    "\tOR appointmentsTable.scheduledDate = @endDate OR appointmentsTable.scheduledDate = @date4");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new report18(
+                        (result.getInt("Client ID")),
+                        (result.getString("Appointment Date")),
+                        (result.getString("Question Asked")),
+                        (result.getInt("Service Number"))
+                        ));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static void cancelAppointment(int aptNum, boolean isLate) {
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT actualPricePaid FROM appointmentsTable WHERE appointmentNumber=?");
+            preparedStatement.setInt(1, aptNum);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                double price = resultSet.getInt(1);
+                preparedStatement = connection.prepareStatement("UPDATE appointmentsTable SET actualPricePaid=?, cancelledDateTime=? WHERE appointmentNumber=?");
+                preparedStatement.setTimestamp(2, new Timestamp(new Date().getTime()));
+                preparedStatement.setInt(3, aptNum);
+                if (isLate){
+                    preparedStatement.setDouble(1, price*.5);
+                } else {
+                    preparedStatement.setDouble(1, 0);
+                }
+                preparedStatement.setInt(2, aptNum);
+                preparedStatement.executeUpdate();
+            }
+            resultSet.close();
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Vector<companyClientHistoryTable> getcompanyClientHistory() {
+        Vector<companyClientHistoryTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM companyClientHistoryTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new companyClientHistoryTable(result.getInt("customerNumber"),
+                        result.getBoolean("currentClient")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsWomenTable> getExistingConditionsWomen() {
+        Vector<existingConditionsWomenTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsWomenTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsWomenTable(result.getInt("customerNumber"),
+                        result.getBoolean("pregnant"), result.getBoolean("gynecologicalConditions")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsSTJDTable> getExistingConditionsSTJD() {
+        Vector<existingConditionsSTJDTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsSTJDTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsSTJDTable(result.getInt("customerNumber"),
+                        result.getBoolean("upperBackRight"), result.getBoolean("upperBackLeft"),
+                        result.getBoolean("shouldersRight"), result.getBoolean("shouldersLeft"),
+                        result.getBoolean("neckRight"), result.getBoolean("neckLeft"),
+                        result.getBoolean("midBackRight"), result.getBoolean("midBackLeft"),
+                        result.getBoolean("lowerBackRight"), result.getBoolean("lowerBackLeft"),
+                        result.getBoolean("legsRight"), result.getBoolean("legsLeft"),
+                        result.getBoolean("kneesRight"), result.getBoolean("kneesLeft"),
+                        result.getBoolean("hipsRight"), result.getBoolean("hipsLeft"),
+                        result.getBoolean("handsRight"), result.getBoolean("handsLeft"),
+                        result.getBoolean("feetRight"), result.getBoolean("feetLeft"),
+                        result.getBoolean("armsRight"), result.getBoolean("armsLeft"),
+                        result.getBoolean("anklesRight"), result.getBoolean("anklesLeft")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsSkinTable> getExistingConditionsSkin() {
+        Vector<existingConditionsSkinTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsSkinTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsSkinTable(result.getInt("customerNumber"),
+                        result.getBoolean("skinIrritations"), result.getBoolean("skinConditions"),
+                        result.getBoolean("melanoma"), result.getBoolean("hypersensitiveReaction"),
+                        result.getBoolean("bruiseEasily")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsRespiratoryTable> getExistingConditionsRespiratory() {
+        Vector<existingConditionsRespiratoryTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsRespiratoryTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsRespiratoryTable(result.getInt("customerNumber"),
+                        result.getBoolean("shortnessOfBreath"), result.getBoolean("emphysema"),
+                        result.getBoolean("chronicCough"), result.getBoolean("bronchitis"),
+                        result.getBoolean("asthma")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    // Yeslyn getPackages
+    public static Vector<packagesTable> getPackages() {
+        Vector<packagesTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM packagesTable");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                v.add(new packagesTable(
+                        result.getInt("packageNumber"),
+                        result.getInt("serviceNumber"),
+                        result.getString("packageDescription"),
+                        result.getDouble("price"),
+                        result.getBoolean("status")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<emergencyContactTable> getEmergencyContact() {
+        Vector<emergencyContactTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM emergencyContactTable");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                v.add(new emergencyContactTable(result.getInt("customerNumber"),
+                        result.getString("emergencyFirstName"),
+                        result.getString("emergencyLastName"),
+                        result.getString("emergencyPhone"),
+                        result.getString("relationship")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<waiverTable> getWaiver() {
+        Vector<waiverTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM waiverTable");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                v.add(new waiverTable(result.getInt("customerNumber"), result.getString("signiture"),
+                        result.getString("date"), result.getBoolean("acknowledgment")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+    
+        // Yeslyn getServices
+    public static Vector<servicesTable> getServices() {
+        Vector<servicesTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM servicesTable");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                v.add(new servicesTable(
+                        result.getInt("serviceNumber"),
+                        result.getString("serviceDescription"),
+                        result.getDouble("price"),
+                        result.getBoolean("status"),
+                        result.getBoolean("discount")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+    
+    // Yeslyn getAdd-Ons
+    public static Vector<addOnsTable> getAddOns() {
+        Vector<addOnsTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM addOnsTable");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                v.add(new addOnsTable(
+                        result.getInt("addOnNumber"),
+                        result.getDouble("price"),
+                        result.getString("addOnDescription"),
+                        result.getInt("customerNumber")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    
+     // Yeslyn Services Delete
+    public static void deleteServicesRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM servicesTable WHERE serviceNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Yeslyn Services Update
+    public static void updateServicesRowByID(int serviceNumber, String serviceDescription, double price, boolean status, boolean discount) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE servicesTable SET serviceNumber=?, serviceDescription=?, price=?, status=?, discount=? WHERE serviceNumber=?");
+            preparedStatement.setInt(1, serviceNumber);
+            preparedStatement.setString(2, serviceDescription);
+            preparedStatement.setDouble(3, price);
+            preparedStatement.setBoolean(4, status);
+            preparedStatement.setBoolean(5, discount);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    // Yeslyn Services Insert
+    public static void insertServicesRowByID(int rowToInsert, String rowToInsert2, Double rowToInsert3, boolean rowToInsert4, boolean rowToInsert5) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO servicesTable (serviceNumber, serviceDescription, price, status, discount) VALUES (?, ?, ?, ?, ?)");
+            preparedStatement.setInt(1, rowToInsert);
+            preparedStatement.setString(2, rowToInsert2);
+            preparedStatement.setDouble(3, rowToInsert3);
+            preparedStatement.setBoolean(4,rowToInsert4);
+            preparedStatement.setBoolean(5,rowToInsert5);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+
+    // Yeslyn Packages Delete
+
+    public static void deletePackagesRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM packagesTable WHERE packageNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Yeslyn Packages Update
+    public static void updatePackagesRowByID(int packageNumber, int serviceNumber, String packageDescription, double price, boolean status) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE packagesTable SET packageNumber=?, serviceNumber=?, packageDescription=?, price=?, status=? WHERE packageNumber=?");
+            preparedStatement.setInt(1, packageNumber);
+            preparedStatement.setInt(2, serviceNumber);
+            preparedStatement.setString(3, packageDescription);
+            preparedStatement.setDouble(4, price);
+            preparedStatement.setBoolean(5, false);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    // Yeslyn Packages Insert
+    public static void insertPackagesRowByID(int rowToInsert, int rowToInsert2, String rowToInsert3, double rowToInsert4, boolean rowToInsert5) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO packagesTable (packageNumber, serviceNumber, packageDescription, price, status) VALUES (?, ?, ?, ?, ?)");
+            preparedStatement.setInt(1, rowToInsert);
+            preparedStatement.setInt(2, rowToInsert2);
+            preparedStatement.setString(3, rowToInsert3);
+            preparedStatement.setDouble(4, rowToInsert4);
+            preparedStatement.setBoolean(5, rowToInsert5);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+    
+       // Yeslyn Add-Ons Delete
+    public static void deleteAddOnsRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM addOnsTable WHERE addOnNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Yeslyn Add-Ons Update
+    public static void updateAddOnsRowByID(int addOnNumber, double price, String addOnDescription, int customerNumber) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE addOnsTable SET addOnNumber=?, price=?, addOnDescription=?, customerNumber=? WHERE serviceNumber=?");
+            preparedStatement.setInt(1, addOnNumber);
+            preparedStatement.setDouble(2, price);
+            preparedStatement.setString(3, addOnDescription);
+            preparedStatement.setInt(4, customerNumber);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    // Yeslyn Add-Ons Insert
+    public static void insertAddOnsRowByID(int rowToInsert, double rowToInsert2, String rowToInsert3, int rowToInsert4) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO addOnsTable (addOnNumber, price, addOnDescription, customerNumber) VALUES (?, ?, ?, ?)");
+            preparedStatement.setInt(1, rowToInsert);
+            preparedStatement.setDouble(2, rowToInsert2);
+            preparedStatement.setString(3, rowToInsert3);
+            preparedStatement.setInt(4, rowToInsert4);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+    
+     public static void updateRowByID(int customerNumberInput,int storeCreditInput, String firstNameInput, String lastNameInput, String genderInput, String phoneInput, String emailInput, String birthdayInput, String addressInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
             PreparedStatement ps = conn.prepareStatement("UPDATE customerTable SET storeCredit=?, firstName=?, lastName=?, gender=?, phone=?, email=?, birthday=?, address=? WHERE customerNumber=?");
@@ -1330,424 +1881,6 @@ public class DataHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static Vector<appointmentsTable> getReport15() {
-        Vector<appointmentsTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@hotStone int = 0,\n" +
-                    "@startDate nvarchar(10),\n" +
-                    "@date2 nvarchar(10), \n" +
-                    "@date3 nvarchar(10), \n" +
-                    "@date4 nvarchar(10), \n" +
-                    "@endDate nvarchar(10), \n" +
-                    "\n" +
-                    "SELECT @hotStone = 4\n" +
-                    "SELECT @startDate = '7/13/2020', \n" +
-                    "SELECT @date2 = '7/14/2020', \n" +
-                    "SELECT @date3 = '7/15/2020', \n" +
-                    "SELECT @date4 = '7/16/2020', \n" +
-                    "SELECT @endDate = '7/17/2020', \n" +
-                    "\n" +
-                    "SELECT \n" +
-                    "appointmentsTable.customerNumber AS 'Client ID',\n" +
-                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
-                    "appointmentsTable.scheduledTime AS 'Appointment Time',\n" +
-                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
-                    "\n" +
-                    "FROM appointmentsTable\n" +
-                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
-                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
-                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
-                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
-                    "\n" +
-                    "WHERE appointmentsTable.addOnNumber = @hotStone\n" +
-                    "AND (appointmentsTable.scheduledDate = @startDate OR appointmentsTable.scheduledDate = @date2)\n" +
-                    "\tOR (appointmentsTable.scheduledDate = @date3 OR appointmentsTable.scheduledDate = @date4)" +
-                    "\tOR appointmentsTable.scheduledDate = @endDate)");
-            ResultSet result = statement.executeQuery();
-
-            while(result.next()){
-                v.add(new appointmentsTable(result.getInt("Client ID Number"),
-                        (result.getString("Appointment Date")),
-                        (result.getString("Appointment Time")),
-                        (result.getInt("Add-On"))));
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    public static Vector<appointmentsTable> getReport16() {
-        Vector<appointmentsTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@smallNum int = 0,\n" +
-                    "\n" +
-                    "SELECT @smallNum = 995\n" +
-                    "\n" +
-                    "SELECT \n" +
-                    "appointmentsTable.customerNumber AS 'Client ID',\n" +
-                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
-                    "appointmentsTable.packageNumber AS 'Appointment Time',\n" +
-                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
-                    "appointmentsTable.actualPricePaid AS 'Price Paid',\n" +
-                    "\n" +
-                    "FROM appointmentsTable\n" +
-                    "JOIN customerTable ON appointmentsTable.customerNumber = customerTable.customerNumber\n" +
-                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
-                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
-                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
-                    "\n" +
-                    "WHERE appointmentsTable.actualPricePaid = @smallNum\n");
-            ResultSet result = statement.executeQuery();
-
-            while(result.next()){
-                v.add(new appointmentsTable(result.getInt("Client ID Number"),
-                        (result.getString("Purchase Date")),
-                        (result.getInt("Package Number")),
-                        (result.getInt("Add-On")),
-                        (result.getDouble("Price Paid"))));
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return v;
-    }
-    public static Vector<report17> getReport17() {
-        Vector<report17> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@hotStone int = 0,\n" +
-                    "@startDate nvarchar(10),\n" +
-                    "@date2 nvarchar(10), \n" +
-                    "@date3 nvarchar(10), \n" +
-                    "@date4 nvarchar(10), \n" +
-                    "@endDate nvarchar(10), \n" +
-                    "\n" +
-                    "SELECT @hotStone = 4\n" +
-                    "SELECT @startDate = '7/13/2020', \n" +
-                    "SELECT @date2 = '7/14/2020', \n" +
-                    "SELECT @date3 = '7/15/2020', \n" +
-                    "SELECT @date4 = '7/16/2020', \n" +
-                    "SELECT @endDate = '7/17/2020', \n" +
-                    "\n" +
-                    "SELECT \n" +
-                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
-                    "appointmentsTable.customerNumber AS 'Customer ID',\n" +
-                    "appointmentsTable.packageNumber AS 'Package Purchased',\n" +
-                    "appointmentsTable.serviceNumber AS 'Service Number',\n" +
-                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
-                    "FAQTable.question AS 'Question Asked',\n" +
-                    "\n" +
-                    "FROM appointmentsTable\n" +
-                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
-                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
-                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
-                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
-                    "\n" +
-                    "WHERE appointmentsTable.scheduledDate = @startDate OR appointmentsTable.scheduledDate = @date2 OR " +
-                    "appointmentsTable.scheduledDate = @date3 \n" +
-                    "\tOR appointmentsTable.scheduledDate = @endDate OR appointmentsTable.scheduledDate = @date4");
-            ResultSet result = statement.executeQuery();
-
-            while(result.next()){
-                v.add(new report17(result.getString("Appointment Date"),
-                        (result.getInt("Client ID")),
-                        (result.getInt("Package Bought")),
-                        (result.getInt("Service Number")),
-                        (result.getInt("Add-On")),
-                        (result.getString("Question Asked"))));
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    public static Vector<report18> getReport18() {
-        Vector<report18> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@importantQuestion,\n" +
-                    "@startDate nvarchar(10),\n" +
-                    "@date2 nvarchar(10), \n" +
-                    "@date3 nvarchar(10), \n" +
-                    "@date4 nvarchar(10), \n" +
-                    "@endDate nvarchar(10), \n" +
-                    "\n" +
-                    "SELECT @importantQuestion = 11\n" +
-                    "SELECT @startDate = '5/13/2020', \n" +
-                    "SELECT @date2 = '5/14/2020', \n" +
-                    "SELECT @date3 = '5/15/2020', \n" +
-                    "SELECT @date4 = '5/16/2020', \n" +
-                    "SELECT @endDate = '5/17/2020', \n" +
-                    "\n" +
-                    "SELECT \n" +
-                    "appointmentsTable.customerNumber AS 'Customer ID',\n" +
-                    "appointmentsTable.packageNumber AS 'Appointment Date',\n" +
-                    "appointmentsTable.serviceNumber AS 'Service Number',\n" +
-                    "FAQTable.question AS 'Question Asked',\n" +
-                    "\n" +
-                    "FROM appointmentsTable\n" +
-                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
-                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
-                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
-                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
-                    "\n" +
-                    "WHERE FAQTable.faqNumber = @importantQuesiton " +
-                    "AND appointmentsTable.scheduledDate = @startDate OR " +
-                    "appointmentsTable.scheduledDate = @date2 OR appointmentsTable.scheduledDate = @date3\n" +
-                    "\tOR appointmentsTable.scheduledDate = @endDate OR appointmentsTable.scheduledDate = @date4");
-            ResultSet result = statement.executeQuery();
-
-            while(result.next()){
-                v.add(new report18(
-                        (result.getInt("Client ID")),
-                        (result.getString("Appointment Date")),
-                        (result.getString("Question Asked")),
-                        (result.getInt("Service Number"))
-                ));
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-
-    public static void cancelAppointment(int aptNum, boolean isLate) {
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT actualPricePaid FROM appointmentsTable WHERE appointmentNumber=?");
-            preparedStatement.setInt(1, aptNum);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
-                double price = resultSet.getInt(1);
-                preparedStatement = connection.prepareStatement("UPDATE appointmentsTable SET actualPricePaid=?, cancelledDateTime=? WHERE appointmentNumber=?");
-                preparedStatement.setTimestamp(2, new Timestamp(new Date().getTime()));
-                preparedStatement.setInt(3, aptNum);
-                if (isLate){
-                    preparedStatement.setDouble(1, price*.5);
-                } else {
-                    preparedStatement.setDouble(1, 0);
-                }
-                preparedStatement.setInt(2, aptNum);
-                preparedStatement.executeUpdate();
-            }
-            resultSet.close();
-            preparedStatement.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static Vector<companyClientHistoryTable> getcompanyClientHistory() {
-        Vector<companyClientHistoryTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM companyClientHistoryTable");
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                v.add(new companyClientHistoryTable(result.getInt("customerNumber"),
-                        result.getBoolean("currentClient")));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    public static Vector<existingConditionsWomenTable> getExistingConditionsWomen() {
-        Vector<existingConditionsWomenTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsWomenTable");
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                v.add(new existingConditionsWomenTable(result.getInt("customerNumber"),
-                        result.getBoolean("pregnant"), result.getBoolean("gynecologicalConditions")));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    public static Vector<existingConditionsSTJDTable> getExistingConditionsSTJD() {
-        Vector<existingConditionsSTJDTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsSTJDTable");
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                v.add(new existingConditionsSTJDTable(result.getInt("customerNumber"),
-                        result.getBoolean("upperBackRight"), result.getBoolean("upperBackLeft"),
-                        result.getBoolean("shouldersRight"), result.getBoolean("shouldersLeft"),
-                        result.getBoolean("neckRight"), result.getBoolean("neckLeft"),
-                        result.getBoolean("midBackRight"), result.getBoolean("midBackLeft"),
-                        result.getBoolean("lowerBackRight"), result.getBoolean("lowerBackLeft"),
-                        result.getBoolean("legsRight"), result.getBoolean("legsLeft"),
-                        result.getBoolean("kneesRight"), result.getBoolean("kneesLeft"),
-                        result.getBoolean("hipsRight"), result.getBoolean("hipsLeft"),
-                        result.getBoolean("handsRight"), result.getBoolean("handsLeft"),
-                        result.getBoolean("feetRight"), result.getBoolean("feetLeft"),
-                        result.getBoolean("armsRight"), result.getBoolean("armsLeft"),
-                        result.getBoolean("anklesRight"), result.getBoolean("anklesLeft")));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    public static Vector<existingConditionsSkinTable> getExistingConditionsSkin() {
-        Vector<existingConditionsSkinTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsSkinTable");
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                v.add(new existingConditionsSkinTable(result.getInt("customerNumber"),
-                        result.getBoolean("skinIrritations"), result.getBoolean("skinConditions"),
-                        result.getBoolean("melanoma"), result.getBoolean("hypersensitiveReaction"),
-                        result.getBoolean("bruiseEasily")));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    public static Vector<existingConditionsRespiratoryTable> getExistingConditionsRespiratory() {
-        Vector<existingConditionsRespiratoryTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsRespiratoryTable");
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                v.add(new existingConditionsRespiratoryTable(result.getInt("customerNumber"),
-                        result.getBoolean("shortnessOfBreath"), result.getBoolean("emphysema"),
-                        result.getBoolean("chronicCough"), result.getBoolean("bronchitis"),
-                        result.getBoolean("asthma")));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    public static Vector<packagesTable> getPackages() {
-        Vector<packagesTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM packagesTable");
-            ResultSet result = statement.executeQuery();
-            while (result.next()) {
-                v.add(new packagesTable(result.getInt("packagesNumber"),
-                        result.getInt("serviceNumber"),
-                        result.getString("packageDescription"),
-                        result.getDouble("price"),
-                        result.getBoolean("0")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    public static Vector<emergencyContactTable> getEmergencyContact() {
-        Vector<emergencyContactTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM emergencyContactTable");
-            ResultSet result = statement.executeQuery();
-            while (result.next()) {
-                v.add(new emergencyContactTable(result.getInt("customerNumber"),
-                        result.getString("emergencyFirstName"),
-                        result.getString("emergencyLastName"),
-                        result.getString("emergencyPhone"),
-                        result.getString("relationship")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    public static Vector<waiverTable> getWaiver() {
-        Vector<waiverTable> v = new Vector<>();
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM waiverTable");
-            ResultSet result = statement.executeQuery();
-            while (result.next()) {
-                v.add(new waiverTable(result.getInt("customerNumber"), result.getString("signiture"),
-                        result.getString("date"), result.getBoolean("acknowledgment")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return v;
-    }
-
-    // Yeslyn Packages Delete
-
-    public static void deletePackagesRowByID(int rowToDelete) {
-        try {
-            Connection conn = ConnectionProvider.getConnection();
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM packagesTable WHERE packageNumber=?");
-            ps.setInt(1, rowToDelete);
-            ps.executeUpdate();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Yeslyn Packages Update
-    public static void updatePackagesRowByID(int packageNumber, String packageDescription, double price) {
-        try {
-            Connection conn = ConnectionProvider.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE packagesTable SET packageNumber=?, packageDescription=?, price=? WHERE packageNumber=?");
-            preparedStatement.setInt(1, packageNumber);
-            preparedStatement.setString(2, packageDescription);
-            preparedStatement.setDouble(3, price);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-        } catch (Exception e) {e.printStackTrace();}
-    }
-
-    // Yeslyn Pakcages Insert
-    public static void insertPackagesRowByID(int rowToInsert, String rowToInsert2, double  String) {
-        try {
-            Connection conn = ConnectionProvider.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO packagesTable (packageNumber, packageDescription, price) VALUES (?, ?, ?)");
-            preparedStatement.setInt(1, rowToInsert);
-            preparedStatement.setString(3, rowToInsert2);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-        } catch (Exception e) {e.printStackTrace();}
     }
 
     public static Vector<GUIfaq> getGUIfaq(){
