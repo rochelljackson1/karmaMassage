@@ -1749,4 +1749,42 @@ public class DataHandler {
             preparedStatement.close();
         } catch (Exception e) {e.printStackTrace();}
     }
+
+    public static Vector<GUIfaq> getGUIfaq(){
+        Vector<GUIfaq> v = new Vector<>();
+        try{
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM FAQTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new GUIfaq(result.getInt("faqNumber"), result.getString("question"),
+                        result.getString("answer")));
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+    public static Vector<GUIContactUs> getGUIContactUS(){
+        Vector<GUIContactUs> v = new Vector<>();
+        try{
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM FAQTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new GUIContactUs(result.getString("firstName"), result.getString("lastName"),
+                        result.getString("answer"), result.getString("email"),
+                        result.getInt("phone"), result.getString("subjectLine"),
+                        result.getString("message")));
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
 }
