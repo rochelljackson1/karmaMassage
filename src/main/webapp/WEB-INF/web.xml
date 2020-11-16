@@ -38,6 +38,21 @@
         <servlet-name>deleteEmergencyOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.deleteEmergencyOptions</servlet-class>
     </servlet>
+         
+       <servlet>
+        <servlet-name>deletePackages</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deletePackages</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteServices</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteServices</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteAddOns</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteAddOns</servlet-class>
+    </servlet>
 
     <servlet>
         <servlet-name>insertOptions</servlet-name>
@@ -73,6 +88,21 @@
         <servlet-name>insertEmergencyOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.insertEmergencyOptions</servlet-class>
     </servlet>
+         
+    <servlet>
+        <servlet-name>insertPackages</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertPackages</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertServices</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertServices</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertAddOns</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertAddOns</servlet-class>
+    </servlet>   
 
     <servlet>
         <servlet-name>updateOptions</servlet-name>
@@ -107,6 +137,21 @@
     <servlet>
         <servlet-name>updateEmergencyOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.updateEmergencyOptions</servlet-class>
+    </servlet>
+         
+    <servlet>
+        <servlet-name>updatePackages</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updatePackages</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateServices</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateServices</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateAddOns</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateAddOns</servlet-class>
     </servlet>
 
     <servlet>
@@ -148,6 +193,21 @@
         <servlet-name>deleteEmergencyOptions</servlet-name>
         <url-pattern>/deleteEmergencyOptions</url-pattern>
     </servlet-mapping>
+         
+    <servlet-mapping>
+        <servlet-name>deletePackages</servlet-name>
+        <url-pattern>/deletePackages</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteServices</servlet-name>
+        <url-pattern>/deleteServices</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteAddOns</servlet-name>
+        <url-pattern>/deleteAddOns</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>insertOptions</servlet-name>
@@ -184,6 +244,21 @@
         <servlet-name>insertEmergencyOptions</servlet-name>
         <url-pattern>/insertEmergencyOptions</url-pattern>
     </servlet-mapping>
+         
+    <servlet-mapping>
+        <servlet-name>insertPackages</servlet-name>
+        <url-pattern>/insertPackages</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertServices</servlet-name>
+        <url-pattern>/insertServices</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertAddOns</servlet-name>
+        <url-pattern>/insertAddOns</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>updateOptions</servlet-name>
@@ -194,7 +269,6 @@
         <servlet-name>updateAddress</servlet-name>
         <url-pattern>/updateAddress</url-pattern>
     </servlet-mapping>
-
 
     <servlet-mapping>
         <servlet-name>updateCountry</servlet-name>
@@ -220,6 +294,21 @@
     <servlet-mapping>
         <servlet-name>updateEmergencyOptions</servlet-name>
         <url-pattern>/updateEmergencyOptions</url-pattern>
+    </servlet-mapping>
+         
+    <servlet-mapping>
+        <servlet-name>updatePackages</servlet-name>
+        <url-pattern>/updatePackages</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateServices</servlet-name>
+        <url-pattern>/updateServices</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateAddOns</servlet-name>
+        <url-pattern>/updateAddOns</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
