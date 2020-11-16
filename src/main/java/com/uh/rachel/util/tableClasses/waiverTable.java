@@ -6,11 +6,19 @@ public class waiverTable {
     String date;
     boolean acknowledgment;
 
-    public waiverTable() {
-
+    public waiverTable(String waiver_signiture, boolean acknowledgment) {
+        this.signiture = waiver_signiture;
+        this.acknowledgment = acknowledgment;
     }
 
     public waiverTable(int customerNumber, String signiture, String date, boolean acknowledgment) {
+        this.customerNumber = customerNumber;
+        this.signiture = signiture;
+        this.date = date;
+        this.acknowledgment = acknowledgment;
+    }
+
+    public waiverTable(String signiture, String date, boolean acknowledgment, int customerNumber) {
         this.customerNumber = customerNumber;
         this.signiture = signiture;
         this.date = date;

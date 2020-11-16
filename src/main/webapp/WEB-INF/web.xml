@@ -9,31 +9,160 @@
         <servlet-class>com.uh.rachel.util.servlets.deleteOptions</servlet-class>
     </servlet>
 
-    <servlet-mapping>
-        <servlet-name>deleteOptions</servlet-name>
-        <url-pattern>/deleteOptions</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>deleteDoctorOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteDoctorOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteCompanyOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteCompanyOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteWaiverOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteWaiverOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteEmergencyOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteEmergencyOptions</servlet-class>
+    </servlet>
 
     <servlet>
         <servlet-name>insertOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.insertOptions</servlet-class>
     </servlet>
 
-    <servlet-mapping>
-        <servlet-name>insertOptions</servlet-name>
-        <url-pattern>/insertOptions</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>insertDoctorOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertDoctorOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertCompanyOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertCompanyOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertWaiverOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertWaiverOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertEmergencyOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertEmergencyOptions</servlet-class>
+    </servlet>
 
     <servlet>
         <servlet-name>updateOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.updateOptions</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>updateDoctorOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateDoctorOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateCompanyOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateCompanyOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateWaiverOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateWaiverOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateEmergencyOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateEmergencyOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>cancellationSystem</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.cancellationSystem</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>deleteOptions</servlet-name>
+        <url-pattern>/deleteOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteDoctorOptions</servlet-name>
+        <url-pattern>/deleteDoctorOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteCompanyOptions</servlet-name>
+        <url-pattern>/deleteCompanyOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteWaiverOptions</servlet-name>
+        <url-pattern>/deleteWaiverOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteEmergencyOptions</servlet-name>
+        <url-pattern>/deleteEmergencyOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertOptions</servlet-name>
+        <url-pattern>/insertOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertDoctorOptions</servlet-name>
+        <url-pattern>/insertDoctorOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertCompanyOptions</servlet-name>
+        <url-pattern>/insertCompanyOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertWaiverOptions</servlet-name>
+        <url-pattern>/insertWaiverOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertEmergencyOptions</servlet-name>
+        <url-pattern>/insertEmergencyOptions</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>updateOptions</servlet-name>
         <url-pattern>/updateOptions</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>updateDoctorOptions</servlet-name>
+        <url-pattern>/updateDoctorOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateCompanyOptions</servlet-name>
+        <url-pattern>/updateCompanyOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateWaiverOptions</servlet-name>
+        <url-pattern>/updateWaiverOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateEmergencyOptions</servlet-name>
+        <url-pattern>/updateEmergencyOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>cancellationSystem</servlet-name>
+        <url-pattern>/cancellationSystem</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

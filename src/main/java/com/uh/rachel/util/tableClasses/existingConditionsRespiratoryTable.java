@@ -27,6 +27,9 @@ public class existingConditionsRespiratoryTable {
         this.asthma = asthma;
     }
 
+    public existingConditionsRespiratoryTable(int customerNumber, boolean shortnessOfBreath, boolean emphysema, boolean chronicCough, boolean bronchitis, boolean asthma) {
+    }
+
     public int getCustomerNumber() {
         return customerNumber;
     }

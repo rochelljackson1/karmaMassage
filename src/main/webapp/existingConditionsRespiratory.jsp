@@ -1,20 +1,18 @@
-<%@ page import="com.uh.rachel.util.tableClasses.companyClientHistoryTable" %>
 <%@ page import="com.uh.rachel.util.DataHandler" %>
 <%@ page import="java.util.Vector" %>
-<%@ page import="com.uh.rachel.util.tableClasses.customerTable" %>
-<%@ page import="javax.xml.crypto.Data" %><%--
+<%@ page import="com.uh.rachel.util.tableClasses.existingConditionsRespiratoryTable" %><%--
   Created by IntelliJ IDEA.
-  User: rjvoigt
-  Date: 11/3/20
-  Time: 4:37 PM
+  User: nafis
+  Date: 11/13/2020
+  Time: 9:52 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Company Client History</title>
+    <title>Existing Conditions Respiratory</title>
 
-    <script type="text/javascript" id="test">
+    <script type="text/javascript">
         function makeVisible(){
             var valuey = document.getElementById('selection').value;
             if (valuey ==="deleteRow") {
@@ -29,7 +27,6 @@
     </script>
 </head>
 <body>
-
 <select id="selection">
     <option value="deleteRow">Delete Customer</option>
     <option value="insertRow">Insert Customer</option>
@@ -38,50 +35,56 @@
 
 <button onclick="makeVisible();">Make Form Visible</button>
 
-<form action="deleteCompanyOptions" id="deleteForm" style="display:none;" method="post">
+<form action="deleteOptions" id="deleteForm" style="display:none;" method="post">
     <input name="rowToDelete" type="text">
     <button type="submit">Delete This Row</button>
 </form>
 
-<form action="insertCompanyOptions" id="insertForm" style="display:none;" method="post">
+<form action="insertOptions" id="insertForm" style="display:none;" method="post">
     <input name="rowToInsert" type="text">
     <input name="rowToInsert2" type="text">
+    <input name="rowToInsert3" type="text">
+    <input name="rowToInsert4" type="text">
+    <input name="rowToInsert5" type="text">
+    <input name="rowToInsert6" type="text">
     <button type="submit">Insert This Row</button>
 </form>
 
-<form action="updateCompanyOptions" id="updateForm" style="display:none;" method="post">
+<form action="updateOptions" id="updateForm" style="display:none;" method="post">
     <input name="customerNumberInput" type="text">
-    <input name="currentClient" type="text">
-<%--    <input name="currentClient" type="checkbox">--%>
+    <input name="shortnessOfBreathInput" type="text">
+    <input name="emphysemaInput" type="text">
+    <input name="chronicCoughInput" type="text">
+    <input name="bronchitisInput" type="text">
+    <input name="asthmaInput" type="text">
     <button type="submit">Update This Row</button>
 </form>
-
 
 <table>
     <tr>
         <th>Customer ID</th>
-        <th>Current Client</th>
+        <th>Shortness Of Breath</th>
+        <th>Emphysema</th>
+        <th>Chronic Cough</th>
+        <th>Bronchitis</th>
+        <th>Asthma</th>
     </tr>
-    <% Vector<companyClientHistoryTable> v = DataHandler.getcompanyClientHistory();
-        for (companyClientHistoryTable c : v) {
-            //System.out.println(c.getCurrentClient());
+
+    <% Vector<existingConditionsRespiratoryTable> v = DataHandler.getExistingConditionsRespiratory();
+        for (existingConditionsRespiratoryTable c : v) {
     %>
     <tr>
         <td><%= String.valueOf(c.getCustomerNumber())%></td>
-            <%--function check() {
-                document.getElementById("updateForm").checked = true;
-            }
-            function uncheck() {
-                document.getElementById("updateForm").checked = false;
-            }--%>
-        <td><%= c.getCurrentClient()?"true":"false"%></td>
+        <td><%= String.valueOf(c.isShortnessOfBreath())%></td>
+        <td><%= String.valueOf(c.isEmphysema())%></td>
+        <td><%= String.valueOf(c.isChronicCough())%></td>
+        <td><%= String.valueOf(c.isBronchitis())%></td>
+        <td><%= String.valueOf(c.isAsthma())%></td>
     </tr>
-
     <%
         }
     %>
-
-
 </table>
+
 </body>
 </html>

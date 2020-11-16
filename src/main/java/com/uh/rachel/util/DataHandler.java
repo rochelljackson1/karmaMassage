@@ -6,6 +6,8 @@ import com.uh.rachel.util.tableClasses.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Vector;
 
 public class DataHandler {
@@ -48,6 +50,213 @@ public class DataHandler {
         }
         return v;
     }
+
+ //Nafisa Chowdhury
+    public static Vector<report1> getReport1() {
+        Vector<report1> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@ack bit = 0,\n" +
+                    "@doctorNoPhone nvarchar(50),\n" +
+                    "@emergencyNoPhone nvarchar(50)\n" +
+                    "\n" +
+                    "SELECT @status = 1\n" +
+                    "SELECT @ack = 1\n" +
+                    "SELECT @doctorNoPhone = 'NULL'\n" +
+                    "SELECT @emergencyNoPhone = 'NULL'\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name',\n" +
+                    "waiverTable.signiture AS 'Waiver Signiture',\n" +
+                    "waiverTable.acknowledgment AS 'Acknowledgment',\n" +
+                    "doctorTable.physicianLastname AS 'Doctor Last Name',\n" +
+                    "doctorTable.physicianPhone AS 'Doctor Phone Number',\n" +
+                    "emergencyContactTable.emergencyFirstName AS 'Emergency First Name',\n" +
+                    "emergencyContactTable.emergencyLastName AS 'Emergency Last Name',\n" +
+                    "emergencyContactTable.relationship AS 'Emergency Relationship',\n" +
+                    "emergencyContactTable.emergencyPhone AS 'Emergency Phone Number',\n" +
+                    "companyClientHistoryTable.currentClient AS 'Status'\n" +
+                    "\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
+                    "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
+                     "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE companyClientHistoryTable.currentClient = @status\n" +
+                    "AND waiverTable.acknowledgment = @ack\n" +
+                    "AND doctorTable.physicianPhone != @doctorNoPhone\n" +
+                    "AND emergencyContactTable.emergencyPhone != @emergencyNoPhone");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new report1(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name")),
+                        new waiverTable(result.getString("Waiver Signiture"), result.getBoolean("Acknowledgment")),
+                        new doctorTable(result.getString("Doctor Last Name"), result.getString("Doctor Phone Number")),
+                        new emergencyContactTable(result.getString("Emergency First Name"), result.getString("Emergency Last Name"),
+                                result.getString("Emergency Phone Number"), result.getString("Emergency Relationship")),
+                        new companyClientHistoryTable(result.getBoolean("Status"))));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+//Nafisa Chowdhury
+    public static Vector<report2> getReport2() {
+        Vector<report2> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@ack bit = 0,\n" +
+                    "@doctorNoPhone nvarchar(50),\n" +
+                    "@emergencyNoPhone nvarchar(50)\n" +
+                    "\n" +
+                    "SELECT @status = 1\n" +
+                    "SELECT @ack = 0\n" +
+                    "SELECT @doctorNoPhone = 'NULL'\n" +
+                    "SELECT @emergencyNoPhone = 'NULL'\n" +
+                    "\n" +
+                    "SELECT\n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name',\n" +
+                    "waiverTable.signiture AS 'Waiver Signiture',\n" +
+                    "waiverTable.acknowledgment AS 'Acknowledgment',\n" +
+                    "doctorTable.physicianLastname AS 'Doctor Last Name',\n" +
+                    "doctorTable.physicianPhone AS 'Doctor Phone Number',\n" +
+                    "emergencyContactTable.emergencyFirstName AS 'Emergency First Name',\n" +
+                    "emergencyContactTable.emergencyLastName AS 'Emergency Last Name',\n" +
+                    "emergencyContactTable.relationship AS 'Emergency Relationship',\n" +
+                    "emergencyContactTable.emergencyPhone AS 'Emergency Phone Number',\n" +
+                    "companyClientHistoryTable.currentClient AS 'Status'\n" +
+                    "\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
+                    "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
+                    "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE emergencyContactTable.emergencyPhone != @emergencyNoPhone\n" +
+                    "AND waiverTable.acknowledgment = @ack\n" +
+                    "AND doctorTable.physicianPhone != @doctorNoPhone\n" +
+                    "AND companyClientHistoryTable.currentClient = @status");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new report2(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name")),
+                        new waiverTable(result.getString("Waiver Signiture"), result.getBoolean("Acknowledgment")),
+                        new doctorTable(result.getString("Doctor Last Name"), result.getString("Doctor Phone Number")),
+                        new emergencyContactTable(result.getString("Emergency First Name"), result.getString("Emergency Last Name"),
+                                result.getString("Emergency Phone Number"), result.getString("Emergency Relationship")),
+                        new companyClientHistoryTable(result.getBoolean("Status"))));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+//Nafisa Chowdhury
+    public static Vector<report3> getReport3() {
+        Vector<report3> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@phone nvarchar(50),\n" +
+                    "@email nvarchar(50)\n" +
+                    "\n" +
+                    "SELECT @status = 0\n" +
+                    "SELECT @phone = 'NULL'\n" +
+                    "SELECT @email = 'NULL'\n" +
+                    "\n" +
+                    "SELECT\n" +
+                    "\n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name',\n" +
+                    "customerTable.phone AS 'Client Phone Number',\n" +
+                    "customerTable.email AS 'Client Email Address',\n" +
+                    "companyClientHistoryTable.currentClient AS 'Status'\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
+                    "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
+                    "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE companyClientHistoryTable.currentClient = @status\n" +
+                    "AND (customerTable.phone != @phone OR customerTable.email != @email)");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new report3(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name"),
+                        result.getString("Client Phone Number"), result.getString("Client Email Address")),
+                        new companyClientHistoryTable(result.getBoolean("Status"))));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+//Nafisa Chowdhury
+    public static Vector<report4> getReport4() {
+        Vector<report4> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@status bit = 0,\n" +
+                    "@phone nvarchar(50),\n" +
+                    "@email nvarchar(50)\n" +
+                    "\n" +
+                    "SELECT @status = 1\n" +
+                    "SELECT @phone = 'NULL'\n" +
+                    "SELECT @email = 'NULL'\n" +
+                    "\n" +
+                    "SELECT\n" +
+                    "\n" +
+                    "customerTable.customerNumber AS 'Client Profile Number',\n" +
+                    "customerTable.firstName AS 'Client First Name',\n" +
+                    "customerTable.lastName AS 'Client Last Name',\n" +
+                    "customerTable.phone AS 'Client Phone Number',\n" +
+                    "customerTable.email AS 'Client Email Address',\n" +
+                    "companyClientHistoryTable.currentClient AS 'Status'\n" +
+                    "\n" +
+                    "FROM customerTable\n" +
+                    "JOIN doctorTable ON customerTable.customerNumber = doctorTable.customerNumber\n" +
+                    "JOIN waiverTable ON customerTable.customerNumber = waiverTable.customerNumber\n" +
+                    "JOIN emergencyContactTable ON customerTable.customerNumber = emergencyContactTable.customerNumber\n" +
+                    "JOIN companyClientHistoryTable ON customerTable.customerNumber = companyClientHistoryTable.customerNumber\n" +
+                    "\n" +
+                    "WHERE companyClientHistoryTable.currentClient = @status\n" +
+                    "AND (customerTable.phone != @phone OR customerTable.email != @email)");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new report4(new customerTable(result.getInt("Client Profile Number"),
+                        result.getString("Client First Name"), result.getString("Client Last Name"),
+                        result.getString("Client Phone Number"), result.getString("Client Email Address")),
+                        new companyClientHistoryTable(result.getBoolean("Status"))));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
 //Ramiro Santibanez
     public static Vector<customerTable> getReport10() {
         Vector<customerTable> v = new Vector<>();
@@ -1552,6 +1761,58 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    public static void updateDoctorRowByID(int customerNumberInput,int doctoNuberInput, String physicianFirstnameInput, String physicianLastnameInput, String physicianPhoneInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE doctorTable SET doctorNuber=?, physicianFirstname=?, physicianLastname=?, physicianPhone=? WHERE customerNumber=?");
+            ps.setInt(1, doctoNuberInput);
+            ps.setString(2, physicianFirstnameInput);
+            ps.setString(3, physicianLastnameInput);
+            ps.setString(4, physicianPhoneInput);
+            ps.setInt(5, customerNumberInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void updateCompanyRowByID(int customerNumberInput, boolean currentClient) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE companyClientHistoryTable SET currentClient=? WHERE customerNumber=?");
+            ps.setBoolean(1, currentClient);
+            ps.setInt(2, customerNumberInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void updateWaiverRowByID(int customerNumberInput, String signiture, String date, boolean acknowledgment) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE waiverTable SET signiture=?, date=?, acknowledgment=? WHERE customerNumber=?");
+            ps.setString(1, signiture);
+            ps.setString(2, date);
+            ps.setBoolean(3, acknowledgment);
+            ps.setInt(4, customerNumberInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void updateEmergencyRowByID(int customerNumberInput, String emergencyFirstNameInput, String emergencyLastNameInput, String emergencyPhoneInput, String relationshipInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE emergencyContactTable SET emergencyFirstName=?, emergencyLastName=?, emergencyPhone=?, relationship=? WHERE customerNumber=?");
+            ps.setString(1, emergencyFirstNameInput);
+            ps.setString(2, emergencyLastNameInput);
+            ps.setString(3, emergencyPhoneInput);
+            ps.setString(4, relationshipInput);
+            ps.setInt(5, customerNumberInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
     public static void insertRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5, String rowToInsert6, String rowToInsert7, String rowToInsert8, String rowToInsert9) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1570,6 +1831,58 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    public static void insertDoctorRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO doctorTable (customerNumber, doctorNuber, physicianFirstname, physicianLastname, physicianPhone) VALUES (?, ?, ?, ?, ?)");
+            ps.setInt(1, rowToInsert);
+            ps.setInt(2, rowToInsert2);
+            ps.setString(3, rowToInsert3);
+            ps.setString(4, rowToInsert4);
+            ps.setString(5, rowToInsert5);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void insertCompanyRowByID(int rowToInsert, boolean rowToInsert2) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO companyClientHistoryTable (customerNumber, currentClient) VALUES (?, ?)");
+            ps.setInt(1, rowToInsert);
+            ps.setBoolean(2, rowToInsert2);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void insertWaiverRowByID(int customerNumber, String signiture, String date, boolean acknowledgment) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO waiverTable (customerNumber, signiture, date, acknowledgment) VALUES (?, ?, ?, ?)");
+            ps.setInt(1, customerNumber);
+            ps.setString(2, signiture);
+            ps.setString(3, date);
+            ps.setBoolean(4, acknowledgment);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void insertEmergencyRowByID(int customerNumberInput, String emergencyFirstNameInput, String emergencyLastNameInput, String emergencyPhoneInput, String relationshipInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO emergencyContactTable (customerNumber, emergencyFirstName, emergencyLastName, emergencyPhone, relationship) VALUES(?, ?, ?, ?, ?)");
+            ps.setInt(1, customerNumberInput);
+            ps.setString(2, emergencyFirstNameInput);
+            ps.setString(3, emergencyLastNameInput);
+            ps.setString(4, emergencyPhoneInput);
+            ps.setString(5, relationshipInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
     public static void deleteRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1577,6 +1890,1003 @@ public class DataHandler {
             ps.setInt(1, rowToDelete);
             ps.executeUpdate();
             ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteDoctorRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM doctorTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteCompanyRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM companyClientHistoryTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteWaiverRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM waiverTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteEmergencyRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM emergencyContactTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Vector<appointmentsTable> getReport15() {
+        Vector<appointmentsTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@hotStone int = 0,\n" +
+                    "@startDate nvarchar(10),\n" +
+                    "@date2 nvarchar(10), \n" +
+                    "@date3 nvarchar(10), \n" +
+                    "@date4 nvarchar(10), \n" +
+                    "@endDate nvarchar(10), \n" +
+                    "\n" +
+                    "SELECT @hotStone = 4\n" +
+                    "SELECT @startDate = '7/13/2020', \n" +
+                    "SELECT @date2 = '7/14/2020', \n" +
+                    "SELECT @date3 = '7/15/2020', \n" +
+                    "SELECT @date4 = '7/16/2020', \n" +
+                    "SELECT @endDate = '7/17/2020', \n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.customerNumber AS 'Client ID',\n" +
+                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.scheduledTime AS 'Appointment Time',\n" +
+                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE appointmentsTable.addOnNumber = @hotStone\n" +
+                    "AND (appointmentsTable.scheduledDate = @startDate OR appointmentsTable.scheduledDate = @date2)\n" +
+                    "\tOR (appointmentsTable.scheduledDate = @date3 OR appointmentsTable.scheduledDate = @date4)" +
+                    "\tOR appointmentsTable.scheduledDate = @endDate)");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new appointmentsTable(result.getInt("Client ID Number"),
+                        (result.getString("Appointment Date")),
+                        (result.getString("Appointment Time")),
+                        (result.getInt("Add-On"))));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<appointmentsTable> getReport16() {
+        Vector<appointmentsTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@smallNum int = 0,\n" +
+                    "\n" +
+                    "SELECT @smallNum = 995\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.customerNumber AS 'Client ID',\n" +
+                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.packageNumber AS 'Appointment Time',\n" +
+                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
+                    "appointmentsTable.actualPricePaid AS 'Price Paid',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN customerTable ON appointmentsTable.customerNumber = customerTable.customerNumber\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE appointmentsTable.actualPricePaid = @smallNum\n");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new appointmentsTable(result.getInt("Client ID Number"),
+                        (result.getString("Purchase Date")),
+                        (result.getInt("Package Number")),
+                        (result.getInt("Add-On")),
+                        (result.getDouble("Price Paid"))));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+    public static Vector<report17> getReport17() {
+        Vector<report17> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@hotStone int = 0,\n" +
+                    "@startDate nvarchar(10),\n" +
+                    "@date2 nvarchar(10), \n" +
+                    "@date3 nvarchar(10), \n" +
+                    "@date4 nvarchar(10), \n" +
+                    "@endDate nvarchar(10), \n" +
+                    "\n" +
+                    "SELECT @hotStone = 4\n" +
+                    "SELECT @startDate = '7/13/2020', \n" +
+                    "SELECT @date2 = '7/14/2020', \n" +
+                    "SELECT @date3 = '7/15/2020', \n" +
+                    "SELECT @date4 = '7/16/2020', \n" +
+                    "SELECT @endDate = '7/17/2020', \n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.customerNumber AS 'Customer ID',\n" +
+                    "appointmentsTable.packageNumber AS 'Package Purchased',\n" +
+                    "appointmentsTable.serviceNumber AS 'Service Number',\n" +
+                    "appointmentsTable.addOnNumber AS 'Add-On',\n" +
+                    "FAQTable.question AS 'Question Asked',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE appointmentsTable.scheduledDate = @startDate OR appointmentsTable.scheduledDate = @date2 OR " +
+                    "appointmentsTable.scheduledDate = @date3 \n" +
+                    "\tOR appointmentsTable.scheduledDate = @endDate OR appointmentsTable.scheduledDate = @date4");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new report17(result.getString("Appointment Date"),
+                        (result.getInt("Client ID")),
+                        (result.getInt("Package Bought")),
+                        (result.getInt("Service Number")),
+                        (result.getInt("Add-On")),
+                        (result.getString("Question Asked"))));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<report18> getReport18() {
+        Vector<report18> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@importantQuestion,\n" +
+                    "@startDate nvarchar(10),\n" +
+                    "@date2 nvarchar(10), \n" +
+                    "@date3 nvarchar(10), \n" +
+                    "@date4 nvarchar(10), \n" +
+                    "@endDate nvarchar(10), \n" +
+                    "\n" +
+                    "SELECT @importantQuestion = 11\n" +
+                    "SELECT @startDate = '5/13/2020', \n" +
+                    "SELECT @date2 = '5/14/2020', \n" +
+                    "SELECT @date3 = '5/15/2020', \n" +
+                    "SELECT @date4 = '5/16/2020', \n" +
+                    "SELECT @endDate = '5/17/2020', \n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "appointmentsTable.customerNumber AS 'Customer ID',\n" +
+                    "appointmentsTable.packageNumber AS 'Appointment Date',\n" +
+                    "appointmentsTable.serviceNumber AS 'Service Number',\n" +
+                    "FAQTable.question AS 'Question Asked',\n" +
+                    "\n" +
+                    "FROM appointmentsTable\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
+                    "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
+                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "\n" +
+                    "WHERE FAQTable.faqNumber = @importantQuesiton " +
+                    "AND appointmentsTable.scheduledDate = @startDate OR " +
+                    "appointmentsTable.scheduledDate = @date2 OR appointmentsTable.scheduledDate = @date3\n" +
+                    "\tOR appointmentsTable.scheduledDate = @endDate OR appointmentsTable.scheduledDate = @date4");
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new report18(
+                        (result.getInt("Client ID")),
+                        (result.getString("Appointment Date")),
+                        (result.getString("Question Asked")),
+                        (result.getInt("Service Number"))
+                        ));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+    public static void cancelAppointment(int aptNum, boolean isLate) {
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT actualPricePaid FROM appointmentsTable WHERE appointmentNumber=?");
+            preparedStatement.setInt(1, aptNum);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                double price = resultSet.getInt(1);
+                preparedStatement = connection.prepareStatement("UPDATE appointmentsTable SET actualPricePaid=?, cancelledDateTime=? WHERE appointmentNumber=?");
+                preparedStatement.setTimestamp(2, new Timestamp(new Date().getTime()));
+                preparedStatement.setInt(3, aptNum);
+                if (isLate){
+                    preparedStatement.setDouble(1, price*.5);
+                } else {
+                    preparedStatement.setDouble(1, 0);
+                }
+                preparedStatement.setInt(2, aptNum);
+                preparedStatement.executeUpdate();
+            }
+            resultSet.close();
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Vector<companyClientHistoryTable> getcompanyClientHistory() {
+        Vector<companyClientHistoryTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM companyClientHistoryTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new companyClientHistoryTable(result.getInt("customerNumber"),
+                        result.getBoolean("currentClient")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsWomenTable> getExistingConditionsWomen() {
+        Vector<existingConditionsWomenTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsWomenTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsWomenTable(result.getInt("customerNumber"),
+                        result.getBoolean("pregnant"), result.getBoolean("gynecologicalConditions")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsSTJDTable> getExistingConditionsSTJD() {
+        Vector<existingConditionsSTJDTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsSTJDTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsSTJDTable(result.getInt("customerNumber"),
+                        result.getBoolean("upperBackRight"), result.getBoolean("upperBackLeft"),
+                        result.getBoolean("shouldersRight"), result.getBoolean("shouldersLeft"),
+                        result.getBoolean("neckRight"), result.getBoolean("neckLeft"),
+                        result.getBoolean("midBackRight"), result.getBoolean("midBackLeft"),
+                        result.getBoolean("lowerBackRight"), result.getBoolean("lowerBackLeft"),
+                        result.getBoolean("legsRight"), result.getBoolean("legsLeft"),
+                        result.getBoolean("kneesRight"), result.getBoolean("kneesLeft"),
+                        result.getBoolean("hipsRight"), result.getBoolean("hipsLeft"),
+                        result.getBoolean("handsRight"), result.getBoolean("handsLeft"),
+                        result.getBoolean("feetRight"), result.getBoolean("feetLeft"),
+                        result.getBoolean("armsRight"), result.getBoolean("armsLeft"),
+                        result.getBoolean("anklesRight"), result.getBoolean("anklesLeft")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsSkinTable> getExistingConditionsSkin() {
+        Vector<existingConditionsSkinTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsSkinTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsSkinTable(result.getInt("customerNumber"),
+                        result.getBoolean("skinIrritations"), result.getBoolean("skinConditions"),
+                        result.getBoolean("melanoma"), result.getBoolean("hypersensitiveReaction"),
+                        result.getBoolean("bruiseEasily")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsRespiratoryTable> getExistingConditionsRespiratory() {
+        Vector<existingConditionsRespiratoryTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsRespiratoryTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsRespiratoryTable(result.getInt("customerNumber"),
+                        result.getBoolean("shortnessOfBreath"), result.getBoolean("emphysema"),
+                        result.getBoolean("chronicCough"), result.getBoolean("bronchitis"),
+                        result.getBoolean("asthma")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<packagesTable> getPackages() {
+        Vector<packagesTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM packagesTable");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                v.add(new packagesTable(result.getInt("packagesNumber"),
+                        result.getInt("serviceNumber"),
+                        result.getString("packageDescription"),
+                        result.getDouble("price"),
+                        result.getBoolean("0")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<emergencyContactTable> getEmergencyContact() {
+        Vector<emergencyContactTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM emergencyContactTable");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                v.add(new emergencyContactTable(result.getInt("customerNumber"),
+                        result.getString("emergencyFirstName"),
+                        result.getString("emergencyLastName"),
+                        result.getString("emergencyPhone"),
+                        result.getString("relationship")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<waiverTable> getWaiver() {
+        Vector<waiverTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM waiverTable");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                v.add(new waiverTable(result.getInt("customerNumber"), result.getString("signiture"),
+                        result.getString("date"), result.getBoolean("acknowledgment")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    // Yeslyn Packages Delete
+
+    public static void deletePackagesRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM packagesTable WHERE packageNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Yeslyn Packages Update
+    public static void updatePackagesRowByID(int packageNumber, String packageDescription, double price) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE packagesTable SET packageNumber=?, packageDescription=?, price=? WHERE packageNumber=?");
+            preparedStatement.setInt(1, packageNumber);
+            preparedStatement.setString(2, packageDescription);
+            preparedStatement.setDouble(3, price);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (Exception e) {e.printStackTrace();}
     }
+
+    // Yeslyn Pakcages Insert
+    public static void insertPackagesRowByID(int rowToInsert, String rowToInsert2, double  String) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO packagesTable (packageNumber, packageDescription, price) VALUES (?, ?, ?)");
+            preparedStatement.setInt(1, rowToInsert);
+            preparedStatement.setString(3, rowToInsert2);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static Vector<GUIfaq> getGUIfaq(){
+        Vector<GUIfaq> v = new Vector<>();
+        try{
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM FAQTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new GUIfaq(result.getInt("faqNumber"), result.getString("question"),
+                        result.getString("answer")));
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+    public static Vector<GUIContactUs> getGUIContactUS(){
+        Vector<GUIContactUs> v = new Vector<>();
+        try{
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM FAQTable");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()){
+                v.add(new GUIContactUs(result.getString("firstName"), result.getString("lastName"),
+                        result.getString("answer"), result.getString("email"),
+                        result.getInt("phone"), result.getString("subjectLine"),
+                        result.getString("message")));
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+    
+    
+    //Makki
+    public static Vector<Address> getAddress() {
+        Vector<Address> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Address");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Address(result.getInt("customerNumber"),
+                        result.getString("street"),
+                        result.getString("cityName"),
+                        result.getString("stateName"),
+                        result.getString("zipCode"),
+                        result.getString("countryName")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+    //Makki
+    public static Vector<Revenue> getRevenue() {
+        Vector<Revenue> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Revenue");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Revenue(
+                        result.getString("date"),
+                        result.getDouble("revenueMonthlyActual"),
+                        result.getDouble("revenueWeeklyActual"),
+                        result.getDouble("revenueMonthlyFromCancellations"),
+                        result.getDouble("potentialRevenueMonthlyFromScheduled"),
+                        result.getDouble("revenueByStaff")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    //Makki
+    public static Vector<City> getCiy() {
+        Vector<City> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM City");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new City(
+                        result.getString("cityName"),
+                        result.getString("internationalCity")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<State> getState() {
+        Vector<State> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM state");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new State(
+                        result.getInt("stateID"),
+                        result.getString("stateCode"),
+                        result.getString("stateName")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+    //Makki
+    public static Vector<Country> getCountry() {
+        Vector<Country> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Country");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Country(
+                        result.getInt("id"),
+                        result.getString("countryName")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+
+    //Makki
+    public static Vector<Staff> getStaff() {
+        Vector<Staff> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Staff");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Staff(
+                        result.getInt("staff_Number"),
+                        result.getString("tips"),
+                        result.getString("date"),
+                        result.getString("totalPTO"),
+                        result.getString("revenueByStaff")));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+    //Makki
+    public static Vector<PTO_Staff> getPTO_Staff() {
+        Vector<PTO_Staff> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM PTO_Staff");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new PTO_Staff(
+                        result.getInt("staffNumber"),
+                        result.getString("maxPTO"),
+                        result.getString("maxSickPTO"),
+                        result.getString("maxMaternatyPTO"),
+                        result.getString("maxEmergencyPTO"),
+                        result.getString("totalPTO")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<Staff_PTO_Staff_Associative> getStaff_PTO_Staff_Associative() {
+        Vector<Staff_PTO_Staff_Associative> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Staff_PTO_Staff_Associative");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Staff_PTO_Staff_Associative(
+                        result.getInt("staff_Number"),
+                        result.getInt("staffNumber")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<OwnerSide_of_Automatic_Payment_Cancellation_System> getOwnerSide_of_Automatic_Payment_Cancellation_System() {
+        Vector<OwnerSide_of_Automatic_Payment_Cancellation_System> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM OwnerSide_of_Automatic_Payment_Cancellation_System");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new OwnerSide_of_Automatic_Payment_Cancellation_System(
+                        result.getString("timeCondition"),
+                        result.getString("deductionPrecentage")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<Location> getLocation() {
+        Vector<Location> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Location");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new Location(
+                        result.getInt("locationNumber"),
+                        result.getInt("customerNumber"),
+                        result.getBoolean("inBound"),
+                        result.getBoolean("outBound")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    //Makki
+    public static Vector<validEmail> getValidEmail() {
+        Vector<validEmail> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@email nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
+                    "\n" +
+                    "SELECT @email = '%@%'\n" +
+
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.email AS 'E-mail',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country'\n" +
+
+
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.email >= @email");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new validEmail(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("E-mail")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<reportGender> getReportGender() {
+        Vector<reportGender> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@gender nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
+                    "\n" +
+                    "SELECT @gender = 'male'\n" +
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.gender AS 'Gender',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country'\n" +
+
+                    "\n" +
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.gender >= @gender\n");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new reportGender(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("Gender")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+    //Makki
+    public static Vector<reportAddress> getReportAddress() {
+        Vector<reportAddress> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@address nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
+                    "\n" +
+                    "SELECT @address = 'address'\n" +
+
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.address AS 'Address',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country'\n" +
+
+                    "\n" +
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.address LIKE address\n");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new reportAddress(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("Address")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+
+
+    //Makki
+    public static Vector<reportBirthday> getReportBirthday() {
+        Vector<reportBirthday> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
+                    "@customerNumber int,\n" +
+                    "@firstName nvarchar,\n" +
+                    "@lastName nvarchar,\n" +
+                    "@birthday nvarchar,\n" +
+                    "@cityName nvarchar,\n" +
+                    "@stateName nvarchar,\n" +
+                    "@countryName nvarchar\n" +
+                    "\n" +
+                    "SELECT @birthday= 'Birthday'\n" +
+
+
+                    "\n" +
+                    "\n" +
+                    "SELECT \n" +
+                    "customerTable.customerNumber AS 'Customer ID',\n" +
+                    "customerTable.firstName AS 'First Name',\n" +
+                    "customerTable.lastName AS 'Last Name',\n" +
+                    "customerTable.birthday AS 'Birthday',\n" +
+                    "Address.cityName AS 'City',\n" +
+                    "Address.stateName AS 'State',\n" +
+                    "Address.countryName AS 'Country'\n" +
+
+                    "\n" +
+                    "FROM Address\n" +
+                    "JOIN State ON Address.stateName = State.stateName\n" +
+                    "JOIN Country ON Address.countryName = Country.countryName\n" +
+                    "JOIN City ON Address.cityName = City.cityName\n" +
+                    "JOIN customerTable ON Address.customerNumber = customerTable.customerNumber\n" +
+
+                    "\n" +
+                    "WHERE customerTable.birthday = birthday\n");
+
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()){
+                v.add(new reportBirthday(new customerTable(
+                        result.getInt("Customer ID"),
+                        result.getString("First Name"),
+                        result.getString("Last Name"),
+                        result.getString("Birthday")),
+                        new Address(
+                                result.getString("City"),
+                                result.getString("State"),
+                                result.getString("Country"))));
+
+
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return v;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 }
