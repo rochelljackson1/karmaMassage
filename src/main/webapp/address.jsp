@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page import="com.uh.rachel.util.DataHandler" %>
 <%@ page import="com.uh.rachel.util.tableClasses.Address" %>
 <%@ page import="java.util.Vector" %><%--
@@ -12,8 +11,57 @@
 <html>
 <head>
     <title>Address</title>
+    <script type="text/javascript">
+        function makeVisible(){
+            var valuey = document.getElementById('selection').value;
+            if (valuey ==="deleteRow") {
+                document.getElementById('deleteForm').style.display = "flex";
+            }
+            if (valuey == "insertRow") {
+                document.getElementById('insertForm').style.display = "flex";
+            }
+            if (valuey == "updateRow") {}
+            document.getElementById('updateForm').style.display = "flex";
+        }
+    </script>
+
 </head>
 <body>
+
+<select id="selection">
+    <option value="deleteRow">Delete Customer</option>
+    <option value="insertRow">Insert Customer</option>
+    <option value="updateRow">Update Customer</option>
+</select>
+
+<button onclick="makeVisible();">Make Form Visible</button>
+
+<form action="deleteAddress" id="deleteForm" style="display:none;" method="post">
+    <input name="rowToDelete" type="text">
+    <button type="submit">Delete This Row</button>
+</form>
+
+<form action="insertAddress" id="insertForm" style="display:none;" method="post">
+    <input name="customerNumberInput" type="text">
+    <input name="streetInput" type="text">
+    <input name="cityNameInput" type="text">
+    <input name="stateNameInput" type="text">
+    <input name="zipCodeInput" type="text">
+    <input name="countryNameInput" type="text">
+    <button type="submit">Insert This Row</button>
+</form>
+
+<form action="updateAddress" id="updateForm" style="display:none;" method="post">
+    <input name="customerNumberInput" type="text">
+    <input name="streetInput" type="text">
+    <input name="cityNameInput" type="text">
+    <input name="stateNameInput" type="text">
+    <input name="zipCodeInput" type="text">
+    <input name="countryNameInput" type="text">
+    <button type="submit">Update This Row</button>
+</form>
+
+
 <table>
     <tr>
         <th>Customer ID</th>
