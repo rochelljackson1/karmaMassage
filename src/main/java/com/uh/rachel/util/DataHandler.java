@@ -407,7 +407,7 @@ public class DataHandler {
         return v;
     }
 
-     public static Vector<FAQTable> getFAQ(){
+    public static Vector<FAQTable> getFAQ(){
         Vector<FAQTable> v = new Vector<>();
         try{
             Connection connection = ConnectionProvider.getConnection();
@@ -1131,7 +1131,7 @@ public class DataHandler {
         }
         return v;
     }
-    
+
     public static Vector<appointmentsTable> getReport15() {
         Vector<appointmentsTable> v = new Vector<>();
         try {
@@ -1316,7 +1316,7 @@ public class DataHandler {
                         (result.getString("Appointment Date")),
                         (result.getString("Question Asked")),
                         (result.getInt("Service Number"))
-                        ));
+                ));
             }
 
         }catch (Exception e){
@@ -1511,8 +1511,8 @@ public class DataHandler {
         }
         return v;
     }
-    
-        // Yeslyn getServices
+
+    // Yeslyn getServices
     public static Vector<servicesTable> getServices() {
         Vector<servicesTable> v = new Vector<>();
         try {
@@ -1532,7 +1532,7 @@ public class DataHandler {
         }
         return v;
     }
-    
+
     // Yeslyn getAdd-Ons
     public static Vector<addOnsTable> getAddOns() {
         Vector<addOnsTable> v = new Vector<>();
@@ -1553,8 +1553,8 @@ public class DataHandler {
         return v;
     }
 
-    
-     // Yeslyn Services Delete
+
+    // Yeslyn Services Delete
     public static void deleteServicesRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1641,8 +1641,8 @@ public class DataHandler {
             preparedStatement.close();
         } catch (Exception e) {e.printStackTrace();}
     }
-    
-       // Yeslyn Add-Ons Delete
+
+    // Yeslyn Add-Ons Delete
     public static void deleteAddOnsRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1682,8 +1682,8 @@ public class DataHandler {
             preparedStatement.close();
         } catch (Exception e) {e.printStackTrace();}
     }
-    
-     public static void updateRowByID(int customerNumberInput,int storeCreditInput, String firstNameInput, String lastNameInput, String genderInput, String phoneInput, String emailInput, String birthdayInput, String addressInput) {
+
+    public static void updateRowByID(int customerNumberInput,int storeCreditInput, String firstNameInput, String lastNameInput, String genderInput, String phoneInput, String emailInput, String birthdayInput, String addressInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
             PreparedStatement ps = conn.prepareStatement("UPDATE customerTable SET storeCredit=?, firstName=?, lastName=?, gender=?, phone=?, email=?, birthday=?, address=? WHERE customerNumber=?");
@@ -1900,6 +1900,7 @@ public class DataHandler {
         }
         return v;
     }
+
     public static Vector<GUIContactUs> getGUIContactUS(){
         Vector<GUIContactUs> v = new Vector<>();
         try{
@@ -1912,14 +1913,12 @@ public class DataHandler {
                         result.getString("answer"), result.getString("email"),
                         result.getInt("phone"), result.getString("subjectLine"),
                         result.getString("message")));
-
             }
         } catch (Exception e){
             e.printStackTrace();
         }
         return v;
     }
-
 
     //Makki
     public static Vector<Address> getAddress() {
@@ -1943,6 +1942,7 @@ public class DataHandler {
         }
         return v;
     }
+
     //Makki
     public static Vector<Revenue> getRevenue() {
         Vector<Revenue> v = new Vector<>();
@@ -1988,8 +1988,6 @@ public class DataHandler {
         return v;
     }
 
-
-
     //Makki
     public static Vector<State> getState() {
         Vector<State> v = new Vector<>();
@@ -2012,7 +2010,6 @@ public class DataHandler {
         return v;
     }
 
-
     //Makki
     public static Vector<Country> getCountry() {
         Vector<Country> v = new Vector<>();
@@ -2033,9 +2030,6 @@ public class DataHandler {
         }
         return v;
     }
-
-
-
 
     //Makki
     public static Vector<Staff> getStaff() {
@@ -2061,7 +2055,6 @@ public class DataHandler {
         return v;
     }
 
-
     //Makki
     public static Vector<PTO_Staff> getPTO_Staff() {
         Vector<PTO_Staff> v = new Vector<>();
@@ -2086,8 +2079,6 @@ public class DataHandler {
         return v;
     }
 
-
-
     //Makki
     public static Vector<Staff_PTO_Staff_Associative> getStaff_PTO_Staff_Associative() {
         Vector<Staff_PTO_Staff_Associative> v = new Vector<>();
@@ -2108,8 +2099,6 @@ public class DataHandler {
         return v;
     }
 
-
-
     //Makki
     public static Vector<OwnerSide_of_Automatic_Payment_Cancellation_System> getOwnerSide_of_Automatic_Payment_Cancellation_System() {
         Vector<OwnerSide_of_Automatic_Payment_Cancellation_System> v = new Vector<>();
@@ -2123,14 +2112,11 @@ public class DataHandler {
                         result.getString("timeCondition"),
                         result.getString("deductionPrecentage")));
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return v;
     }
-
-
 
     //Makki
     public static Vector<Location> getLocation() {
@@ -2170,7 +2156,6 @@ public class DataHandler {
                     "\n" +
                     "SELECT @email = '%@%'\n" +
 
-
                     "\n" +
                     "\n" +
                     "SELECT \n" +
@@ -2181,7 +2166,6 @@ public class DataHandler {
                     "Address.cityName AS 'City',\n" +
                     "Address.stateName AS 'State',\n" +
                     "Address.countryName AS 'Country'\n" +
-
 
                     "FROM Address\n" +
                     "JOIN State ON Address.stateName = State.stateName\n" +
@@ -2204,18 +2188,12 @@ public class DataHandler {
                                 result.getString("City"),
                                 result.getString("State"),
                                 result.getString("Country"))));
-
-
-
             }
-
         }catch (Exception e){
             e.printStackTrace();
         }
         return v;
     }
-
-
 
     //Makki
     public static Vector<reportGender> getReportGender() {
@@ -2266,7 +2244,6 @@ public class DataHandler {
                                 result.getString("City"),
                                 result.getString("State"),
                                 result.getString("Country"))));
-
             }
 
         }catch (Exception e){
@@ -2274,8 +2251,6 @@ public class DataHandler {
         }
         return v;
     }
-
-
 
     //Makki
     public static Vector<reportAddress> getReportAddress() {
@@ -2292,7 +2267,6 @@ public class DataHandler {
                     "@countryName nvarchar\n" +
                     "\n" +
                     "SELECT @address = 'address'\n" +
-
 
                     "\n" +
                     "\n" +
@@ -2327,9 +2301,6 @@ public class DataHandler {
                                 result.getString("City"),
                                 result.getString("State"),
                                 result.getString("Country"))));
-
-
-
             }
 
         }catch (Exception e){
@@ -2337,9 +2308,6 @@ public class DataHandler {
         }
         return v;
     }
-
-
-
 
     //Makki
     public static Vector<reportBirthday> getReportBirthday() {
@@ -2356,7 +2324,6 @@ public class DataHandler {
                     "@countryName nvarchar\n" +
                     "\n" +
                     "SELECT @birthday= 'Birthday'\n" +
-
 
                     "\n" +
                     "\n" +
@@ -2391,9 +2358,6 @@ public class DataHandler {
                                 result.getString("City"),
                                 result.getString("State"),
                                 result.getString("Country"))));
-
-
-
             }
 
         }catch (Exception e){
@@ -2408,7 +2372,6 @@ public class DataHandler {
             PreparedStatement ps = conn.prepareStatement("UPDATE Country SET countryName=? WHERE Id=?");
             ps.setString(2, countryNameInput);
             ps.setInt(1, IdInput);
-
 
             ps.executeUpdate();
             ps.close();
@@ -2437,7 +2400,6 @@ public class DataHandler {
         }
     }
 
-
     public static void updateAddressRowByID(int customerNumberInput, String streetInput, String cityNameInput, String stateNameInput, String zipCodeInput, String countryNameInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2454,8 +2416,6 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
-
-
     public static void insertAddressRowByID( int customerNumberInput, String streetInput, String cityNameInput, String stateNameInput, String zipCodeInput, String countryNameInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2471,8 +2431,6 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
-
-
     public static void deleteAddressRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2484,7 +2442,4 @@ public class DataHandler {
             e.printStackTrace();
         }
     }
-
-
-
 }
