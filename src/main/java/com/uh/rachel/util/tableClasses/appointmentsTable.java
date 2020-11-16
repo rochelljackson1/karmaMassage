@@ -114,5 +114,3 @@ public class appointmentsTable {
     public void setStaff_number(int staff_number) { this.staff_number = staff_number; }
 
 }
-
-
