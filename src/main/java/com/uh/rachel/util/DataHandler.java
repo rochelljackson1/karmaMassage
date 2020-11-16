@@ -41,7 +41,7 @@ public class DataHandler {
 
             while (result.next()) {
                 v.add(new doctorTable(result.getInt("customerNumber"),
-                        result.getInt("doctorNumber"), result.getString("physicianFirstname"),
+                        result.getInt("doctorNuber"), result.getString("physicianFirstname"),
                         result.getString("physicianLastname"), result.getString("physicianPhone")));
             }
 
