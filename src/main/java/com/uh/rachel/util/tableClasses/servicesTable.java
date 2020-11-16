@@ -63,4 +63,3 @@ public class servicesTable {
         this.discount = discount;
     }
 }
-
