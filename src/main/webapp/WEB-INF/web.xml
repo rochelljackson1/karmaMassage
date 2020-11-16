@@ -10,6 +10,16 @@
     </servlet>
 
     <servlet>
+        <servlet-name>deleteAddress</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteAddress</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteCountry</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteCountry</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>deleteDoctorOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.deleteDoctorOptions</servlet-class>
     </servlet>
@@ -35,6 +45,16 @@
     </servlet>
 
     <servlet>
+        <servlet-name>insertAddress</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertAddress</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertCountry</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertCountry</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>insertDoctorOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.insertDoctorOptions</servlet-class>
     </servlet>
@@ -57,6 +77,16 @@
     <servlet>
         <servlet-name>updateOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.updateOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateAddress</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateAddress</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateCountry</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateCountry</servlet-class>
     </servlet>
 
     <servlet>
@@ -90,6 +120,16 @@
     </servlet-mapping>
 
     <servlet-mapping>
+    <servlet-name>deleteAddress</servlet-name>
+    <url-pattern>/deleteAddress</url-pattern>
+</servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteCountry</servlet-name>
+        <url-pattern>/deleteCountry</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
         <servlet-name>deleteDoctorOptions</servlet-name>
         <url-pattern>/deleteDoctorOptions</url-pattern>
     </servlet-mapping>
@@ -115,6 +155,17 @@
     </servlet-mapping>
 
     <servlet-mapping>
+        <servlet-name>insertAddress</servlet-name>
+        <url-pattern>/insertAddress</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertCountry</servlet-name>
+        <url-pattern>/insertCountry</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
         <servlet-name>insertDoctorOptions</servlet-name>
         <url-pattern>/insertDoctorOptions</url-pattern>
     </servlet-mapping>
@@ -138,6 +189,18 @@
         <servlet-name>updateOptions</servlet-name>
         <url-pattern>/updateOptions</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateAddress</servlet-name>
+        <url-pattern>/updateAddress</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>updateCountry</servlet-name>
+        <url-pattern>/updateCountry</url-pattern>
+    </servlet-mapping>
+
 
     <servlet-mapping>
         <servlet-name>updateDoctorOptions</servlet-name>

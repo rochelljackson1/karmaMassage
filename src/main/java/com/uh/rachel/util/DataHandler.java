@@ -2269,6 +2269,93 @@ public class DataHandler {
         return v;
     }
 
+    public static void updateCountryRowByID(int IdInput,String countryNameInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE Country SET countryName=? WHERE Id=?");
+            ps.setString(2, countryNameInput);
+            ps.setInt(1, IdInput);
+
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void insertCountryRowByID(String countryNameInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO Country (countryName) VALUES (?)");
+            ps.setString(1, countryNameInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void deleteCountryRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM Country WHERE Id=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void updateAddressRowByID(int customerNumberInput, String streetInput, String cityNameInput, String stateNameInput, String zipCodeInput, String countryNameInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE Address SET street=?, cityName=?, stateName=?, zipCode=?, countryName=? WHERE customerNumber=?");
+            ps.setInt(6, customerNumberInput);
+            ps.setString(1, streetInput);
+            ps.setString(2, cityNameInput);
+            ps.setString(3, stateNameInput);
+            ps.setString(4, zipCodeInput);
+            ps.setString(5, countryNameInput);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+
+
+    public static void insertAddressRowByID( int customerNumberInput, String streetInput, String cityNameInput, String stateNameInput, String zipCodeInput, String countryNameInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO Address ( customerNumber, street, cityName, stateName, zipCode, countryName) VALUES(?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, customerNumberInput);
+            ps.setString(2, streetInput);
+            ps.setString(3, cityNameInput);
+            ps.setString(4, stateNameInput);
+            ps.setString(5, zipCodeInput);
+            ps.setString(6, countryNameInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+
+
+    public static void deleteAddressRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM Address WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
 
 
 
