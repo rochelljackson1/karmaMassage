@@ -14,46 +14,54 @@
 <html>
 <head>
     <title>Packages</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<h1 align="center" class="w3-grey">Service Packages</h1>
-</head>
 
-<body bgcolor="#aeb6f5">
-<form method="post" action="/save">
-    <fieldset>
-        <legend><em>Please Update Your Service Package</em></legend>
-        <em>Package Number:</em><br>
-        <input type="text" name="packageNumber">
-        <br>
-        <input type="hidden" name="serviceNumber" value="">
-        <br>
-        <em>Package Description:</em><br>
-        <input type="text" name="packageDescription">
-        <br>
-        <em>Price:</em><br>
-        <input type="number" name="price">
-        <br>
-        <input type="hidden" name="status" value="">
-    </fieldset>
+    <script type="text/javascript">
+        function makeVisible(){
+            var valuey = document.getElementById('selection').value;
+            if (valuey ==="deleteRow") {
+                document.getElementById('deleteForm').style.display = "flex";
+            }
+            if (valuey == "insertRow") {
+                document.getElementById('insertForm').style.display = "flex";
+            }
+            if (valuey == "updateRow") {}
+            document.getElementById('updateForm').style.display = "flex";
+        }
+    </script>
+</head>
+<body>
+<select id="selection">
+    <option value="deleteRow">Delete Package</option>
+    <option value="insertRow">Insert Package</option>
+    <option value="updateRow">Update Package</option>
+</select>
+
+<button onclick="makeVisible();">Make Form Visible</button>
+
+<form action="deleteOptions" id="deleteForm" style="display:none;" method="post">
+    <input name="rowToDelete" type="text">
+    <button type="submit">Delete This Row</button>
 </form>
-<form>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 80%;
-        }
-        td, th {
-            border: 1px solid lightgrey;
-            text-align: left;
-            padding: 8px;
-            width: 100px;
-        }
-        table.center{
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+<br>
+<form action="insertOptions" id="insertForm" style="display:none;" method="post">
+    <input name="rowToInsert" type="text">
+    <input name="rowToInsert2" type="text">
+    <input name="rowToInsert3" type="text">
+    <input name="rowToInsert4" type="text">
+    <input name="rowToInsert5" type="text">
+    <button type="submit">Insert This Row</button>
 </form>
+<br>
+<form action="updateOptions" id="updateForm" style="display:none;" method="post">
+    <input name="packageNumber" type="text">
+    <input name="serviceNumber" type="text">
+    <input name="packageDescription" type="text">
+    <input name="price" type="text">
+    <input name="status" type="text">
+
+    <button type="submit">Update This Row</button>
+</form>
+
 <table class="center">
     <h2 align="center" class="w3-grey">Packages List</h2>
     <tr>
