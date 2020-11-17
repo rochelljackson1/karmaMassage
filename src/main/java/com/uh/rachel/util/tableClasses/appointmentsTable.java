@@ -112,5 +112,12 @@ public class appointmentsTable {
 
     public int getStaff_number() { return staff_number; }
     public void setStaff_number(int staff_number) { this.staff_number = staff_number; }
+        
+    public appointmentsTable(int customerNumber, int addOnNumber, String scheduledDate, String scheduledTime) {
+        this.customerNumber = customerNumber;
+        this.addOnNumber = addOnNumber;
+        this.scheduledDate = scheduledDate;
+        this.scheduledTime = scheduledTime;
+    }
 
 }
