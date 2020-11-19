@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Vector;
 
 public class DataHandler {
+    //Rachel
     public static Vector<customerTable> getCustomers() {
         Vector<customerTable> v = new Vector<>();
         try {
@@ -32,6 +33,7 @@ public class DataHandler {
         return v;
     }
 
+    //Rachel
     public static Vector<doctorTable> getDoctors() {
         Vector<doctorTable> v = new Vector<>();
         try {
@@ -407,6 +409,7 @@ public class DataHandler {
         return v;
     }
 
+    //Dominic
     public static Vector<FAQTable> getFAQ(){
         Vector<FAQTable> v = new Vector<>();
         try{
@@ -426,6 +429,7 @@ public class DataHandler {
         return v;
     }
 
+    //Yeslyn
     public static Vector<appointmentsTable> getAppointments(){
         Vector<appointmentsTable> v = new Vector<>();
         try {
@@ -450,6 +454,7 @@ public class DataHandler {
         return v;
     }
 
+    //Rachel
     public static Vector<customerTable> getReport9() {
         Vector<customerTable> v = new Vector<>();
         try {
@@ -524,6 +529,7 @@ public class DataHandler {
         return v;
     }
 
+    //Rachel
     public static Vector<customerTable> getReport12() {
         Vector<customerTable> v = new Vector<>();
         try {
@@ -649,6 +655,7 @@ public class DataHandler {
         return v;
     }
 
+    //Rachel
     public static Vector<report13> getReport13() {
         Vector<report13> v = new Vector<>();
         try {
@@ -696,13 +703,13 @@ public class DataHandler {
                                 result.getBoolean("Emphysema"), result.getBoolean("Shortness of Breathe")),
                         new companyClientHistoryTable(result.getBoolean("Status"))));
             }
-
         }catch (Exception e){
             e.printStackTrace();
         }
         return v;
     }
 
+    //Rachel
     public static Vector<report14> getReport14() {
         Vector<report14> v = new Vector<>();
         try {
@@ -756,6 +763,7 @@ public class DataHandler {
         return v;
     }
 
+    //Sakina
     public static Vector<report5> getReport5() {
         Vector<report5> v = new Vector<>();
         try {
@@ -841,6 +849,7 @@ public class DataHandler {
         return v;
     }
 
+    //Sakina
     public static Vector<report6> getReport6() {
         Vector<report6> v = new Vector<>();
         try {
@@ -895,6 +904,7 @@ public class DataHandler {
         return v;
     }
 
+    //Sakina
     public static Vector<report7> getReport7() {
         Vector<report7> v = new Vector<>();
         try {
@@ -989,6 +999,7 @@ public class DataHandler {
         return v;
     }
 
+    //Sakina
     public static Vector<report8> getReport8() {
         Vector<report8> v = new Vector<>();
         try {
@@ -1132,6 +1143,7 @@ public class DataHandler {
         return v;
     }
 
+    //Yeslyn
     public static Vector<appointmentsTable> getReport15() {
         Vector<appointmentsTable> v = new Vector<>();
         try {
@@ -1182,6 +1194,7 @@ public class DataHandler {
         return v;
     }
 
+    //Yeslyn
     public static Vector<appointmentsTable> getReport16() {
         Vector<appointmentsTable> v = new Vector<>();
         try {
@@ -1220,6 +1233,8 @@ public class DataHandler {
         }
         return v;
     }
+
+    //Yeslyn
     public static Vector<report17> getReport17() {
         Vector<report17> v = new Vector<>();
         try {
@@ -1273,6 +1288,7 @@ public class DataHandler {
         return v;
     }
 
+    //Yeslyn
     public static Vector<report18> getReport18() {
         Vector<report18> v = new Vector<>();
         try {
@@ -1325,6 +1341,7 @@ public class DataHandler {
         return v;
     }
 
+    //Yeslyn
     public static void cancelAppointment(int aptNum, boolean isLate) {
         try {
             Connection connection = ConnectionProvider.getConnection();
@@ -1351,6 +1368,7 @@ public class DataHandler {
         }
     }
 
+    //Rachel
     public static Vector<companyClientHistoryTable> getcompanyClientHistory() {
         Vector<companyClientHistoryTable> v = new Vector<>();
         try {
@@ -1369,6 +1387,7 @@ public class DataHandler {
         return v;
     }
 
+    //Sakina
     public static Vector<existingConditionsWomenTable> getExistingConditionsWomen() {
         Vector<existingConditionsWomenTable> v = new Vector<>();
         try {
@@ -1387,6 +1406,7 @@ public class DataHandler {
         return v;
     }
 
+    //Sakina
     public static Vector<existingConditionsSTJDTable> getExistingConditionsSTJD() {
         Vector<existingConditionsSTJDTable> v = new Vector<>();
         try {
@@ -1416,6 +1436,7 @@ public class DataHandler {
         return v;
     }
 
+    //Sakina
     public static Vector<existingConditionsSkinTable> getExistingConditionsSkin() {
         Vector<existingConditionsSkinTable> v = new Vector<>();
         try {
@@ -1436,6 +1457,7 @@ public class DataHandler {
         return v;
     }
 
+    //Sakina
     public static Vector<existingConditionsRespiratoryTable> getExistingConditionsRespiratory() {
         Vector<existingConditionsRespiratoryTable> v = new Vector<>();
         try {
@@ -1456,7 +1478,7 @@ public class DataHandler {
         return v;
     }
 
-    // Yeslyn getPackages
+    // Yeslyn
     public static Vector<packagesTable> getPackages() {
         Vector<packagesTable> v = new Vector<>();
         try {
@@ -1477,6 +1499,7 @@ public class DataHandler {
         return v;
     }
 
+    //Rachel
     public static Vector<emergencyContactTable> getEmergencyContact() {
         Vector<emergencyContactTable> v = new Vector<>();
         try {
@@ -1496,6 +1519,7 @@ public class DataHandler {
         return v;
     }
 
+    //Rachel
     public static Vector<waiverTable> getWaiver() {
         Vector<waiverTable> v = new Vector<>();
         try {
@@ -1512,7 +1536,7 @@ public class DataHandler {
         return v;
     }
 
-    // Yeslyn getServices
+    // Yeslyn
     public static Vector<servicesTable> getServices() {
         Vector<servicesTable> v = new Vector<>();
         try {
@@ -1533,7 +1557,7 @@ public class DataHandler {
         return v;
     }
 
-    // Yeslyn getAdd-Ons
+    // Yeslyn
     public static Vector<addOnsTable> getAddOns() {
         Vector<addOnsTable> v = new Vector<>();
         try {
@@ -1683,6 +1707,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Rachel
     public static void updateRowByID(int customerNumberInput,int storeCreditInput, String firstNameInput, String lastNameInput, String genderInput, String phoneInput, String emailInput, String birthdayInput, String addressInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1701,6 +1726,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Rachel
     public static void updateDoctorRowByID(int customerNumberInput,int doctoNuberInput, String physicianFirstnameInput, String physicianLastnameInput, String physicianPhoneInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1715,6 +1741,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Sakina
     public static void updateCompanyRowByID(int customerNumberInput, boolean currentClient) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1726,6 +1753,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Sakina
     public static void updateWaiverRowByID(int customerNumberInput, String signiture, String date, boolean acknowledgment) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1739,6 +1767,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Rachel
     public static void updateEmergencyRowByID(int customerNumberInput, String emergencyFirstNameInput, String emergencyLastNameInput, String emergencyPhoneInput, String relationshipInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1753,6 +1782,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Rachel
     public static void insertRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5, String rowToInsert6, String rowToInsert7, String rowToInsert8, String rowToInsert9) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1771,6 +1801,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Rachel
     public static void insertDoctorRowByID(int rowToInsert,int rowToInsert2, String rowToInsert3, String rowToInsert4, String rowToInsert5) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1785,6 +1816,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Sakina
     public static void insertCompanyRowByID(int rowToInsert, boolean rowToInsert2) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1796,6 +1828,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Sakina
     public static void insertWaiverRowByID(int customerNumber, String signiture, String date, boolean acknowledgment) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1809,6 +1842,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Rachel
     public static void insertEmergencyRowByID(int customerNumberInput, String emergencyFirstNameInput, String emergencyLastNameInput, String emergencyPhoneInput, String relationshipInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1823,6 +1857,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Rachel
     public static void deleteRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1835,6 +1870,7 @@ public class DataHandler {
         }
     }
 
+    //Rachel
     public static void deleteDoctorRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1847,6 +1883,7 @@ public class DataHandler {
         }
     }
 
+    //Sakina
     public static void deleteCompanyRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1859,6 +1896,7 @@ public class DataHandler {
         }
     }
 
+    //Sakina
     public static void deleteWaiverRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1871,6 +1909,7 @@ public class DataHandler {
         }
     }
 
+    //Rachel
     public static void deleteEmergencyRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -1883,6 +1922,7 @@ public class DataHandler {
         }
     }
 
+    //Dominic
     public static Vector<GUIfaq> getGUIfaq(){
         Vector<GUIfaq> v = new Vector<>();
         try{
@@ -1901,6 +1941,7 @@ public class DataHandler {
         return v;
     }
 
+    //Dominic
     public static Vector<GUIContactUs> getGUIContactUS(){
         Vector<GUIContactUs> v = new Vector<>();
         try{
@@ -2366,6 +2407,7 @@ public class DataHandler {
         return v;
     }
 
+    //Makki
     public static void updateCountryRowByID(int IdInput,String countryNameInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2378,6 +2420,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Makki
     public static void insertCountryRowByID(String countryNameInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2388,6 +2431,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Makki
     public static void deleteCountryRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2400,6 +2444,7 @@ public class DataHandler {
         }
     }
 
+    //Makki
     public static void updateAddressRowByID(int customerNumberInput, String streetInput, String cityNameInput, String stateNameInput, String zipCodeInput, String countryNameInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2416,6 +2461,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Makki
     public static void insertAddressRowByID( int customerNumberInput, String streetInput, String cityNameInput, String stateNameInput, String zipCodeInput, String countryNameInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2431,6 +2477,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Makki
     public static void deleteAddressRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2679,6 +2726,7 @@ public class DataHandler {
             e.printStackTrace();}
     }
 
+    //Ramiro
     public static void insertexistingConditionsHeadNeckRowByID( int customerNumberInput,boolean visionProblemsInput, boolean visionLossInput, boolean sinusProblemsInput, boolean migrainesInput, boolean jawPainInput, boolean hearingLossInput, boolean headachesInput, boolean earProblemsInput ) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2698,6 +2746,7 @@ public class DataHandler {
             e.printStackTrace();}
     }
 
+    //Ramiro
     public static void deleteexistingConditionsHeadNeckRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2709,7 +2758,7 @@ public class DataHandler {
             e.printStackTrace();
         }
     }
-//Ramiro Santibanez
+    //Ramiro Santibanez
     public static void updateexistingConditionsInfectiousRowByID(int customerNumberInput, boolean skinConditionsInput, boolean respiratoryConditionsInput, boolean hivInput, boolean herpesInput, boolean hepatitisInput, boolean altheletsFootInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2726,6 +2775,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Ramiro
     public static void insertexistingConditionsInfectiousRowByID( int customerNumberInput, boolean skinConditionsInput, boolean respiratoryConditionsInput, boolean hivInput, boolean herpesInput, boolean hepatitisInput, boolean altheletsFootInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2742,6 +2792,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Ramiro
     public static void deleteexistingConditionsInfectiousRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2753,7 +2804,8 @@ public class DataHandler {
             e.printStackTrace();
         }
     }
-//Ramiro Santibanez
+
+    //Ramiro Santibanez
     public static void updateexistingConditionsNeurologicalRowByID(int customerNumberInput, boolean tinglingInput, boolean stabbingPainInput, boolean parkinsonsInput, boolean numbnessInput, boolean multipleSclerosisInput, boolean herniatedDiscInput, boolean cerebralPaisyInput, boolean burningInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2772,6 +2824,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Ramiro
     public static void insertexistingConditionsNeurologicalRowByID( int customerNumberInput, boolean tinglingInput, boolean stabbingPainInput, boolean parkinsonsInput, boolean numbnessInput, boolean multipleSclerosisInput, boolean herniatedDiscInput, boolean cerebralPaisyInput, boolean burningInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2790,6 +2843,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Ramiro
     public static void deleteexistingConditionsNeurologicalRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2801,7 +2855,7 @@ public class DataHandler {
             e.printStackTrace();
         }
     }
-//Ramiro Satibanez
+    //Ramiro Satibanez
     public static void updateexistingConditionsMedicationsRowByID(int customerNumberInput, String otherInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2813,6 +2867,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Ramiro
     public static void insertexistingConditionsMedicationsRowByID( int customerNumberInput, String otherInput) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2824,6 +2879,7 @@ public class DataHandler {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Ramiro
     public static void deleteexistingConditionsMedicationsRowByID(int rowToDelete) {
         try {
             Connection conn = ConnectionProvider.getConnection();
@@ -2835,7 +2891,8 @@ public class DataHandler {
             e.printStackTrace();
         }
     }
-    
+
+    //Ramiro
    public static Vector<existingConditionsNeurologicalTable> getExistingConditionsNeurological() {
         Vector<existingConditionsNeurologicalTable> v = new Vector<>();
         try {
@@ -2862,6 +2919,7 @@ public class DataHandler {
         return v;
     }
 
+    //Ramiro
     public static Vector<existingConditionsHeadNeckTable> getExistingConditonsHeadNeck() {
         Vector<existingConditionsHeadNeckTable> v = new Vector<>();
         try {
@@ -2888,7 +2946,7 @@ public class DataHandler {
         return v;
     }
 
-
+    //Ramiro
     public static Vector<existingConditionsInfectiousTable> getExistingConditonsInfectious() {
         Vector<existingConditionsInfectiousTable> v = new Vector<>();
         try {
@@ -2913,6 +2971,7 @@ public class DataHandler {
         return v;
     }
 
+    //Ramiro
     public static Vector<existingConditionsMedicationsTable> getExistingConditionsMedications() {
         Vector<existingConditionsMedicationsTable> v = new Vector<>();
         try {
