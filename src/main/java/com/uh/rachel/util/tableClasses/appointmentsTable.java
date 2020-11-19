@@ -15,12 +15,31 @@ public class appointmentsTable {
         String cardNumberType;
         String cardNumber;
         int staff_number;
+        String cancelledDateTime;
 
         public appointmentsTable() {
 
         }
 
-        public appointmentsTable(int appointmentNumber, int customerNumber,  int serviceNumber, int packageNumber, int addOnNumber, String appointmentDateTime, double originalFullPrice, String dateCancelled, String timeCancelled, double actualPricePaid, String defaultPayment, String cardNumberType, String cardNumber, int staff_number) {
+    public appointmentsTable(int appointmentNumber, int customerNumber, int serviceNumber, int packageNumber, int addOnNumber, double originalFullPrice, String dateCancelled, String timeCancelled, double actualPricePaid, String defaultPayment, String cardNumberType, String cardNumber, int staff_number, String cancelledDateTime, String appointmentDateTime) {
+        this.appointmentDateTime = appointmentDateTime;
+        this.appointmentNumber = appointmentNumber;
+        this.customerNumber = customerNumber;
+        this.serviceNumber = serviceNumber;
+        this.packageNumber = packageNumber;
+        this.addOnNumber = addOnNumber;
+        this.originalFullPrice = originalFullPrice;
+        this.dateCancelled = dateCancelled;
+        this.timeCancelled = timeCancelled;
+        this.actualPricePaid = actualPricePaid;
+        this.defaultPayment = defaultPayment;
+        this.cardNumberType = cardNumberType;
+        this.cardNumber = cardNumber;
+        this.staff_number = staff_number;
+        this.cancelledDateTime = cancelledDateTime;
+    }
+
+    public appointmentsTable(int appointmentNumber, int customerNumber, int serviceNumber, int packageNumber, int addOnNumber, String appointmentDateTime, double originalFullPrice, String dateCancelled, String timeCancelled, double actualPricePaid, String defaultPayment, String cardNumberType, String cardNumber, int staff_number) {
             this.appointmentDateTime = appointmentDateTime;
             this.customerNumber = customerNumber;
             this.appointmentNumber = appointmentNumber;
@@ -117,5 +136,13 @@ public class appointmentsTable {
         this.customerNumber = customerNumber;
         this.addOnNumber = addOnNumber;
         this.appointmentDateTime = appointmentDateTime;
+    }
+
+    public String getCancelledDateTime() {
+        return cancelledDateTime;
+    }
+
+    public void setCancelledDateTime(String cancelledDateTime) {
+        this.cancelledDateTime = cancelledDateTime;
     }
 }

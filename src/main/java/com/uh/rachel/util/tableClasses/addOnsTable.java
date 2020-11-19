@@ -9,6 +9,12 @@ public class addOnsTable {
     public addOnsTable() {
     }
 
+    public addOnsTable(int addOnNumber, double price, String addOnDescription){
+        this.addOnNumber = addOnNumber;
+        this.price = price;
+        this.addOnDescription = addOnDescription;
+    }
+
     public addOnsTable(int addOnNumber, double price, String addOnDescription, int customerNumber){
         this.addOnNumber = addOnNumber;
         this.price = price;

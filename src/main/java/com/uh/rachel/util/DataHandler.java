@@ -441,11 +441,11 @@ public class DataHandler {
                 v.add(new appointmentsTable(result.getInt("appointmentNumber"),
                         result.getInt("customerNumber"), result.getInt("serviceNumber"),
                         result.getInt("packageNumber"), result.getInt("addOnNumber"),
-                        result.getString("scheduledDate"), result.getString("scheduledTime"),
                         result.getDouble("originalFullPrice"), result.getString("dateCancelled"),
                         result.getString("timeCancelled"), result.getDouble("actualPricePaid"),
                         result.getString("defaultPayment"), result.getString("cardNumberType"),
-                        result.getString("cardNumber"), result.getInt("staff_NUmber")));
+                        result.getString("cardNumber"), result.getInt("staff_Number"),
+                        result.getString("appointmentDateTime"), result.getString("cancelledDateTime")));
             }
 
         }catch (Exception e){
@@ -1563,8 +1563,7 @@ public class DataHandler {
                 v.add(new addOnsTable(
                         result.getInt("addOnNumber"),
                         result.getDouble("price"),
-                        result.getString("addOnDescription"),
-                        result.getInt("customerNumber")));
+                        result.getString("addOnDescription")));
             }
         } catch (Exception e) {
             e.printStackTrace();

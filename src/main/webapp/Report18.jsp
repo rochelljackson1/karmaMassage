@@ -27,7 +27,7 @@
     %>
     <tr>
         <td><%= String.valueOf(c.getAppointmentsTablePackage().getCustomerNumber())%></td>
-        <td><%= String.valueOf(c.getAppointmentsTablePackage().getScheduledDate())%></td>
+        <td><%= String.valueOf(c.getAppointmentsTablePackage().getAppointmentDateTime())%></td>
         <td><%= String.valueOf(c.getQuestionPackage().getQuestion())%></td>
         <td><%= String.valueOf(c.getAppointmentsTablePackage().getServiceNumber())%></td>
     </tr>

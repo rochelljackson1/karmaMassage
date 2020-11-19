@@ -43,8 +43,6 @@
         <td><%= String.valueOf(c.getServiceNumber())%></td>
         <td><%= String.valueOf(c.getPackageNumber())%></td>
         <td><%= String.valueOf(c.getAddOnNumber())%></td>
-        <td><%= String.valueOf(c.getScheduledDate())%></td>
-        <td><%= String.valueOf(c.getScheduledTime())%></td>
         <td><%= String.valueOf(c.getOriginalFullPrice())%></td>
         <td><%= String.valueOf(c.getDateCancelled())%></td>
         <td><%= String.valueOf(c.getTimeCancelled())%></td>
@@ -53,6 +51,9 @@
         <td><%= String.valueOf(c.getCardNumberType())%></td>
         <td><%= String.valueOf(c.getCardNumber())%></td>
         <td><%= String.valueOf(c.getStaff_number())%></td>
+        <td><%= String.valueOf(c.getAppointmentDateTime())%></td>
+        <td><%= String.valueOf(c.getCancelledDateTime())%></td>
+
     </tr>
     <%
         }

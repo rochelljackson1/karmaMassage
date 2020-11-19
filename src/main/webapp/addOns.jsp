@@ -60,12 +60,11 @@
 </form>
 
 <table class="center">
-    <h2 align="center" class="w3-grey">Packages List</h2>
+    <h2 align="center" class="w3-grey">Add Ons List</h2>
     <tr>
         <th style="text-align:center">Add-On Number</th>
         <th style="text-align:center">Price</th>
         <th style="text-align:center">Add-On Description</th>
-        <th style="text-align:center">Customer Number</th>
     </tr>
 
     <% Vector<addOnsTable> v = DataHandler.getAddOns();
@@ -75,7 +74,6 @@
         <td style="text-align:center"><%= String.valueOf(c.getAddOnNumber())%></td>
         <td style="text-align:center"><%= String.valueOf(c.getPrice())%></td>
         <td style="text-align:center"><%= String.valueOf(c.getAddOnDescription()) %></td>
-        <td style="text-align:center"><%= String.valueOf(c.getCustomerNumber()) %></td>
     </tr>
     <%
         }
