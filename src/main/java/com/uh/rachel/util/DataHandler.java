@@ -1148,43 +1148,36 @@ public class DataHandler {
         Vector<appointmentsTable> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@hotStone int = 0,\n" +
-                    "@startDate nvarchar(25),\n" +
-                    "@date2 nvarchar(25), \n" +
-                    "@date3 nvarchar(25), \n" +
-                    "@date4 nvarchar(25), \n" +
-                    "@endDate nvarchar(25), \n" +
+            PreparedStatement statement = connection.prepareStatement("USE [karma-massage-db]\n" +
                     "\n" +
-                    "SELECT @hotStone = 4\n" +
-                    "SELECT @startDate = '2020-04-01 23:55:17.000', \n" +
-                    "SELECT @date2 = '2020-10-07 20:20:07.000', \n" +
-                    "SELECT @date3 = '2020-09-03 17:57:48.000', \n" +
-                    "SELECT @date4 ='2020-08-01 05:58:14.000', \n" +
-                    "SELECT @endDate = '2020-01-29 21:34:27.000', \n" +
+                    "DECLARE\n" +
+                    "@leastAmount int = 995,\n" +
+                    "@biggestAmount int = 1000\n" +
+                    "\n" +
+                    "SELECT @leastAmount\n" +
+                    "SELECT @biggestAmount\n" +
                     "\n" +
                     "SELECT \n" +
                     "appointmentsTable.customerNumber AS 'Client ID',\n" +
-                    "appointmentsTable.scheduledDateTime AS 'Appointment Date',\n" +
-                    "appointmentsTable.scheduledTime AS 'Appointment Time',\n" +
+                    "appointmentsTable.appointmentDateTime AS 'Date Purchased',\n" +
+                    "appointmentsTable.packageNumber AS 'Package',\n" +
                     "appointmentsTable.addOnNumber AS 'Add-On',\n" +
+                    "appointmentsTable.actualPricePaid AS 'Amount Paid'\n" +
+                    "\n" +
+                    "\n" +
                     "\n" +
                     "FROM appointmentsTable\n" +
-                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
-                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
                     "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
-                    "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
+                    "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
                     "\n" +
-                    "WHERE appointmentsTable.addOnNumber = @hotStone\n" +
-                    "AND (appointmentsTable.appointmentDateTime = @startDate OR appointmentsTable.appointmentDateTime = @date2)\n" +
-                    "\tOR (appointmentsTable.appointmentDateTime = @date3 OR appointmentsTable.appointmentDateTime = @date4)" +
-                    "\tOR appointmentsTable.appointmentDateTime = @endDate)");
+                    "WHERE appointmentsTable.actualPricePaid > @leastAmount\n" +
+                    "AND appointmentsTable.actualPricePaid < @biggestAmount\n");
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
                 v.add(new appointmentsTable(result.getInt("Client ID Number"),
-                        (result.getString("Appointment Date")),
-                        (result.getInt("Add-On"))));
+                        result.getString("Date Purchased"), result.getInt("Package"),
+                        result.getInt("Add-On"), result.getDouble("Amount Paid")));
             }
 
         }catch (Exception e){
@@ -1197,25 +1190,31 @@ public class DataHandler {
         Vector<appointmentsTable> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@smallNum int = 0,\n" +
+            PreparedStatement statement = connection.prepareStatement("USE [karma-massage-db]\n" +
                     "\n" +
-                    "SELECT @smallNum = 995\n" +
+                    "DECLARE\n" +
+                    "@smallNum int = 995\n" +
+                    "\n" +
+                    "\n" +
+                    "SELECT @smallNum \n" +
                     "\n" +
                     "SELECT \n" +
                     "appointmentsTable.customerNumber AS 'Client ID',\n" +
-                    "appointmentsTable.appointmentDateTime AS 'Appointment Date',\n" +
-                    "appointmentsTable.packageNumber AS 'Appointment Time',\n" +
+                    "appointmentsTable.appointmentDateTime AS 'Date Purchased',\n" +
+                    "appointmentsTable.packageNumber AS 'Package Number',\n" +
                     "appointmentsTable.addOnNumber AS 'Add-On',\n" +
-                    "appointmentsTable.actualPricePaid AS 'Price Paid',\n" +
+                    "appointmentsTable.actualPricePaid AS 'Price Paid'\n" +
+                    "\n" +
+                    "\n" +
                     "\n" +
                     "FROM appointmentsTable\n" +
                     "JOIN customerTable ON appointmentsTable.customerNumber = customerTable.customerNumber\n" +
                     "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
+                    "JOIN packagesTable ON appointmentsTable.packageNumber = packagesTable.packageNumber\n" +
                     "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
                     "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
                     "\n" +
-                    "WHERE appointmentsTable.actualPricePaid = @smallNum\n");
+                    "WHERE appointmentsTable.actualPricePaid > @smallNum");
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
@@ -1236,28 +1235,35 @@ public class DataHandler {
         Vector<report17> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@hotStone int = 0,\n" +
+            PreparedStatement statement = connection.prepareStatement("\n" +
+                    "USE [karma-massage-db]\n" +
+                    "\n" +
+                    "--Variables to help us Identify the date Range\n" +
+                    "DECLARE\n" +
+                    "\n" +
                     "@startDate nvarchar(25),\n" +
-                    "@date2 nvarchar(25), \n" +
-                    "@date3 nvarchar(25), \n" +
-                    "@date4 nvarchar(25), \n" +
-                    "@endDate nvarchar(25), \n" +
+                    "@date2 nvarchar(25),\n" +
+                    "@date3 nvarchar(25),\n" +
+                    "@date4 nvarchar(25),\n" +
+                    "@endDate nvarchar(25)\n" +
                     "\n" +
-                    "SELECT @hotStone = 4\n" +
-                    "SELECT @startDate = '2020-04-01 23:55:17.000', \n" +
-                    "SELECT @date2 = '2020-10-07 20:20:07.000', \n" +
-                    "SELECT @date3 = '2020-09-03 17:57:48.000', \n" +
-                    "SELECT @date4 ='2020-08-01 05:58:14.000', \n" +
-                    "SELECT @endDate = '2020-01-29 21:34:27.000', \n" +
+                    "-- Variables are given the dates\n" +
                     "\n" +
+                    "SELECT @startDate = '2020-04-01 23:55:17.000'\n" +
+                    "SELECT @date2 = '2020-10-07 20:20:07.000'\n" +
+                    "SELECT @date3 = '2020-09-03 17:57:48.000'\n" +
+                    "SELECT @date4 ='2020-08-01 05:58:14.000'\n" +
+                    "SELECT @endDate = '2020-01-29 21:34:27.000'\n" +
+                    "\n" +
+                    "-- Data that will be displayed\n" +
                     "SELECT \n" +
                     "appointmentsTable.appointmentDateTime AS 'Appointment Date',\n" +
-                    "appointmentsTable.customerNumber AS 'Customer ID',\n" +
-                    "appointmentsTable.packageNumber AS 'Package Purchased',\n" +
+                    "appointmentsTable.customerNumber AS 'Client ID',\n" +
+                    "appointmentsTable.packageNumber AS 'Package Bought',\n" +
                     "appointmentsTable.serviceNumber AS 'Service Number',\n" +
                     "appointmentsTable.addOnNumber AS 'Add-On',\n" +
-                    "FAQTable.question AS 'Question Asked',\n" +
+                    "FAQTable.question AS 'Question Asked'\n" +
+                    "\n" +
                     "\n" +
                     "FROM appointmentsTable\n" +
                     "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
@@ -1265,9 +1271,11 @@ public class DataHandler {
                     "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
                     "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
                     "\n" +
-                    "WHERE appointmentsTable.appointmentDateTime = @startDate OR appointmentsTable.appointmentDateTime = @date2 OR " +
-                    "appointmentsTable.appointmentDateTime = @date3 \n" +
-                    "\tOR appointmentsTable.appointmentDateTime = @endDate OR appointmentsTable.appointmentDateTime = @date4");
+                    "\n" +
+                    "WHERE (( appointmentsTable.appointmentDateTime = @startDate OR appointmentsTable.appointmentDateTime = @date2\n" +
+                    "OR appointmentsTable.appointmentDateTime = @date3 OR appointmentsTable.appointmentDateTime = @endDate\n" +
+                    "OR appointmentsTable.appointmentDateTime = @date4\n" +
+                    "))\n");
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
@@ -1289,25 +1297,30 @@ public class DataHandler {
         Vector<report18> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
-            PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
-                    "@importantQuestion,\n" +
-                    "@startDate nvarchar(25),\n" +
-                    "@date2 nvarchar(25), \n" +
-                    "@date3 nvarchar(25), \n" +
-                    "@date4 nvarchar(25), \n" +
-                    "@endDate nvarchar(25), \n" +
+            PreparedStatement statement = connection.prepareStatement("USE [karma-massage-db]\n" +
                     "\n" +
-                    "SELECT @startDate = '2020-04-01 23:55:17.000', \n" +
-                    "SELECT @date2 = '2020-10-07 20:20:07.000', \n" +
-                    "SELECT @date3 = '2020-09-03 17:57:48.000', \n" +
-                    "SELECT @date4 ='2020-08-01 05:58:14.000', \n" +
-                    "SELECT @endDate = '2020-01-29 21:34:27.000', \n" +
+                    "DECLARE\n" +
+                    "@importantQuestion int = 11,\n" +
+                    "@startDate nvarchar(25),\n" +
+                    "@date2 nvarchar(25),\n" +
+                    "@date3 nvarchar(25),\n" +
+                    "@date4 nvarchar(25),\n" +
+                    "@endDate nvarchar(25)\n" +
+                    "\n" +
+                    "SELECT @importantQuestion\n" +
+                    "SELECT @startDate = '2020-04-01 23:55:17.000'\n" +
+                    "SELECT @date2 = '2020-10-07 20:20:07.000'\n" +
+                    "SELECT @date3 = '2020-09-03 17:57:48.000'\n" +
+                    "SELECT @date4 ='2020-08-01 05:58:14.000'\n" +
+                    "SELECT @endDate = '2020-01-29 21:34:27.000'\n" +
                     "\n" +
                     "SELECT \n" +
-                    "appointmentsTable.customerNumber AS 'Customer ID',\n" +
-                    "appointmentsTable.packageNumber AS 'Appointment Date',\n" +
-                    "appointmentsTable.serviceNumber AS 'Service Number',\n" +
-                    "FAQTable.question AS 'Question Asked',\n" +
+                    "appointmentsTable.customerNumber AS 'Client ID',\n" +
+                    "appointmentsTable.appointmentDateTime AS 'Appointment Date',\n" +
+                    "FAQTable.question 'Question Asked',\n" +
+                    "appointmentsTable.serviceNumber AS 'Service Number'\n" +
+                    "\n" +
+                    "\n" +
                     "\n" +
                     "FROM appointmentsTable\n" +
                     "JOIN addOnsTable ON appointmentsTable.addOnNumber = addOnsTable.addOnNumber\n" +
@@ -1315,10 +1328,11 @@ public class DataHandler {
                     "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
                     "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
                     "\n" +
-                    "WHERE FAQTable.faqNumber = @importantQuesiton " +
-                    "AND appointmentsTable.appointmentDateTime = @startDate OR " +
-                    "appointmentsTable.appointmentDateTime = @date2 OR appointmentsTable.appointmentDateTime = @date3\n" +
-                    "\tOR appointmentsTable.appointmentDateTime = @endDate OR appointmentsTable.appointmentDateTime = @date4");
+                    "WHERE FAQTable.faqNumber = @importantQuestion\n" +
+                    "AND (( appointmentsTable.appointmentDateTime = @startDate OR appointmentsTable.appointmentDateTime = @date2\n" +
+                    "OR appointmentsTable.appointmentDateTime = @date3 OR appointmentsTable.appointmentDateTime = @endDate\n" +
+                    "OR appointmentsTable.appointmentDateTime = @date4\n" +
+                    "))");
             ResultSet result = statement.executeQuery();
 
             while(result.next()){

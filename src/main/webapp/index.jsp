@@ -61,9 +61,9 @@
     <a href="http://localhost:8080/karmaMassage/report13.jsp">Report 13</a>
     <a href="http://localhost:8080/karmaMassage/report14.jsp">Report 14</a>
     <a href="http://localhost:8080/karmaMassage/report15.jsp">Report 15</a>
-    <a href="http://localhost:8080/karmaMassage/report16.jsp">Report 16</a>
-    <a href="http://localhost:8080/karmaMassage/report17.jsp">Report 17</a>
-    <a href="http://localhost:8080/karmaMassage/report18.jsp">Report 18</a>
+    <a href="http://localhost:8080/karmaMassage/Report16.jsp">Report 16</a>
+    <a href="http://localhost:8080/karmaMassage/Report17.jsp">Report 17</a>
+    <a href="http://localhost:8080/karmaMassage/Report18.jsp">Report 18</a>
     <a href="http://localhost:8080/karmaMassage/reportAddress.jsp">Report 19</a>
     <a href="http://localhost:8080/karmaMassage/reportBirthday.jsp">Report 20</a>
     <a href="http://localhost:8080/karmaMassage/reportGender.jsp"> Report 21</a>

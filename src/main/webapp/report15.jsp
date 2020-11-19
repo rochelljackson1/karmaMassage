@@ -29,7 +29,9 @@
     <tr>
         <td><%= String.valueOf(c.getCustomerNumber())%></td>
         <td><%= String.valueOf(c.getAppointmentDateTime())%></td>
+        <td><%= String.valueOf(c.getPackageNumber())%></td>
         <td><%= String.valueOf(c.getAddOnNumber())%></td>
+        <td><%= String.valueOf(c.getActualPricePaid())%></td>
     </tr>
     <%
         }
