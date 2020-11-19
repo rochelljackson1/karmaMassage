@@ -2442,4 +2442,220 @@ public class DataHandler {
             e.printStackTrace();
         }
     }
+
+    //Nafisa Chowdhury
+    public static void deleteRespiratoryRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM existingConditionsRespiratoryTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Nafisa Chowdhury
+    public static void deleteSkinRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM existingConditionsSkinTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Nafisa Chowdhury
+    public static void deleteSTJDRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM existingConditionsSTJDTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Nafisa Chowdhury
+    public static void deleteWomenRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM exisingConditionsWomenTable WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Nafisa Chowdhury
+    public static void insertRespiratoryRowByID(int rowToInsert, boolean rowToInsert2, boolean rowToInsert3, boolean rowToInsert4, boolean rowToInsert5, boolean rowToInsert6) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO existingConditionsRespiratoryTable (customerNumber, shortnessOfBreath, emphysema, chronicCough, bronchitis, asthma) VALUES (?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, rowToInsert);
+            ps.setBoolean(2, rowToInsert2);
+            ps.setBoolean(3, rowToInsert3);
+            ps.setBoolean(4, rowToInsert4);
+            ps.setBoolean(5, rowToInsert5);
+            ps.setBoolean(6, rowToInsert6);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    //Nafisa Chowdhury
+    public static void insertSkinRowByID(int rowToInsert, boolean rowToInsert2, boolean rowToInsert3, boolean rowToInsert4, boolean rowToInsert5, boolean rowToInsert6) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO existingConditionsSkinTable (customerNumber, skinIrritations, skinConditions, melanoma, hypersensitiveReaction, bruiseEasily) VALUES (?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, rowToInsert);
+            ps.setBoolean(2, rowToInsert2);
+            ps.setBoolean(3, rowToInsert3);
+            ps.setBoolean(4, rowToInsert4);
+            ps.setBoolean(5, rowToInsert5);
+            ps.setBoolean(6, rowToInsert6);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    //Nafisa Chowdhury
+    public static void insertWomenRowByID(int rowToInsert, boolean rowToInsert2, boolean rowToInsert3) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO existingConditionsWomenTable (customerNumber, pregnant, gynecologicalConditions) VALUES (?, ?, ?)");
+            ps.setInt(1, rowToInsert);
+            ps.setBoolean(2, rowToInsert2);
+            ps.setBoolean(3, rowToInsert3);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    //Nafisa Chowdhury
+    public static void insertSTJDRowByID(int rowToInsert, boolean rowToInsert2, boolean rowToInsert3, boolean rowToInsert4, boolean rowToInsert5, boolean rowToInsert6,
+                                         boolean rowToInsert7, boolean rowToInsert8, boolean rowToInsert9, boolean rowToInsert10, boolean rowToInsert11,
+                                         boolean rowToInsert12, boolean rowToInsert13, boolean rowToInsert14, boolean rowToInsert15, boolean rowToInsert16,
+                                         boolean rowToInsert17, boolean rowToInsert18, boolean rowToInsert19, boolean rowToInsert20, boolean rowToInsert21,
+                                         boolean rowToInsert22, boolean rowToInsert23, boolean rowToInsert24, boolean rowToInsert25) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO existingConditionsSTJDTable (customerNumber, upperBackRight, upperBackLeft, shouldersRight, shouldersLeft, neckRight, neckLeft, midBackRight, midBackLeft, lowerBackRight, lowerBackLeft, legsRight, legsLeft, kneesRight, kneesLeft, hipsRight, hipsLeft, handsRight, handsLeft, feetRight, feetLeft, armsRight, armsLeft, anklesRight, anklesLeft) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, rowToInsert);
+            ps.setBoolean(2, rowToInsert2);
+            ps.setBoolean(3, rowToInsert3);
+            ps.setBoolean(4, rowToInsert4);
+            ps.setBoolean(5, rowToInsert5);
+            ps.setBoolean(6, rowToInsert6);
+            ps.setBoolean(2, rowToInsert7);
+            ps.setBoolean(3, rowToInsert8);
+            ps.setBoolean(4, rowToInsert9);
+            ps.setBoolean(5, rowToInsert10);
+            ps.setBoolean(6, rowToInsert11);
+            ps.setBoolean(2, rowToInsert12);
+            ps.setBoolean(3, rowToInsert13);
+            ps.setBoolean(4, rowToInsert14);
+            ps.setBoolean(5, rowToInsert15);
+            ps.setBoolean(6, rowToInsert16);
+            ps.setBoolean(2, rowToInsert17);
+            ps.setBoolean(3, rowToInsert18);
+            ps.setBoolean(4, rowToInsert19);
+            ps.setBoolean(5, rowToInsert20);
+            ps.setBoolean(6, rowToInsert21);
+            ps.setBoolean(2, rowToInsert22);
+            ps.setBoolean(3, rowToInsert23);
+            ps.setBoolean(4, rowToInsert24);
+            ps.setBoolean(5, rowToInsert25);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    //Nafisa Chowdhury
+    public static void updateRespiratoryRowByID(int customerNumberInput, boolean shortnessOfBreath, boolean emphysema, boolean chronicCough, boolean bronchitis, boolean asthma) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE existingConditionsRespiratoryTable SET shortnessOfBreath=?, emphysema=?, chronicCough=?, bronchitis=?, asthma=? WHERE customerNumber=?");
+            ps.setBoolean(1, shortnessOfBreath);
+            ps.setBoolean(2, emphysema);
+            ps.setBoolean(3, chronicCough);
+            ps.setBoolean(4, bronchitis);
+            ps.setBoolean(5, asthma);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    //Nafisa Chowdhury
+    public static void updateSkinRowByID(int customerNumberInput, boolean skinIrritations, boolean skinConditions, boolean melanoma, boolean hypersensitiveReaction, boolean bruiseEasily) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE existingConditionsSkinTable SET skinIrritations=?, skinConditions=?, melanoma=?, hypersensitiveReaction=?, bruiseEasily=? WHERE customerNumber=?");
+            ps.setBoolean(1, skinIrritations);
+            ps.setBoolean(2, skinConditions);
+            ps.setBoolean(3, melanoma);
+            ps.setBoolean(4, hypersensitiveReaction);
+            ps.setBoolean(5, bruiseEasily);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    //Nafisa Chowdhury
+    public static void updateSTJDRowByID(int customerNumberInput, boolean upperBackRight, boolean upperBackLeft, boolean shouldersRight, boolean shouldersLeft, boolean neckRight,
+                                         boolean neckLeft, boolean midBackRight, boolean midBackLeft, boolean lowerBackRight, boolean lowerBackLeft,
+                                         boolean legsRight, boolean legsLeft, boolean kneesRight, boolean kneesLeft, boolean hipsRight,
+                                         boolean hipsLeft, boolean handsRight, boolean handsLeft, boolean feetRight, boolean feetLeft,
+                                         boolean armsRight, boolean armsLeft, boolean anklesRight, boolean anklesLeft) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE existingConditionsSTJDTable SET upperBackRight=?, upperBackLeft=?, shouldersRight=?, shouldersLeft=?, neckRight=?, neckLeft=?, midBackRight=?, midBackLeft=?, lowerBackRight=?, lowerBackLeft=?, legsRight=?, legsLeft=?, kneesRight=?, kneesLeft=?, hipsRight=?, hipsLeft=?, handsRight=?, handsLeft=?, feetRight=?, feetLeft=?, armsRight=?, armsLeft=?, anklesRight=?, anklesLeft=? WHERE customerNumber=?");
+            ps.setBoolean(1, upperBackRight);
+            ps.setBoolean(2, upperBackLeft);
+            ps.setBoolean(3, shouldersRight);
+            ps.setBoolean(4, shouldersLeft);
+            ps.setBoolean(5, neckRight);
+            ps.setBoolean(1, neckLeft);
+            ps.setBoolean(2, midBackRight);
+            ps.setBoolean(3, midBackLeft);
+            ps.setBoolean(4, lowerBackRight);
+            ps.setBoolean(5, lowerBackLeft);
+            ps.setBoolean(1, legsRight);
+            ps.setBoolean(2, legsLeft);
+            ps.setBoolean(3, kneesRight);
+            ps.setBoolean(4, kneesLeft);
+            ps.setBoolean(5, hipsRight);
+            ps.setBoolean(1, hipsLeft);
+            ps.setBoolean(2, handsRight);
+            ps.setBoolean(3, handsLeft);
+            ps.setBoolean(4, feetRight);
+            ps.setBoolean(5, feetLeft);
+            ps.setBoolean(1, armsRight);
+            ps.setBoolean(2, armsLeft);
+            ps.setBoolean(3, anklesRight);
+            ps.setBoolean(4, anklesLeft);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    //Nafisa Chowdhury
+    public static void updateWomenRowByID(int customerNumberInput, boolean pregnant, boolean gynecologicalConditions) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE existingConditionsWomenTable SET pregnant=?, gynecologicalConditions=? WHERE customerNumber=?");
+            ps.setBoolean(1, pregnant);
+            ps.setBoolean(2, gynecologicalConditions);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
 }
