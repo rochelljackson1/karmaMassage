@@ -1150,22 +1150,22 @@ public class DataHandler {
             Connection connection = ConnectionProvider.getConnection();
             PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
                     "@hotStone int = 0,\n" +
-                    "@startDate nvarchar(10),\n" +
-                    "@date2 nvarchar(10), \n" +
-                    "@date3 nvarchar(10), \n" +
-                    "@date4 nvarchar(10), \n" +
-                    "@endDate nvarchar(10), \n" +
+                    "@startDate nvarchar(25),\n" +
+                    "@date2 nvarchar(25), \n" +
+                    "@date3 nvarchar(25), \n" +
+                    "@date4 nvarchar(25), \n" +
+                    "@endDate nvarchar(25), \n" +
                     "\n" +
                     "SELECT @hotStone = 4\n" +
-                    "SELECT @startDate = '7/13/2020', \n" +
-                    "SELECT @date2 = '7/14/2020', \n" +
-                    "SELECT @date3 = '7/15/2020', \n" +
-                    "SELECT @date4 = '7/16/2020', \n" +
-                    "SELECT @endDate = '7/17/2020', \n" +
+                    "SELECT @startDate = '2020-04-01 23:55:17.000', \n" +
+                    "SELECT @date2 = '2020-10-07 20:20:07.000', \n" +
+                    "SELECT @date3 = '2020-09-03 17:57:48.000', \n" +
+                    "SELECT @date4 ='2020-08-01 05:58:14.000', \n" +
+                    "SELECT @endDate = '2020-01-29 21:34:27.000', \n" +
                     "\n" +
                     "SELECT \n" +
                     "appointmentsTable.customerNumber AS 'Client ID',\n" +
-                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.scheduledDateTime AS 'Appointment Date',\n" +
                     "appointmentsTable.scheduledTime AS 'Appointment Time',\n" +
                     "appointmentsTable.addOnNumber AS 'Add-On',\n" +
                     "\n" +
@@ -1176,15 +1176,14 @@ public class DataHandler {
                     "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
                     "\n" +
                     "WHERE appointmentsTable.addOnNumber = @hotStone\n" +
-                    "AND (appointmentsTable.scheduledDate = @startDate OR appointmentsTable.scheduledDate = @date2)\n" +
-                    "\tOR (appointmentsTable.scheduledDate = @date3 OR appointmentsTable.scheduledDate = @date4)" +
-                    "\tOR appointmentsTable.scheduledDate = @endDate)");
+                    "AND (appointmentsTable.appointmentDateTime = @startDate OR appointmentsTable.appointmentDateTime = @date2)\n" +
+                    "\tOR (appointmentsTable.appointmentDateTime = @date3 OR appointmentsTable.appointmentDateTime = @date4)" +
+                    "\tOR appointmentsTable.appointmentDateTime = @endDate)");
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
                 v.add(new appointmentsTable(result.getInt("Client ID Number"),
                         (result.getString("Appointment Date")),
-                        (result.getString("Appointment Time")),
                         (result.getInt("Add-On"))));
             }
 
@@ -1194,7 +1193,6 @@ public class DataHandler {
         return v;
     }
 
-    //Yeslyn
     public static Vector<appointmentsTable> getReport16() {
         Vector<appointmentsTable> v = new Vector<>();
         try {
@@ -1206,7 +1204,7 @@ public class DataHandler {
                     "\n" +
                     "SELECT \n" +
                     "appointmentsTable.customerNumber AS 'Client ID',\n" +
-                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.appointmentDateTime AS 'Appointment Date',\n" +
                     "appointmentsTable.packageNumber AS 'Appointment Time',\n" +
                     "appointmentsTable.addOnNumber AS 'Add-On',\n" +
                     "appointmentsTable.actualPricePaid AS 'Price Paid',\n" +
@@ -1234,28 +1232,27 @@ public class DataHandler {
         return v;
     }
 
-    //Yeslyn
     public static Vector<report17> getReport17() {
         Vector<report17> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
             PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
                     "@hotStone int = 0,\n" +
-                    "@startDate nvarchar(10),\n" +
-                    "@date2 nvarchar(10), \n" +
-                    "@date3 nvarchar(10), \n" +
-                    "@date4 nvarchar(10), \n" +
-                    "@endDate nvarchar(10), \n" +
+                    "@startDate nvarchar(25),\n" +
+                    "@date2 nvarchar(25), \n" +
+                    "@date3 nvarchar(25), \n" +
+                    "@date4 nvarchar(25), \n" +
+                    "@endDate nvarchar(25), \n" +
                     "\n" +
                     "SELECT @hotStone = 4\n" +
-                    "SELECT @startDate = '7/13/2020', \n" +
-                    "SELECT @date2 = '7/14/2020', \n" +
-                    "SELECT @date3 = '7/15/2020', \n" +
-                    "SELECT @date4 = '7/16/2020', \n" +
-                    "SELECT @endDate = '7/17/2020', \n" +
+                    "SELECT @startDate = '2020-04-01 23:55:17.000', \n" +
+                    "SELECT @date2 = '2020-10-07 20:20:07.000', \n" +
+                    "SELECT @date3 = '2020-09-03 17:57:48.000', \n" +
+                    "SELECT @date4 ='2020-08-01 05:58:14.000', \n" +
+                    "SELECT @endDate = '2020-01-29 21:34:27.000', \n" +
                     "\n" +
                     "SELECT \n" +
-                    "appointmentsTable.scheduledDate AS 'Appointment Date',\n" +
+                    "appointmentsTable.appointmentDateTime AS 'Appointment Date',\n" +
                     "appointmentsTable.customerNumber AS 'Customer ID',\n" +
                     "appointmentsTable.packageNumber AS 'Package Purchased',\n" +
                     "appointmentsTable.serviceNumber AS 'Service Number',\n" +
@@ -1268,9 +1265,9 @@ public class DataHandler {
                     "JOIN servicesTable ON appointmentsTable.serviceNumber = servicesTable.serviceNumber\n" +
                     "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
                     "\n" +
-                    "WHERE appointmentsTable.scheduledDate = @startDate OR appointmentsTable.scheduledDate = @date2 OR " +
-                    "appointmentsTable.scheduledDate = @date3 \n" +
-                    "\tOR appointmentsTable.scheduledDate = @endDate OR appointmentsTable.scheduledDate = @date4");
+                    "WHERE appointmentsTable.appointmentDateTime = @startDate OR appointmentsTable.appointmentDateTime = @date2 OR " +
+                    "appointmentsTable.appointmentDateTime = @date3 \n" +
+                    "\tOR appointmentsTable.appointmentDateTime = @endDate OR appointmentsTable.appointmentDateTime = @date4");
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
@@ -1288,25 +1285,23 @@ public class DataHandler {
         return v;
     }
 
-    //Yeslyn
     public static Vector<report18> getReport18() {
         Vector<report18> v = new Vector<>();
         try {
             Connection connection = ConnectionProvider.getConnection();
             PreparedStatement statement = connection.prepareStatement("DECLARE\n" +
                     "@importantQuestion,\n" +
-                    "@startDate nvarchar(10),\n" +
-                    "@date2 nvarchar(10), \n" +
-                    "@date3 nvarchar(10), \n" +
-                    "@date4 nvarchar(10), \n" +
-                    "@endDate nvarchar(10), \n" +
+                    "@startDate nvarchar(25),\n" +
+                    "@date2 nvarchar(25), \n" +
+                    "@date3 nvarchar(25), \n" +
+                    "@date4 nvarchar(25), \n" +
+                    "@endDate nvarchar(25), \n" +
                     "\n" +
-                    "SELECT @importantQuestion = 11\n" +
-                    "SELECT @startDate = '5/13/2020', \n" +
-                    "SELECT @date2 = '5/14/2020', \n" +
-                    "SELECT @date3 = '5/15/2020', \n" +
-                    "SELECT @date4 = '5/16/2020', \n" +
-                    "SELECT @endDate = '5/17/2020', \n" +
+                    "SELECT @startDate = '2020-04-01 23:55:17.000', \n" +
+                    "SELECT @date2 = '2020-10-07 20:20:07.000', \n" +
+                    "SELECT @date3 = '2020-09-03 17:57:48.000', \n" +
+                    "SELECT @date4 ='2020-08-01 05:58:14.000', \n" +
+                    "SELECT @endDate = '2020-01-29 21:34:27.000', \n" +
                     "\n" +
                     "SELECT \n" +
                     "appointmentsTable.customerNumber AS 'Customer ID',\n" +
@@ -1321,9 +1316,9 @@ public class DataHandler {
                     "JOIN FAQTable ON appointmentsTable.serviceNumber = FAQTable.serviceNumber\n" +
                     "\n" +
                     "WHERE FAQTable.faqNumber = @importantQuesiton " +
-                    "AND appointmentsTable.scheduledDate = @startDate OR " +
-                    "appointmentsTable.scheduledDate = @date2 OR appointmentsTable.scheduledDate = @date3\n" +
-                    "\tOR appointmentsTable.scheduledDate = @endDate OR appointmentsTable.scheduledDate = @date4");
+                    "AND appointmentsTable.appointmentDateTime = @startDate OR " +
+                    "appointmentsTable.appointmentDateTime = @date2 OR appointmentsTable.appointmentDateTime = @date3\n" +
+                    "\tOR appointmentsTable.appointmentDateTime = @endDate OR appointmentsTable.appointmentDateTime = @date4");
             ResultSet result = statement.executeQuery();
 
             while(result.next()){
