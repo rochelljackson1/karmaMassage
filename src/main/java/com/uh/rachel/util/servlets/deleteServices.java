@@ -1,8 +1,5 @@
 package com.uh.rachel.util.servlets;
-
-
 import com.uh.rachel.util.DataHandler;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
