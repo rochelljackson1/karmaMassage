@@ -35,19 +35,19 @@
 
 <button onclick="makeVisible();">Make Form Visible</button>
 
-<form action="deleteOptions" id="deleteForm" style="display:none;" method="post">
+<form action="deleteWomenOptions" id="deleteForm" style="display:none;" method="post">
     <input name="rowToDelete" type="text">
     <button type="submit">Delete This Row</button>
 </form>
 
-<form action="insertOptions" id="insertForm" style="display:none;" method="post">
+<form action="insertWomenOptions" id="insertForm" style="display:none;" method="post">
     <input name="rowToInsert" type="text">
     <input name="rowToInsert2" type="text">
     <input name="rowToInsert3" type="text">
     <button type="submit">Insert This Row</button>
 </form>
 
-<form action="updateOptions" id="updateForm" style="display:none;" method="post">
+<form action="updateWomenOptions" id="updateForm" style="display:none;" method="post">
     <input name="customerNumberInput" type="text">
     <input name="pregnantInput" type="text">
     <input name="gynecologicalConditionsInput" type="text">
