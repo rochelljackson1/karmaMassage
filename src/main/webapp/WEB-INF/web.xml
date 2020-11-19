@@ -53,6 +53,26 @@
         <servlet-name>deleteAddOns</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.deleteAddOns</servlet-class>
     </servlet>
+         
+    <servlet>
+        <servlet-name>deleteexistingConditionsHeadNeckOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteAddOns</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteexistingConditionsInfectiousOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteAddOns</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteexistingConditionsMedicationsOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteAddOns</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteexistingConditionsNeurologicalOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteAddOns</servlet-class>
+    </servlet>
 
     <servlet>
         <servlet-name>insertOptions</servlet-name>
@@ -103,6 +123,26 @@
         <servlet-name>insertAddOns</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.insertAddOns</servlet-class>
     </servlet>   
+         
+    <servlet>
+        <servlet-name>insertexistingConditionsHeadNeckOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertAddOns</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertexistingConditionsInfectiousOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertAddOns</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertexistingConditionsMedicationsOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertAddOns</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertexistingConditionsNeurologicalOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertAddOns</servlet-class>
+    </servlet>
 
     <servlet>
         <servlet-name>updateOptions</servlet-name>
@@ -158,6 +198,26 @@
         <servlet-name>cancellationSystem</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.cancellationSystem</servlet-class>
     </servlet>
+         
+    <servlet>
+        <servlet-name>updateexistingConditionsHeadNeckOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateexistingConditionsInfectiousOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateexistingConditionsMedicationsOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateexistingConditionsNeurologicalOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateOptions</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>deleteOptions</servlet-name>
@@ -207,6 +267,26 @@
     <servlet-mapping>
         <servlet-name>deleteAddOns</servlet-name>
         <url-pattern>/deleteAddOns</url-pattern>
+    </servlet-mapping>
+         
+   <servlet-mapping>
+        <servlet-name>deleteexistingConditionsHeadNeckOptions</servlet-name>
+        <url-pattern>/deleteexistingConditionsHeadNeckOption</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteexistingConditionsInfectiousOptions</servlet-name>
+        <url-pattern>/deleteexistingConditionsInfectiousOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteexistingConditionsMedicationsOptions</servlet-name>
+        <url-pattern>/deleteexistingConditionsMedicationsOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteexistingConditionsNeurologicalOptions</servlet-name>
+        <url-pattern>/deleteexistingConditionsNeurologicalOptions</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -259,6 +339,27 @@
         <servlet-name>insertAddOns</servlet-name>
         <url-pattern>/insertAddOns</url-pattern>
     </servlet-mapping>
+         
+   <servlet-mapping>
+        <servlet-name>insertexistingConditionsHeadNeckOptions</servlet-name>
+        <url-pattern>/insertexistingConditionsHeadNexkOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertexistingConditionsInfectiousOptions</servlet-name>
+        <url-pattern>/insertexistingConditionsInfectiousOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertexistingConditionsMedicationsOptions</servlet-name>
+        <url-pattern>/insertexistingConditionsMedicationsOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertexistingConditionsNeurologicalOptions</servlet-name>
+        <url-pattern>/insertexistingConditionsNeurologicalOptions</url-pattern>
+    </servlet-mapping>
+
 
     <servlet-mapping>
         <servlet-name>updateOptions</servlet-name>
@@ -310,12 +411,31 @@
         <servlet-name>updateAddOns</servlet-name>
         <url-pattern>/updateAddOns</url-pattern>
     </servlet-mapping>
+         
+   <servlet-mapping>
+        <servlet-name>updateexistingConditionsHeadNeckOptions</servlet-name>
+        <url-pattern>/updateexistingConditionsHeadNeckOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateexistingConditionsInfectiousOptions</servlet-name>
+        <url-pattern>/updateexistingConditionsInfectiousOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateexistingConditionsMedicationsOptions</servlet-name>
+        <url-pattern>/updateexistingConditionsMedicationsOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateexistingConditionsNeurologicalOptions</servlet-name>
+        <url-pattern>/updateexistingConditionsNeurologicalOptions</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>cancellationSystem</servlet-name>
         <url-pattern>/cancellationSystem</url-pattern>
     </servlet-mapping>
-
-
+         
 </web-app>
 
