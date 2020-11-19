@@ -1,14 +1,12 @@
 package com.uh.rachel.util.tableClasses;
 
 public class appointmentsTable {
-
+        String appointmentDateTime;
         int appointmentNumber;
         int customerNumber;
         int serviceNumber;
         int packageNumber;
         int addOnNumber;
-        String scheduledDate;
-        String scheduledTime;
         double originalFullPrice;
         String dateCancelled;
         String timeCancelled;
@@ -22,14 +20,13 @@ public class appointmentsTable {
 
         }
 
-        public appointmentsTable(int customerNumber, int appointmentNumber, int serviceNumber, int packageNumber, int addOnNumber, String scheduledDate, String scheduledTime, double originalFullPrice, String dateCancelled, String timeCancelled, double actualPricePaid, String defaultPayment, String cardNumberType, String cardNumber, int staff_number) {
+        public appointmentsTable(int appointmentNumber, int customerNumber,  int serviceNumber, int packageNumber, int addOnNumber, String appointmentDateTime, double originalFullPrice, String dateCancelled, String timeCancelled, double actualPricePaid, String defaultPayment, String cardNumberType, String cardNumber, int staff_number) {
+            this.appointmentDateTime = appointmentDateTime;
             this.customerNumber = customerNumber;
             this.appointmentNumber = appointmentNumber;
             this.serviceNumber = serviceNumber;
             this.packageNumber = packageNumber;
             this.addOnNumber = addOnNumber;
-            this.scheduledDate = scheduledDate;
-            this.scheduledTime = scheduledTime;
             this.originalFullPrice = originalFullPrice;
             this.dateCancelled = dateCancelled;
             this.timeCancelled = timeCancelled;
@@ -40,11 +37,11 @@ public class appointmentsTable {
             this.staff_number = staff_number;
         }
 
-    public appointmentsTable(int customerNumber, String scheduledDate, String scheduledTime, int addOnNumber) {
-        this.customerNumber = customerNumber;
-        this.addOnNumber = addOnNumber;
-        this.scheduledDate = scheduledDate;
-        this.scheduledTime = scheduledTime;
+    public appointmentsTable(int customerNumber, String appointmentDateTime, int addOnNumber) {
+            this.customerNumber = customerNumber;
+            this.appointmentDateTime = appointmentDateTime;
+            this.addOnNumber = addOnNumber;
+
     }
 
     public appointmentsTable(int customerNumber, int appointmentNumber) {
@@ -52,16 +49,17 @@ public class appointmentsTable {
         this.customerNumber = customerNumber;
     }
 
-    public appointmentsTable(int customerNumber, String scheduledDate, int packageNumber, int addOnNumber, double actualPricePaid) {
+    //Report16
+    public appointmentsTable(int customerNumber, String appointmentDateTime, int packageNumber, int addOnNumber, double actualPricePaid) {
             this.customerNumber = customerNumber;
-            this.scheduledDate = scheduledDate;
+            this.appointmentDateTime = appointmentDateTime;
             this.packageNumber = packageNumber;
             this.addOnNumber = addOnNumber;
             this.actualPricePaid = actualPricePaid;
     }
 
-    public appointmentsTable(String scheduledDate, int customerNumber, int packageNumber, int serviceNumber, int addOnNumber){
-            this.scheduledDate = scheduledDate;
+    public appointmentsTable(String appointmentDateTime, int customerNumber, int packageNumber, int serviceNumber, int addOnNumber){
+            this.appointmentDateTime = appointmentDateTime;
             this.customerNumber = customerNumber;
             this.packageNumber = packageNumber;
             this.serviceNumber = serviceNumber;
@@ -83,11 +81,13 @@ public class appointmentsTable {
     public int getAddOnNumber() { return addOnNumber; }
     public void setAddOnNumber(int addOnNumber) { this.addOnNumber = addOnNumber; }
 
-    public String getScheduledDate() { return scheduledDate; }
-    public void setScheduledDate(String scheduledDate) { this.scheduledDate = scheduledDate; }
+    public String getAppointmentDateTime() {
+        return appointmentDateTime;
+    }
 
-    public String getScheduledTime() { return scheduledTime; }
-    public void setScheduledTime(String scheduledTime) { this.scheduledTime = scheduledTime; }
+    public void setAppointmentDateTime(String appointmentDateTime) {
+        this.appointmentDateTime = appointmentDateTime;
+    }
 
     public double getOriginalFullPrice() { return originalFullPrice; }
     public void setOriginalFullPrice(double originalFullPrice) { this.originalFullPrice = originalFullPrice; }
@@ -112,12 +112,10 @@ public class appointmentsTable {
 
     public int getStaff_number() { return staff_number; }
     public void setStaff_number(int staff_number) { this.staff_number = staff_number; }
-        
-    public appointmentsTable(int customerNumber, int addOnNumber, String scheduledDate, String scheduledTime) {
+
+    public appointmentsTable(int customerNumber, int addOnNumber, String appointmentDateTime) {
         this.customerNumber = customerNumber;
         this.addOnNumber = addOnNumber;
-        this.scheduledDate = scheduledDate;
-        this.scheduledTime = scheduledTime;
+        this.appointmentDateTime = appointmentDateTime;
     }
-
 }
