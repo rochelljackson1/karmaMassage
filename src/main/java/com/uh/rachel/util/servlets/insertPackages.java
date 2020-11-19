@@ -20,4 +20,3 @@ public class insertPackages extends HttpServlet {
         response.sendRedirect("./packages.jsp");
     }
 }
-
