@@ -75,6 +75,26 @@
     </servlet>
 
     <servlet>
+        <servlet-name>deleteRespiratoryOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteRespiratoryOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteSkinOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteSkinOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteSTJDOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteSTJDOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>deleteWomenOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.deleteWomenOptions</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>insertOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.insertOptions</servlet-class>
     </servlet>
@@ -142,6 +162,26 @@
     <servlet>
         <servlet-name>insertexistingConditionsNeurologicalOptions</servlet-name>
         <servlet-class>com.uh.rachel.util.servlets.insertAddOns</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertRespiratoryOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertRespiratoryOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertSkinOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertSkinOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertSTJDOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertSTJDOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>insertWomenOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.insertWomenOptions</servlet-class>
     </servlet>
 
     <servlet>
@@ -219,15 +259,35 @@
         <servlet-class>com.uh.rachel.util.servlets.updateOptions</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>updateRespiratoryOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateRespiratoryOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateSkinOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateSkinOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateSTJDOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateSTJDOptions</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>updateWomenOptions</servlet-name>
+        <servlet-class>com.uh.rachel.util.servlets.updateWomenOptions</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>deleteOptions</servlet-name>
         <url-pattern>/deleteOptions</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
-    <servlet-name>deleteAddress</servlet-name>
-    <url-pattern>/deleteAddress</url-pattern>
-</servlet-mapping>
+        <servlet-name>deleteAddress</servlet-name>
+        <url-pattern>/deleteAddress</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>deleteCountry</servlet-name>
@@ -288,6 +348,27 @@
         <servlet-name>deleteexistingConditionsNeurologicalOptions</servlet-name>
         <url-pattern>/deleteexistingConditionsNeurologicalOptions</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteRespiratoryOptions</servlet-name>
+        <url-pattern>/deleteRespiratoryOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteSkinOptions</servlet-name>
+        <url-pattern>/deleteSkinOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteSTJDOptions</servlet-name>
+        <url-pattern>/deleteSTJDOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>deleteWomenOptions</servlet-name>
+        <url-pattern>/deleteWomenOptions</url-pattern>
+    </servlet-mapping>
+
 
     <servlet-mapping>
         <servlet-name>insertOptions</servlet-name>
@@ -360,6 +441,25 @@
         <url-pattern>/insertexistingConditionsNeurologicalOptions</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>insertRespiratoryOptions</servlet-name>
+        <url-pattern>/insertRespiratoryOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertSkinOptions</servlet-name>
+        <url-pattern>/insertSkinOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertSTJDOptions</servlet-name>
+        <url-pattern>/insertSTJDOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>insertWomenOptions</servlet-name>
+        <url-pattern>/insertWomenOptions</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>updateOptions</servlet-name>
@@ -375,7 +475,6 @@
         <servlet-name>updateCountry</servlet-name>
         <url-pattern>/updateCountry</url-pattern>
     </servlet-mapping>
-
 
     <servlet-mapping>
         <servlet-name>updateDoctorOptions</servlet-name>
@@ -430,6 +529,28 @@
     <servlet-mapping>
         <servlet-name>updateexistingConditionsNeurologicalOptions</servlet-name>
         <url-pattern>/updateexistingConditionsNeurologicalOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateRespiratoryOptions</servlet-name>
+        <url-pattern>/updateRespiratoryOptions</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>updateSkinOptions</servlet-name>
+        <url-pattern>/updateSkinOptions</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>updateSTJDOptions</servlet-name>
+        <url-pattern>/updateSTJDOptions</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>updateWomenOptions</servlet-name>
+        <url-pattern>/updateWomenOptions</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
