@@ -26,6 +26,8 @@ public class existingConditionsHeadNeckTable {
         this.earProblems = earProblems;
     }
 
+
+
     public int getCustomerNumber() {
         return customerNumber;
     }
