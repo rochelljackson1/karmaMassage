@@ -1,7 +1,6 @@
 <%@ page import="com.uh.rachel.util.DataHandler" %>
 <%@ page import="com.uh.rachel.util.tableClasses.City" %>
 <%@ page import="java.util.Vector" %>
-<%@ page import="com.uh.rachel.util.tableClasses.report15" %>
 <%@ page import="com.uh.rachel.util.tableClasses.appointmentsTable" %>
 
 <%--
@@ -19,28 +18,19 @@
 <body>
 <table>
     <tr>
-
         <th>Client ID Number</th>
-        <th>Appointment Number</th>
-        <th>Chosen Package</th>
-        <th>Chosen Service'</th>
-        <th>Service Description</th>
+        <th>Appointment Date</th>
+        <th>Appointment Time</th>
         <th>Add-On Service</th>
-        <th>Add-On Description</th>
-
     </tr>
-    <% Vector<report15> v = DataHandler.getReport15();
-        for (report15 c : v) {
+    <% Vector<appointmentsTable> v = DataHandler.getReport15();
+        for (appointmentsTable c : v) {
     %>
     <tr>
-        <td><%= String.valueOf(c.getAppointments().getCustomerNumber())%></td>
-        <td><%= String.valueOf(c.getAppointments().getAppointmentNumber())%></td>
-        <td><%= String.valueOf(c.getPackages().getPackageNumber())%></td>
-        <td><%= String.valueOf(c.getServices().getServiceNumber())%></td>
-        <td><%= String.valueOf(c.getServices().getServiceDescription())%></td>
-        <td><%= String.valueOf(c.getAddOns().getAddOnNumber())%></td>
-        <td><%= String.valueOf(c.getAddOns().getAddOnDescription())%></td>
-
+        <td><%= String.valueOf(c.getCustomerNumber())%></td>
+        <td><%= String.valueOf(c.getScheduledDate())%></td>
+        <td><%= String.valueOf(c.getScheduledTime())%></td>
+        <td><%= String.valueOf(c.getAddOnNumber())%></td>
     </tr>
     <%
         }
