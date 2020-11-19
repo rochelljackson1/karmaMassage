@@ -2658,4 +2658,277 @@ public class DataHandler {
             ps.close();
         } catch (Exception e) {e.printStackTrace();}
     }
+    
+    public static void updateexistingConditionsHeadNeckRowByID(int customerNumberInput, boolean visionProblemsInput, boolean visionLossInput, boolean sinusProblemsInput, boolean migrainesInput, boolean jawPainInput, boolean hearingLossInput, boolean headachesInput, boolean earProblemsInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE existingConditionsHeadNeckTable SET visionProblems=?, visionLoss=?, sinusProblem=?, migraines=?, jawPain=?, hearingLoss=?, headaches=?, earProblesm");
+            ps.setInt(1, customerNumberInput);
+            ps.setBoolean(2, visionProblemsInput);
+            ps.setBoolean(3, visionLossInput);
+            ps.setBoolean(4, sinusProblemsInput);
+            ps.setBoolean(5, migrainesInput);
+            ps.setBoolean(6, jawPainInput);
+            ps.setBoolean(7, hearingLossInput);
+            ps.setBoolean(8, headachesInput);
+            ps.setBoolean(9, earProblemsInput);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();}
+    }
+
+    public static void insertexistingConditionsHeadNeckRowByID( int customerNumberInput,boolean visionProblemsInput, boolean visionLossInput, boolean sinusProblemsInput, boolean migrainesInput, boolean jawPainInput, boolean hearingLossInput, boolean headachesInput, boolean earProblemsInput ) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO existingConditionsHeadNecktable ( customerNumber, visionProblems, visionLoss, sinusProblems, migraines, jawPain, hearingLoss, headaches, earProblems) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?");
+            ps.setInt(1, customerNumberInput);
+            ps.setBoolean(2, visionProblemsInput);
+            ps.setBoolean(3, visionLossInput);
+            ps.setBoolean(4, sinusProblemsInput);
+            ps.setBoolean(5, migrainesInput);
+            ps.setBoolean(6, jawPainInput);
+            ps.setBoolean(7, hearingLossInput);
+            ps.setBoolean(8, headachesInput);
+            ps.setBoolean(9, earProblemsInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();}
+    }
+
+    public static void deleteexistingConditionsHeadNeckRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM existingCounditionsHeadNeck WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//Ramiro Santibanez
+    public static void updateexistingConditionsInfectiousRowByID(int customerNumberInput, boolean skinConditionsInput, boolean respiratoryConditionsInput, boolean hivInput, boolean herpesInput, boolean hepatitisInput, boolean altheletsFootInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE existingConditionsInfectiousTable SET skinConditions=?, respiratoryConditions=?, hiv=?, herpes=?, hepatitis=?, altheletsFoot=? WHERE customerNumber =?");
+            ps.setInt(1, customerNumberInput);
+            ps.setBoolean(2, skinConditionsInput);
+            ps.setBoolean(3, respiratoryConditionsInput);
+            ps.setBoolean(4, hivInput);
+            ps.setBoolean(5, herpesInput);
+            ps.setBoolean(6, hepatitisInput);
+            ps.setBoolean(7, altheletsFootInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void insertexistingConditionsInfectiousRowByID( int customerNumberInput, boolean skinConditionsInput, boolean respiratoryConditionsInput, boolean hivInput, boolean herpesInput, boolean hepatitisInput, boolean altheletsFootInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO existingConditionsInfectioustable ( customerNumber, skinConditions, respiratoryConditions, hiv, herpes, hepatitis, altheletsFoot) VALUES(?, ?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, customerNumberInput);
+            ps.setBoolean(2, skinConditionsInput);
+            ps.setBoolean(3, respiratoryConditionsInput);
+            ps.setBoolean(4, hivInput);
+            ps.setBoolean(5, herpesInput);
+            ps.setBoolean(6, hepatitisInput);
+            ps.setBoolean(7, altheletsFootInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void deleteexistingConditionsInfectiousRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM existingCounditionsInfectious WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//Ramiro Santibanez
+    public static void updateexistingConditionsNeurologicalRowByID(int customerNumberInput, boolean tinglingInput, boolean stabbingPainInput, boolean parkinsonsInput, boolean numbnessInput, boolean multipleSclerosisInput, boolean herniatedDiscInput, boolean cerebralPaisyInput, boolean burningInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE existingConditionsNeurologicalTable SET, tingling=?, stabbingPain=?, parkinsons=?, numbness=?, multipleSclerosis=?, herniatedDisc=?, cerebralPaisy=?, burning=?");
+            ps.setInt(1, customerNumberInput);
+            ps.setBoolean(2, tinglingInput);
+            ps.setBoolean(3, stabbingPainInput);
+            ps.setBoolean(4, parkinsonsInput);
+            ps.setBoolean(5, numbnessInput);
+            ps.setBoolean(6, multipleSclerosisInput);
+            ps.setBoolean(7, herniatedDiscInput);
+            ps.setBoolean(8, cerebralPaisyInput);
+            ps.setBoolean(9, burningInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void insertexistingConditionsNeurologicalRowByID( int customerNumberInput, boolean tinglingInput, boolean stabbingPainInput, boolean parkinsonsInput, boolean numbnessInput, boolean multipleSclerosisInput, boolean herniatedDiscInput, boolean cerebralPaisyInput, boolean burningInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO existingConditionsNeurologicaltable (customerNumber, tingling, stabbingPain, parkinsons, numbness, multipleSclerosis, herniatedDisc, cerebralPaisy, burning) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, customerNumberInput);
+            ps.setBoolean(2, tinglingInput);
+            ps.setBoolean(3, stabbingPainInput);
+            ps.setBoolean(4, parkinsonsInput);
+            ps.setBoolean(5, numbnessInput);
+            ps.setBoolean(6, multipleSclerosisInput);
+            ps.setBoolean(7, herniatedDiscInput);
+            ps.setBoolean(8, cerebralPaisyInput);
+            ps.setBoolean(9, burningInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void deleteexistingConditionsNeurologicalRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM existingCounditionsNeurological WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//Ramiro Satibanez
+    public static void updateexistingConditionsMedicationsRowByID(int customerNumberInput, String otherInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE existingConditionsMedicationsTable SET, other=?");
+            ps.setInt(1, customerNumberInput);
+            ps.setString(2, otherInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void insertexistingConditionsMedicationsRowByID( int customerNumberInput, String otherInput) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO existingConditionsMedicationtable ( customerNumber, other) VALUES(?, ?)");
+            ps.setInt(1, customerNumberInput);
+            ps.setString(2, otherInput);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {e.printStackTrace();}
+    }
+
+    public static void deleteexistingConditionsMedicationsRowByID(int rowToDelete) {
+        try {
+            Connection conn = ConnectionProvider.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM existingConditionMedications WHERE customerNumber=?");
+            ps.setInt(1, rowToDelete);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+   public static Vector<existingConditionsNeurologicalTable> getExistingConditionsNeurological() {
+        Vector<existingConditionsNeurologicalTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsNeurological");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsNeurologicalTable(
+                        result.getInt("customerNumber"),
+                        result.getBoolean("tingling"),
+                        result.getBoolean("stabbingPain"),
+                        result.getBoolean("parkinsons"),
+                        result.getBoolean("numbness"),
+                        result.getBoolean("multipleSclerosis"),
+                        result.getBoolean("herniateDisc"),
+                        result.getBoolean("cerebralPaisy"),
+                        result.getBoolean("burning")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsHeadNeckTable> getExistingConditonsHeadNeck() {
+        Vector<existingConditionsHeadNeckTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsHeadNeck");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsHeadNeckTable(
+                        result.getInt("customerNumber"),
+                        result.getBoolean("visionProblems"),
+                        result.getBoolean("vissionLoss"),
+                        result.getBoolean("sinusProblems"),
+                        result.getBoolean("migraines"),
+                        result.getBoolean("jawPain"),
+                        result.getBoolean("hearingLoss"),
+                        result.getBoolean("Headaches"),
+                        result.getBoolean("earProblems")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+
+    public static Vector<existingConditionsInfectiousTable> getExistingConditonsInfectious() {
+        Vector<existingConditionsInfectiousTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsInfectious");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsInfectiousTable(
+                        result.getInt("customerNumber"),
+                        result.getBoolean("skinConditions"),
+                        result.getBoolean("respiratoryConditions"),
+                        result.getBoolean("hiv"),
+                        result.getBoolean("herpes"),
+                        result.getBoolean("hepatitis"),
+                        result.getBoolean("altheletsFoot")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    }
+
+    public static Vector<existingConditionsMedicationsTable> getExistingConditionsMedications() {
+        Vector<existingConditionsMedicationsTable> v = new Vector<>();
+        try {
+            Connection connection = ConnectionProvider.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM existingConditionsMedications");
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                v.add(new existingConditionsMedicationsTable(
+                        result.getInt("customerNumber"),
+                        result.getString("other")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return v;
+    } 
 }
